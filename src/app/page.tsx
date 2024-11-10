@@ -1,7 +1,28 @@
-import Image from "next/image";
+import Sidebar from '../components/Sidebar';
+import Header from '../components/header';
+import MainContent from '../components/Maincontent';
+import StatsPanel from '../components/Stats';
+import styles from '../components/Home.module.css';
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <main><h1>Hello World</h1></main>
+    <div className={styles.container}>
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main Layout */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <Header />
+
+        {/* Main Content and Stats */}
+        <div className="flex">
+          <MainContent />
+          <StatsPanel />
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default Home;
