@@ -4,7 +4,6 @@ import MainContent from '../components/Maincontent';
 import StatsPanel from '../components/Stats';
 import styles from '../components/Home.module.css';
 
-
 const Home: React.FC = () => {
   return (
     <div className={styles.container}>
@@ -27,5 +26,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-
