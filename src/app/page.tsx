@@ -1,28 +1,32 @@
+
+import { HomeIcon } from '@radix-ui/react-icons'
+import React from 'react';
 import Sidebar from '../components/Sidebar';
-import Header from '../components/header';
-import MainContent from '../components/Maincontent';
-import StatsPanel from '../components/Stats';
-import styles from '../components/Home.module.css';
 
-const Home: React.FC = () => {
+
+const Dashboard = () => {
   return (
-    <div className={styles.container}>
-      {/* Sidebar */}
+    <div className="flex h-screen">
       <Sidebar />
-
-      {/* Main Layout */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
+      <div className="flex-grow flex flex-col">
         <Header />
-
-        {/* Main Content and Stats */}
-        <div className="flex">
-          <MainContent />
-          <StatsPanel />
-        </div>
+        <MainContent />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Dashboard;
+
+
+
+
+// export default function Home() {
+//   return(
+//     <main><h1>WELCOME TO CIPHERION</h1>
+//     {/* for navigation(turn into a next page) (clickable label)
+//     <a href = "/users"> Users</a>
+//     <SampleCard /> */}
+//     </main>
+//   )
+// }
