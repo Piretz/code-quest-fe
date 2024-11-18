@@ -1,22 +1,22 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-    darkMode: ["class"],
-    content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-  	extend: {
-  		colors: {
-  			page: {
-				active: "#ffcb73"
-				
-			}
-  		}
-  	}
+    extend: {
+      colors: {
+        darkBlue: "#1E1E3F",
+        accentYellow: "#F5C443",
+        accentPurple: "#4E148C",
+        successGreen: "#4CAF50",
+        errorRed: "#F44336",
+      },
+    },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 };
+
 export default config;
