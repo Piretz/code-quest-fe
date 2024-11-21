@@ -3,6 +3,19 @@
  @tailwind utilities;
  
  body {
-   color: var(--foreground);
-  
+  margin: 0;
+  color: #ffcb73;
+  font-family: avallon caps;
+  font-size: 25px;
+  font-weight: 800;
+  background: radial-gradient(circle, #001f3f, #654779);
+  min-height: 100vh;
+  display: flex;
+  justify-content: left;
+  align-items: top;
+  padding-top: 5px;
+  padding-left: 2px;
  }
+ html {
+  scroll-behavior: smooth;
+}

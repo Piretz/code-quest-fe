@@ -1,7 +1,13 @@
 import Image from "next/image";
+import Sidebar from "../components/sidebar";
 
 export default function Home() {
   return (
-    <main><h1>CIPHERion</h1></main>
+    <div>
+      <main><h1>Clash of Coders</h1></main>
+              <Sidebar />
+    </div>
+    
+    
   )
 }
