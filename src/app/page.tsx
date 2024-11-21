@@ -1,20 +1,7 @@
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
-import Main from "../components/Main";
+import Image from "next/image";
 
-const Home = () => {
+export default function Home() {
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <Sidebar />
-      <div className="flex flex-1 flex-col">
-        {/* Header */}
-        <Header />
-        {/* Main Content */}
-        <Main />
-      </div>
-    </div>
-  );
-};
-
-export default Home;
+    <main><h1>CIPHERion</h1></main>
+  )
+}
