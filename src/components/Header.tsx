@@ -15,7 +15,7 @@ const Header: FC = () => {
           <option>Python</option>
         </select>
         <button className="bg-red-600 px-4 py-2 text-white rounded hover:bg-red-700">RESET LEVEL</button>
-        <button className="bg-yellow-300 text-purple-900 px-4 py-2 rounded">SWITCH</button>
+        <button className="bg-yellow-300 text-purple-900 px-4 py-2 rounded"> SWITCH</button>
       </div>
     </div>
   );
