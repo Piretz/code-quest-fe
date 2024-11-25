@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/app/components.{js,ts,jsx,tsx}",
+    "./src/app/**/*.{js,ts,jsx,tsx}", // Para sa app directory
+    "./src/components/**/*.{js,ts,jsx,tsx}", // Para sa components folder
+    "./src/ui/**/*.{js,ts,jsx,tsx}", // Para sa UI-specific files
   ],
   theme: {
     extend: {
+      // Custom theme extensions (optional)
       colors: {
-        "yellow-gradient": "#FFC107",
-        "orange-gradient": "#FF5722",
+        primary: "#1E293B",
+        secondary: "#3B82F6",
       },
     },
   },
-  darkMode: "class", // Enables dark mode via class
   plugins: [],
 };
-
-  
