@@ -58,14 +58,18 @@ const Dashboard = () => {
                 title="Lesson 1. Introduction to HTML"
                 duration="(15:00)"
                 author="Mr. John Doe"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 isDarkMode={isDarkMode} // Pass isDarkMode to LessonCard
               />
               <LessonCard
                 title="Lesson 2. CSS Basics"
                 duration="(20:00)"
                 author="Mr. John Doe"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 isDarkMode={isDarkMode} // Pass isDarkMode to LessonCard
               />
             </div>
@@ -75,13 +79,13 @@ const Dashboard = () => {
             <div className="flex flex-col space-y-2">
               {/* Leaderboard */}
               <div
-                className={`p-4 h-64 w-80 rounded-md shadow-lg ${
+                className={`p-4 h-64 w-72 rounded-md shadow-lg ${
                   isDarkMode
                     ? "bg-gray-800 text-white"
                     : "bg-[#035CC2] text-white"
                 }`}
               >
-                <h3 className="text-xl text-white font-bold flex items-center space-x-16">
+                <h3 className="text-xl text-white font-bold flex items-center space-x-10">
                   <FaTrophy className="text-yellow-300" /> <span>LEADERBOARDS</span>
                 </h3>
                 <div className="mt-4 space-y-2">
@@ -103,7 +107,8 @@ const Dashboard = () => {
                           ? "bg-orange-200 text-orange-800"
                           : isDarkMode
                           ? "bg-gray-700"
-                          : "bg-white"
+                          : "bg-white text-black"
+                          
                       }`}
                     >
                       <span className="font-bold">{`#${player.rank}`}</span>
@@ -116,7 +121,7 @@ const Dashboard = () => {
 
                   {/* Level Box */}
             <div
-                className={`p-2 h-64 w-80 rounded-lg shadow-md ${
+                className={`p-2 h-64 w-72 rounded-lg shadow-md ${
                   isDarkMode
                     ? "bg-gray-700 text-white"
                     : "bg-[#035CC2] text-white"
@@ -129,13 +134,13 @@ const Dashboard = () => {
 
               {/* Stats */}
               <div
-                className={`p-4 h-64 w-80 rounded-md shadow-lg ${
+                className={`p-4 h-64 w-72 rounded-md shadow-lg ${
                   isDarkMode
                     ? "bg-gray-800 text-white"
                     : "bg-[#035CC2] text-white"
                 }`}
               >
-                <h3 className="text-xl text-white font-bold flex items-center space-x-24">
+                <h3 className="text-xl text-white font-bold flex items-center space-x-20">
                   <FaChartBar className="text-green-300" /> <span>STATS</span>
                 </h3>
                 <div className="mt-4 space-y-3">

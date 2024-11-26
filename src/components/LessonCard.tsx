@@ -27,9 +27,9 @@ const LessonCard: React.FC<LessonCardProps> = ({
         <span>{title} {duration}</span>
       </h2>
 
-      <p className="text-sm p-2 space-x-2">{` ${author}`}</p>
+      <p className="text-sm pl-8 space-x-10">{` ${author}`}</p>
 
-      <p className="mt-4 text-sm border-b border-black space-y-6">{description}</p>
+      <p className="mt-3 pl-11 pb-5  text-sm border-b border-black space-y-6">{description}</p>
       <button
         className={`mt-4 py-2 px-4 rounded-md flex items-center space-x-2 ${
           isDarkMode
