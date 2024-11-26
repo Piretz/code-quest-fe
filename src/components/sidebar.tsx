@@ -137,7 +137,7 @@ const Sidebar = () => {
 
         <li>
           <button
-            className={`flex items-center space-x-8 w-full p-3 rounded-sm hover:bg-gray-700`}
+            className={`flex items-center space-x-8 w-full p-3 rounded-sm hover:bg-blue-400 hover:text-white`}
             onClick={() => handleButtonClick("Info")}
           >
             <FaInfoCircle className="h-6 w-6" />
@@ -147,7 +147,7 @@ const Sidebar = () => {
 
         <li>
           <button
-            className={`flex items-center space-x-8 w-full p-3 rounded-sm hover:bg-gray-700`}
+            className={`flex items-center space-x-8 w-full p-3 rounded-sm hover:bg-blue-400 hover:text-white`}
             onClick={() => handleButtonClick("Sign Out")}
           >
             <FaSignOutAlt className="h-6 w-6" />
