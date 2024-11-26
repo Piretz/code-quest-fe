@@ -18,8 +18,8 @@
 // }
 // _app.tsx or root file
 import React from "react";
-import { ThemeProvider } from "../components/ThemeContext"; // Import the ThemeProvider
-import Dashboard from "../components/Dashboard";
+import { ThemeProvider } from "../components/Page4/ThemeContext"; // Import the ThemeProvider
+import Dashboard from "../components/Page4/Dashboard";
 
 const App = () => {
   return (

@@ -23,4 +23,5 @@
 /* Custom Global Styles */
 body {
   @apply bg-gray-900 text-white; /* Example global styles */
+  font-family: 'Poppins', sans-serif;
 }
