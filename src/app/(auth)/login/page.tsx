@@ -27,9 +27,9 @@ const Page = () => {
       });
     } else {
       setErrors({ email: '', password: '' });
-      // Display success toast
+
       toast.success("Login Successful");
-      // Proceed with additional login logic
+     
       console.log("Login Successful:", { email, password });
     }
   };
