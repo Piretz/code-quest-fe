@@ -1,9 +1,10 @@
 import React from "react";
 import { FaUser, FaBell, FaCog } from "react-icons/fa";
+import { MdDarkMode } from "react-icons/md"; // Import Dark Mode Icon
 import { useTheme } from "./ThemeContext"; // Import Theme Context
 
 const Header = () => {
-  const { isDarkMode } = useTheme(); // Get isDarkMode from context
+  const { isDarkMode, toggleDarkMode } = useTheme(); // Get isDarkMode and toggleDarkMode from context
 
   return (
     <div
@@ -13,19 +14,34 @@ const Header = () => {
     >
       <h1 className="text-xl"></h1>
       <div className="flex space-x-6 text-white">
-        {/* Settings Button */}
-        <button className="flex items-center space-x-4  ">
-          <FaCog className="h-7 w-7" /> {/* Settings Icon */}
-          <span></span>
+
+        {/* Dark Mode Toggle Button with Animation */}
+        <button
+          className={`flex items-center space-x-4 transition-transform duration-300 transform ${
+            isDarkMode ? "rotate-180" : "rotate-0"
+          }`}
+          onClick={toggleDarkMode}
+        >
+          <MdDarkMode
+            className={`h-7 w-7 transition-all duration-500 ${
+              isDarkMode ? "text-gray-400" : "text-white"
+            }`} 
+          /> {/* Dark Mode Icon */}
+          <span>{isDarkMode ? "" : ""}</span>
         </button>
+
+        {/* Notification button */}
         <button className="flex items-center space-x-4 ">
-          <FaBell className="h-7 w-7" /> {/* Player Icon */}
+          <FaBell className="h-7 w-7" /> {/* Notification Icon */}
           <span></span>
         </button>
+
+        {/* Label name player */}
         <button className="flex items-center space-x-8 ">
-          {/* <FaBell className="h-5 w-5" /> Player Icon */}
           <span>Player 1</span>
         </button>
+
+        {/* User button */}
         <button className="flex items-center space-x-4 ">
           <FaUser className="h-7 w-7" /> {/* Player Icon */}
           <span></span>
