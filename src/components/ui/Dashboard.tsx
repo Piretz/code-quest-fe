@@ -57,10 +57,12 @@ const Dashboard = () => {
             strokeLinecap="round"
           />
         </svg>
+
         {/* Centered Percentage */}
         <div className="absolute text-center mb-5 text-white font-poppins font-bold text-xl">
           <span>{percentage}%</span>
         </div>
+
         {/* Optional label below the percentage */}
         {label && <div className="text-lg text-white font-poppins">{label}</div>}
       </div>
@@ -146,7 +148,7 @@ const Dashboard = () => {
             </div>
 
             {/* Leaderboard & Stats */}
-            <div className="flex flex-col space-y-2 ml-8">
+            <div className="flex flex-col space-y-2 ml-9">
               {/* Leaderboard */}
               <div
   className={`p-4 h-64 w-72 rounded-3xl shadow-lg ${
@@ -156,7 +158,7 @@ const Dashboard = () => {
   <h3 className="text-xl text-white font-bold flex items-center space-x-10">
     <FaTrophy className="text-yellow-300" /> <span>LEADERBOARDS</span>
   </h3>
-  <div className="mt-4 space-y-2">
+  <div className="mt-4 space-y-2 ">
     {[
       { rank: 1, name: "Player1", score: 1500 },
       { rank: 2, name: "Player2", score: 1300 },
@@ -165,7 +167,7 @@ const Dashboard = () => {
     ].map((player, index) => (
       <div
         key={index}
-        className={`flex justify-between items-center p-2 rounded-md ${
+        className={`flex justify-between items-center p-2 rounded-2xl ${
           player.rank === 1
             ? "bg-yellow-100 text-yellow-800"
             : player.rank === 2
