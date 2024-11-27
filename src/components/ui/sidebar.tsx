@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image"; // Import Next.js Image
 import { useState } from "react";
-import { useTheme } from "./ThemeContext"; // Import Theme Context
+import { useTheme } from "./ThemeContext";
 import { MdDarkMode } from "react-icons/md";
 import {
   FaHome,
@@ -17,7 +17,7 @@ import {
 
 
   const Sidebar = () => {
-      const { isDarkMode, toggleDarkMode } = useTheme(); // Get context values
+      const { isDarkMode} = useTheme(); // Get context values
       const [activeButton, setActiveButton] = useState<string>("Home");
       const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true); // State to control sidebar visibility
 
@@ -34,6 +34,10 @@ import {
         setActiveButton(action);
         console.log(`Clicked on ${action}`);
       };
+
+    function toggleDarkMode(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+      throw new Error("Function not implemented.");
+    }
 
   return (
     <div className="relative h-screen flex">
