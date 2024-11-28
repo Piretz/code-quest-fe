@@ -2,25 +2,6 @@
  @tailwind components;
  @tailwind utilities;
  
- /* body {
-  margin: 0;
-  color: #000000;
-  font-family: avallon caps;
-  font-size: 25px;
-  font-weight: 800;
-  background: #ECF9FF;
-  min-height: 100vh;
-  display: flex;
-  justify-content: left;
-  align-items: top;
-  padding-top: 5px;
-  padding-left: 2px;
- }
- html {
-  scroll-behavior: smooth;
-} */
-
-/* Custom Global Styles */
 body {
   @apply bg-gray-900 text-white; /* Example global styles */
   font-family: 'Poppins', sans-serif;

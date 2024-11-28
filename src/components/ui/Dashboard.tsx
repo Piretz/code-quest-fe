@@ -80,10 +80,10 @@ const Dashboard = () => {
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Header />
-        <div className="p-1 space-y-4 flex-1 flex flex-col">
+        <div className="p-1 space-y-3 flex-1 flex flex-col">
           {/* Filter Buttons */}
           <div
-            className={`flex space-x-3 pl-3 ml-7 rounded-full shadow-lg max-w-6xl font-poppins font-normal ${
+            className={`flex space-x-3 pl-3 p-1 ml-7 mt-3 rounded-full shadow-lg max-w-6xl font-poppins font-normal drop-shadow-2xl ${
               isDarkMode
                 ? "bg-gray-700 text-white"
                 : "bg-gradient-to-br from-[#035CC2] to-[#0286DF]"
@@ -92,11 +92,11 @@ const Dashboard = () => {
             {["All", "Completed", "Continue"].map((filter) => (
               <button
                 key={filter}
-                className={`px-5 py-2 rounded-full ${
+                className={`px-5 py-2 rounded-full drop-shadow-lg ${
                   activeFilter === filter
                     ? "bg-blue-300 text-black"
                     : isDarkMode
-                    ? "bg-gray-700 hover:bg-gray-600"
+                    ? "bg-gray-800 hover:bg-gray-600"
                     : "bg-white text-black hover:bg-blue-500 hover:text-white"
                 }`}
                 onClick={() => handleButtonClick(filter)}
@@ -148,11 +148,11 @@ const Dashboard = () => {
             </div>
 
             {/* Leaderboard & Stats */}
-            <div className="flex flex-col space-y-2 ml-9">
+            <div className="flex flex-col space-y-5 ml-9">
               {/* Leaderboard */}
               <div
   className={`p-4 h-64 w-72 rounded-3xl shadow-lg ${
-    isDarkMode ? "bg-gray-800 text-white" : "bg-[#035CC2] text-white"
+    isDarkMode ? "bg-gray-700 shadow-lg shadow-gray-700/35 text-white" : "bg-[#035CC2] drop-shadow-2xl text-white"
   }`}
 >
   <h3 className="text-xl text-white font-bold flex items-center space-x-10">
@@ -205,7 +205,7 @@ const Dashboard = () => {
               {/* Stats */}
               <div
                   className={`p-4 h-64 w-72 md:w-72 rounded-3xl shadow-lg ${
-                    isDarkMode ? "bg-gray-800 text-white" : "bg-[#035CC2] text-white"
+                    isDarkMode ? "bg-gray-700 shadow-lg shadow-gray-700/35 text-white" : "bg-[#035CC2] drop-shadow-2xl text-white"
                   }`}
                 >
                   <h3 className="text-xl text-white font-bold flex items-center space-x-20">

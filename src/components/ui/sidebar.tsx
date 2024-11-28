@@ -40,7 +40,7 @@ const Sidebar = () => {
       <div
         className={`${
           isSidebarOpen ? "w-56" : "w-18"
-        } overflow-hidden transition-all duration-300 ease-in-out h-screen shadow-xl flex flex-col ${
+        } overflow-hidden transition-all duration-300 ease-in-out h-screen shadow-xl flex flex-col drop-shadow-2xl ${
           isDarkMode ? "bg-gray-800 text-white" : "bg-gradient-to-b from-[#082751] to-[#035CC2] text-white"
         }`}
       >
@@ -66,7 +66,9 @@ const Sidebar = () => {
             alt="QCUnite Logo"
             width={32} // Width of the logo
             height={32} // Height of the logo
-            className="object-contain"
+            className={`object-contain ${
+              isSidebarOpen ? "animate-spin-slow" : ""
+            }`} // Apply rotation animation when sidebar is open
           />
           {isSidebarOpen && (
             <div className="text-2xl font-poppins font-bold text-white">QCUnite</div>
@@ -128,7 +130,8 @@ const Sidebar = () => {
               <button
                 className={`flex items-center ${isSidebarOpen ? "space-x-8" : "justify-center"} w-full p-3 rounded-sm font-poppins font-normal transition-all duration-150 ${
                   isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "hover:bg-blue-400 text-white"}`}
-                onClick={() => handleButtonClick("Sign Out")}>
+                onClick={() => handleButtonClick("Sign Out")}
+              >
                 <FaSignOutAlt className="h-6 w-6" />
                 {isSidebarOpen && <span>Sign Out</span>}
               </button>
