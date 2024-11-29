@@ -22,7 +22,7 @@ const Dashboard = () => {
   ) => {
     const radius = 50; // Radius of the circle
     const circumference = 2 * Math.PI * radius; // Circumference formula
-  
+
     return (
       <div className="relative flex flex-col items-center justify-center">
         <svg
@@ -68,13 +68,13 @@ const Dashboard = () => {
       </div>
     );
   };
-  
+
   return (
     <div
-      className={`flex h-screen ${
+      className={`flex h-screen bg-cover bg-center ${
         isDarkMode
-          ? "bg-gray-900 text-white"
-          : "bg-gradient-to-b from-[#082751] to-[#063977] text-black"
+          ? "text-white bg-gray-900"
+          : " bg-[url('/assets/bg.jpg')]"
       }`}
     >
       <Sidebar />
@@ -151,71 +151,73 @@ const Dashboard = () => {
             <div className="flex flex-col space-y-5 ml-9">
               {/* Leaderboard */}
               <div
-  className={`p-4 h-64 w-72 rounded-3xl shadow-lg ${
-    isDarkMode ? "bg-gray-700 shadow-lg shadow-gray-700/35 text-white" : "bg-[#035CC2] drop-shadow-2xl text-white"
-  }`}
->
-  <h3 className="text-xl text-white font-bold flex items-center space-x-10">
-    <FaTrophy className="text-yellow-300" /> <span>LEADERBOARDS</span>
-  </h3>
-  <div className="mt-4 space-y-2 ">
-    {[
-      { rank: 1, name: "Player1", score: 1500 },
-      { rank: 2, name: "Player2", score: 1300 },
-      { rank: 3, name: "Player3", score: 1200 },
-      { rank: 4, name: "You", score: 1100 },
-    ].map((player, index) => (
-      <div
-        key={index}
-        className={`flex justify-between items-center p-2 rounded-2xl ${
-          player.rank === 1
-            ? "bg-yellow-100 text-yellow-800"
-            : player.rank === 2
-            ? "bg-gray-300 text-gray-800"
-            : player.rank === 3
-            ? "bg-orange-200 text-orange-800"
-            : isDarkMode
-            ? "bg-gray-700"
-            : "bg-white text-black"
-        }`}
-      >
-        <span className="flex items-center">
-          {player.rank === 1 && (
-            <FaTrophy className="text-yellow-400 mr-2" />
-          )}
-          {player.rank === 2 && (
-            <FaTrophy className="text-gray-400 mr-2" />
-          )}
-          {player.rank === 3 && (
-            <FaTrophy className="text-orange-500 mr-2" />
-          )}
-          {player.rank > 3 && (
-            <FaTrophy className="text-gray-500 mr-2" />
-          )}
-          <span className="font-bold">{`#${player.rank}`}</span>
-        </span>
-        <span>{player.name}</span>
-        <span>{player.score} pts</span>
-      </div>
-    ))}
-  </div>
-</div>
-
+                className={`p-4 h-64 w-72 rounded-3xl shadow-lg backdrop-blur-md bg-opacity-60 ${
+                  isDarkMode
+                    ? "bg-gray-700 shadow-lg shadow-gray-700/35 text-white"
+                    : "bg-gradient-to-b from-[#035CC2] to-[#0033FF] drop-shadow-2xl text-white"
+                }`}
+              >
+                <h3 className="text-xl text-white font-bold flex items-center space-x-10">
+                  <FaTrophy className="text-yellow-300" /> <span>LEADERBOARDS</span>
+                </h3>
+                <div className="mt-4 space-y-2 ">
+                  {[
+                    { rank: 1, name: "Player1", score: 1500 },
+                    { rank: 2, name: "Player2", score: 1300 },
+                    { rank: 3, name: "Player3", score: 1200 },
+                    { rank: 4, name: "You", score: 1100 },
+                  ].map((player, index) => (
+                    <div
+                      key={index}
+                      className={`flex justify-between items-center p-2 rounded-2xl ${
+                        player.rank === 1
+                          ? "bg-yellow-100 text-yellow-800"
+                          : player.rank === 2
+                          ? "bg-gray-300 text-gray-800"
+                          : player.rank === 3
+                          ? "bg-orange-200 text-orange-800"
+                          : isDarkMode
+                          ? "bg-white text-black "
+                          : "bg-white text-black"
+                      }`}
+                    >
+                      <span className="flex items-center">
+                        {player.rank === 1 && (
+                          <FaTrophy className="text-yellow-400 mr-2" />
+                        )}
+                        {player.rank === 2 && (
+                          <FaTrophy className="text-gray-400 mr-2" />
+                        )}
+                        {player.rank === 3 && (
+                          <FaTrophy className="text-orange-500 mr-2" />
+                        )}
+                        {player.rank > 3 && (
+                          <FaTrophy className="text-gray-500 mr-2" />
+                        )}
+                        <span className="font-bold">{`#${player.rank}`}</span>
+                      </span>
+                      <span>{player.name}</span>
+                      <span>{player.score} pts</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {/* Stats */}
               <div
-                  className={`p-4 h-64 w-72 md:w-72 rounded-3xl shadow-lg ${
-                    isDarkMode ? "bg-gray-700 shadow-lg shadow-gray-700/35 text-white" : "bg-[#035CC2] drop-shadow-2xl text-white"
-                  }`}
-                >
-                  <h3 className="text-xl text-white font-bold flex items-center space-x-20">
-                    <FaChartBar className="text-green-300" /> <span>STATS</span>
-                  </h3>
-                  <div className="mt-4 flex flex-col">
-                    {renderAnimatedCircularChart( 80, "blue", "Games Played")}
-
-                  </div>
+                className={`p-4 h-64 w-72 md:w-72 rounded-3xl shadow-lg ${
+                  isDarkMode
+                    ? "bg-gray-700 shadow-lg shadow-gray-700/35 text-white"
+                    : "bg-gradient-to-b from-[#035CC2] to-[#0033FF] drop-shadow-2xl text-white"
+                }`}
+              >
+                <h3 className="text-xl text-white font-bold flex items-center space-x-20">
+                  <FaChartBar className="text-green-300" /> <span>STATS</span>
+                </h3>
+                <div className="mt-4 flex flex-col">
+                  {renderAnimatedCircularChart(50, "#22c55e", "Games Played")}
                 </div>
+              </div>
             </div>
           </div>
         </div>

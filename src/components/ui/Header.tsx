@@ -1,6 +1,6 @@
 import React from "react";
-import { FaUser, FaBell, FaMoon, FaSun } from "react-icons/fa"; // Importing moon and sun icons
-import { useTheme } from "./ThemeContext"; // Import Theme Context
+import { FaUser, FaBell, FaMoon, FaSun } from "react-icons/fa";
+import { useTheme } from "./ThemeContext"; 
 
 const Header: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useTheme(); // Get isDarkMode and toggleDarkMode from context

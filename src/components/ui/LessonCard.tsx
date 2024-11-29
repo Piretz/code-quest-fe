@@ -1,5 +1,5 @@
 import React from "react";
-import { FaPlay, FaCircle } from "react-icons/fa"; // Import the play icon
+import { FaPlay, FaCircle } from "react-icons/fa"; 
 
 interface LessonCardProps {
   title: string;

@@ -62,14 +62,12 @@ const Sidebar = () => {
           } mb-4 py-4 h-15 space-x-3`}
         >
           <Image
-            src="/assets/steam.ico" // Path to your .ico logo
+            src="/assets/steam.ico" 
             alt="QCUnite Logo"
-            width={32} // Width of the logo
-            height={32} // Height of the logo
-            className={`object-contain ${
-              isSidebarOpen ? "animate-spin-slow" : ""
-            }`} // Apply rotation animation when sidebar is open
-          />
+            width={32} 
+            height={32}
+            className="object-contain animate-spin-slow" // Apply rotation animation permanently 
+            />
           {isSidebarOpen && (
             <div className="text-2xl font-poppins font-bold text-white">QCUnite</div>
           )}
