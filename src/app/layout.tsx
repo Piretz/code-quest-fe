@@ -35,15 +35,14 @@
 // }
 
 import '../app/globals.css';
+import { ThemeProvider } from "@/components/ui/ThemeContext";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (    
     <html lang="en">
-      <body className="font-sans">{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

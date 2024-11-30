@@ -71,12 +71,10 @@ const Dashboard = () => {
 
   return (
     <div
-      className={`flex h-screen bg-cover bg-center ${
-        isDarkMode
-          ? "text-white bg-gray-900"
-          : " bg-[url('/assets/bg.jpg')]"
-      }`}
-    >
+    className={`flex h-screen ${
+      isDarkMode ? "bg-gray-900 text-white" : "bg-gradient-to-b from-[#082751] to-[#063977] text-black"
+    }`}
+  >
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Header />

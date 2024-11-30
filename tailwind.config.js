@@ -10,6 +10,7 @@ module.exports = {
       // Font customization
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        zenDots: ['Zen Dots'],
       },
       // Custom colors
       colors: {
@@ -33,6 +34,11 @@ module.exports = {
         blink: {
           "0%, 100%": { borderColor: "transparent" }, // Cursor starts transparent
           "50%": { borderColor: "white" }, // Cursor blinks
+        },
+        scaleUp: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.2)" },
+          "100%": { transform: "scale(1)" },
         },
       },
       // Defining animations

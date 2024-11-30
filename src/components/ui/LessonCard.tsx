@@ -29,7 +29,7 @@ const LessonCard: React.FC<LessonCardProps> = ({
 
       <p className="text-sm font-poppins font-semibold pl-8 space-x-10 pt-2">{` ${author}`}</p>
 
-      <p className="mt-3 pl-11 pb-5 font-poppins text-sm border-b border-black space-y-6">{description}</p>
+      <p className="mt-6 pl-11 pb-5 font-poppins text-sm border-b border-black space-y-6">{description}</p>
       <button
         className={`mt-4 py-2 px-4 rounded-md flex items-center space-x-2 font-poppins ${
           isDarkMode
