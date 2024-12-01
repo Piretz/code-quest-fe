@@ -10,13 +10,26 @@ import Footer from "./footer";
 
 const App = () => {
   return (
-    <div>
+    <div className="w-full min-h-screen flex flex-col">
+      {/* Header */}
       <Header />
+
+      {/* Hero Section */}
       <Hero />
-      <Heropage/>
+
+      {/* Hero Page Section */}
+      <Heropage />
+
+      {/* Stats Section */}
       <Stats />
+
+      {/* Courses Offered Section */}
       <CoursesOffered />
+
+      {/* Testimonials Section */}
       <Testimonials />
+
+      {/* Footer */}
       <Footer />
     </div>
   );

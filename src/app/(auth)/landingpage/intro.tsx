@@ -17,6 +17,7 @@ const Hero = () => {
 
   return (
     <section
+      id="intro"
       className="bg-cover bg-center text-white text-center h-screen flex flex-col justify-center items-center"
       style={{ backgroundImage: 'url(/assets/bglanding.png)' }} // Set your background image
     >
@@ -42,7 +43,7 @@ const Hero = () => {
           alt="Play Now Button"
           width={800}  // Adjust width based on your image size
           height={500}  // Adjust height based on your image size
-          className="object-contain"
+          className=""
         />
         
         {/* The Play Now Text Overlay */}

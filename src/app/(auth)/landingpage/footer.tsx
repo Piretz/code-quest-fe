@@ -3,7 +3,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#00172D] text-white py-6 text-center">
+    
+    <footer
+    id = "footer" 
+    className="bg-[#00172D] text-white py-6 text-center">
       {/* Container for Footer Content */}
       <div className="container mx-auto px-2">
         {/* Row of H1 elements */}
