@@ -10,16 +10,18 @@ const Stats = () => {
   ];
 
   return (
-    <section className="bg-[#003366] text-white py-20 grid grid-cols-2 sm:grid-cols-4 text-center">
-      {stats.map((stat, index) => (
-        <div
-          key={index}
-          className={`text-lg px-4 ${index !== stats.length - 1 ? "border-r border-white " : ""}`} // Add border-right except for the last item
-        >
-          <p className="text-5xl font-bold">{stat.value}</p>
-          <p className="mt-4 text-center">{stat.label}</p>
-        </div>
-      ))}
+    <section className="bg-[#003366] text-white py-16 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-8 text-center">
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className={`px-4 ${index < stats.length - 1 ? "sm:border-r border-gray-400" : ""}`}
+          >
+            <p className="text-4xl sm:text-5xl font-bold">{stat.value}</p>
+            <p className="mt-2 text-sm sm:text-base">{stat.label}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

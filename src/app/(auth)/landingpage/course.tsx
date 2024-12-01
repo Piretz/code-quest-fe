@@ -16,7 +16,7 @@ const CoursesOffered = () => {
     >
       {/* Left Side: Title */}
       <div className="flex flex-col ml-36 leading-relaxed font-poppins text-2xl text-left w-1/3">
-        <h2 className="text-5xl font-bold font-zenDots">Courses Offered</h2>
+        <h2 className="text-5xl font-bold font-zenDots ml-16">Courses Offered</h2>
         <p className="mt-6 font-poppins text-lg text-nowrap max-w-md">
           Cipherion offers a diverse range of courses designed to equip<br /> IT students with essential skills for the tech industry. 
           From <br /> foundational topics like HTML, CSS, and JavaScript for building <br /> responsive and interactive websites to advanced <br /> programming in Java and Python, 

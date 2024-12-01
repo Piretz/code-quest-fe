@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link"; // Import Link from Next.js for navigation
 
 const Header = () => {
   const [activeButton, setActiveButton] = useState<string>("");
@@ -45,20 +46,27 @@ const Header = () => {
 
       {/* Right Side Buttons */}
       <div className="flex space-x-2 sm:space-x-4">
-        <button
-          onClick={() => handleButtonClick("login")}
-          className={`px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots ${
-            activeButton === "login" ? "bg-[#04AA6D]" : "hover:bg-[#04AA6D]"
-          }`}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => handleButtonClick("signup")}
-          className={`bg-[#035CC2] hover:bg-blue-700 px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots`}
-        >
-          Sign Up
-        </button>
+        {/* Login Button Link */}
+        <Link href="/login">
+          <button
+            onClick={() => handleButtonClick("login")}
+            className={`px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots ${
+              activeButton === "login" ? "bg-[#04AA6D]" : "hover:bg-[#04AA6D]"
+            }`}
+          >
+            Login
+          </button>
+        </Link>
+
+        {/* Sign Up Button Link */}
+        <Link href="/signup">
+          <button
+            onClick={() => handleButtonClick("signup")}
+            className={`bg-[#035CC2] hover:bg-blue-700 px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots`}
+          >
+            Sign Up
+          </button>
+        </Link>
       </div>
     </header>
   );
