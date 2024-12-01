@@ -1,74 +1,118 @@
-'use client';
-
-import React, { useState } from 'react';
-import { z } from 'zod';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-const useloginSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
-const Page = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({ email: '', password: '' });
-
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    const result = useloginSchema.safeParse({ email, password });
-
-    if (!result.success) {
-      const newErrors = result.error.format();
-      setErrors({
-        email: newErrors.email?._errors[0] || '',
-        password: newErrors.password?._errors[0] || '',
-      });
-    } else {
-      setErrors({ email: '', password: '' });
-
-      toast.success("Login Successful");
-     
-      console.log("Login Successful:", { email, password });
-    }
-  };
+export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-mono text-4xl text-green-500 text-center mb-8">TEST</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-xs">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+    <div
+      style={{
+        overflow: 'hidden', // Prevent scrolling by hiding overflow
+        height: '100vh',    // Ensure the page takes up the full height
+      }}
+    >
+      {/* Header with Navigation Bar */}
+      <header
+        style={{
+          backgroundColor: '#223F77',  // Background color matching the background
+          padding: '16px 0',          // Add some padding for spacing
+          position: 'fixed',          // Fix the header position at the top
+          top: 0,                     // Make sure it stays at the top
+          left: 0,                    // Align it to the left side
+          width: '100%',              // Ensure it spans the entire width
+          zIndex: 10,                 // Ensure it stays on top of other content
+        }}
+      >
+        <nav className="container mx-auto flex justify-between items-center">
+          {/* Aligning navigation items to the right */}
+          <ul className="flex space-x-10 ml-auto"> {/* ml-auto pushes the list items to the right */}
+            <li><a href="#home" className="text-white text-xl hover:text-gray-200">Home</a></li>
+            <li><a href="#about" className="text-white text-xl hover:text-gray-200">About</a></li>
+            <li><a href="#courses" className="text-white text-xl hover:text-gray-200">Courses</a></li>
+            <li><a href="#contact" className="text-white text-xl hover:text-gray-200">Contact Us</a></li>
+            <li><a href="#login" className="text-white text-xl hover:text-gray-200">Login</a></li>
+            <li><a href="#signup" className="text-white text-xl hover:text-gray-200">Sign Up</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* Login Section with Dark Blue Background */}
+      <div
+        style={{
+          backgroundColor: '#223F77',  // Background color
+          height: '100vh',            // Full height of the viewport
+          width: '100vw',             // Full width of the viewport
+          margin: 0,                  // Ensure no margin
+          padding: 0,                 // Ensure no padding
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',   // Stack the content vertically
+          paddingTop: '60px',        // Space for the fixed header, adjust accordingly
+        }}
+      >
+        <h1 style={{ color: 'white', marginBottom: '20px' }}>LOGIN</h1>
+
+        {/* Login Form */}
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '10px',
+          }}
+        >
+          {/* Username Label */}
+          <label htmlFor="username" style={{ color: 'white', fontSize: '1.2rem', marginLeft: '-650px' }}>
+            Username
+          </label>
+          {/* Username Input */}
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            type="text"
+            placeholder="Username"
+            style={{
+              padding: '5px',
+              borderRadius: '3px',
+              border: '1px solid #ccc',
+              width: '343px',
+              fontSize: '1rem',
+              marginLeft: '-400px', // Adjust this value to control how far it moves left
+            }}
           />
-          {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
+
+          {/* Password Label */}
+          <label htmlFor="password" style={{ color: 'white', fontSize: '1.2rem', marginLeft: '-650px' }}>
+            Password
+          </label>
+          {/* Password Input */}
           <input
+            id="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Password"
+            style={{
+              padding: '5px', // Increased padding for a larger height
+              borderRadius: '3px',
+              border: '1px solid #ccc',
+              width: '343px', // Adjusted width for a larger textbox
+              fontSize: '1rem',
+              marginLeft: '-400px', // Adjust this value to control how far it moves left
+            }}
           />
-          {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
-        </div>
-        <div className="flex items-center justify-between">
+
+          {/* Login Button */}
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            style={{
+              backgroundColor: '#000000',
+              color: 'white',
+              padding: '2px 150px',
+              border: 'none',
+              borderRadius: '3px',
+              cursor: 'pointer',
+              fontSize: '18px', // Adjust this value to set the text size
+              marginLeft: '-400px', // Adjust this value to control how far it moves left
+            }}
           >
             Login
           </button>
-        </div>
-      </form>
-      <ToastContainer />
+        </form>
+      </div>
     </div>
   );
-};
-
-export default Page;
+}
