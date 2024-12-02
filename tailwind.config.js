@@ -46,8 +46,9 @@ module.exports = {
         'spin-slow': 'spin-slow 10s linear infinite',
         typewriter:
           "typewriter 3s steps(var(--typewriter-steps, 15)) infinite, blink 0.4s step-end infinite",
-      },
+      
     },
+  }
   },
   plugins: [],
 };
