@@ -18,11 +18,7 @@ export default function Page() {
 
   return (
     <div
-      style={{
-        overflow: 'hidden',
-        height: '100vh',
-      }}
-    >
+      style={{ overflow: 'hidden', height: '100vh',}}>
       {/* Header with Navigation Bar */}
       <header
         style={{
@@ -135,14 +131,14 @@ export default function Page() {
       {/* Clickable Image at the Top */}
       <Link href="/">
         <Image
-          src="/assets/SIGN UP.png" // Replace with your image path
+          src="/assets/SG.png" // Replace with your image path
           alt="Go Back to Homepage"
-          width={830} // Adjust the width
-          height={900} // Adjust the height
+          width={550} // Adjust the width
+          height={0} // Adjust the height
           style={{
             position: 'absolute',
-            top: '62px', // Adjust spacing from the top
-            left: '-25px', // Adjust spacing from the left
+            top: '203px', // Adjust spacing from the top
+            left: '120px', // Adjust spacing from the left
             zIndex: 15, // Ensure it's above the header
             cursor: 'pointer', // Make it clear the image is clickable
           }}
@@ -165,11 +161,11 @@ export default function Page() {
           gap: '50px',
         }}
       >
-        {/* Image Container */}
+        {/* BACKGROUND */}
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
           {/* Background Image */}
           <Image
-            src="/assets/background.png"
+            src="/assets/bg.png"
             alt="Background Image"
             layout="fill"
             objectFit="cover"

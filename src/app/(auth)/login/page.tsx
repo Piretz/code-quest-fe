@@ -74,12 +74,12 @@ export default function Page() {
         <Image
           src="/assets/back button.png" // Replace with your image path
           alt="Go Back to Homepage"
-          width={686} // Adjust the width
+          width={586} // Adjust the width
           height={0} // Adjust the height
           style={{
             position: 'absolute',
-            top: '120px', // Adjust spacing from the top
-            left: '629px', // Center image horizontally
+            top: '175px', // Adjust spacing from the top
+            left: '590px', // Center image horizontally
             transform: 'translateX(-50%)', // Center image horizontally
             zIndex: 3, // Ensure it's above the header
             cursor: 'pointer', // Make it clear the image is clickable
@@ -102,23 +102,24 @@ export default function Page() {
           gap: '50px',
         }}
       >
-        {/* Image Container */}
+        {/* BACKGROUND */}
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
           {/* Background Image */}
           <Image
             src="/assets/bg.png"
             alt="Background Image"
-            layout="fill"
-            objectFit="cover"
+            width={1600} // Adjusted width
+            height={1600} // Adjusted height
             style={{
               position: 'absolute',
               top: '50%',
-              left: '55%',
+              left: '50%',
               transform: 'translate(-50%, -50%)',
               zIndex: 1,
+              objectFit: 'contain', // Ensures it doesn't stretch or crop
             }}
           />
-          
+
           {/* Foreground Image */}
           <Image
             src="/assets/character.png"
@@ -130,6 +131,36 @@ export default function Page() {
               zIndex: 4,
               marginTop: '80px',
               marginLeft: '1100px',
+            }}
+          />
+
+          {/* Facebook Image */}
+          <Image
+            src="/assets/fb.png"
+            alt="Facebook Login"
+            width={80} // Adjust the size of the Facebook image
+            height={80} // Adjust the size of the Facebook image
+            style={{
+              position: 'absolute',
+              top: '65%',
+              left: '27%',
+              zIndex: 5,
+              cursor: 'pointer', // Make it clear the image is clickable
+            }}
+          />
+
+          {/* Google Image */}
+          <Image
+            src="/assets/google.png"
+            alt="Google Login"
+            width={80} // Adjust the size of the Google image
+            height={80} // Adjust the size of the Google image
+            style={{
+              position: 'absolute',
+              top: '65%',
+              left: '35%',
+              zIndex: 5,
+              cursor: 'pointer', // Make it clear the image is clickable
             }}
           />
         </div>
@@ -148,7 +179,16 @@ export default function Page() {
               zIndex: 5,
             }}
           >
-            <label htmlFor="username" style={{ color: 'white', fontSize: '1rem', marginLeft: '-2920px', marginTop: '-150px', opacity: 0.7 }}>
+            <label
+              htmlFor="username"
+              style={{
+                color: 'white',
+                fontSize: '1rem',
+                marginLeft: '-2920px',
+                marginTop: '-150px',
+                opacity: 0.7,
+              }}
+            >
               Username
             </label>
             <input
@@ -161,14 +201,22 @@ export default function Page() {
                 border: '1px solid #ccc',
                 backgroundColor: '#273239',
                 color: 'white',
-                width: '400px',  // Adjust width to your desired size
-                height: '40px',  // Adjust height to your desired size
+                width: '400px', // Adjust width to your desired size
+                height: '40px', // Adjust height to your desired size
                 fontSize: '1rem', // Increase font size for better readability
-                marginLeft: '-2600px', // Remove any unwanted margin      
+                marginLeft: '-2600px', // Remove any unwanted margin
               }}
             />
 
-            <label htmlFor="password" style={{ color: 'white', fontSize: '1rem', marginLeft: '-2920px', opacity: 0.7 }}>
+            <label
+              htmlFor="password"
+              style={{
+                color: 'white',
+                fontSize: '1rem',
+                marginLeft: '-2920px',
+                opacity: 0.7,
+              }}
+            >
               Password
             </label>
             <div style={{ position: 'relative', width: '100%' }}>
