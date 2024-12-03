@@ -1,23 +1,27 @@
 "use client";
-
 import React from "react";
 import Header from "./header";
 import Sidebar from "./sidebar";
 import MainContent from "./maincontent";
 
 const Layout: React.FC = () => {
+  const currentLevel = 1;
+  const currentExperience = 11;
+  const experienceNeeded = 100;
+
   return (
-    <div className="min-h-screen bg-[#223F77] text-white flex flex-col">
-      {/* Header Section */}
-      <Header />
-
-      {/* SIDEBAR SECTION */}
-        <Sidebar/>
-
-      <div className="flex flex-1">
-        {/* Main Content Section
-        <MainContent /> */}
-        
+    <div className="flex h-screen bg-[#223F77]">
+      {/* Sidebar */}
+      <Sidebar />
+      <div className="flex flex-col flex-grow">
+        {/* Header */}
+        <Header
+          currentLevel={currentLevel}
+          currentExperience={currentExperience}
+          experienceNeeded={experienceNeeded}
+        />
+        {/* Main Content */}
+        <MainContent />
       </div>
     </div>
   );

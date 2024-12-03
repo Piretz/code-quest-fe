@@ -1,7 +1,11 @@
  @tailwind base;
  @tailwind components;
  @tailwind utilities;
- 
+ /* globals.css */
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
  body {
    @apply bg-gray-900 text-white; /* Tailwind styles */
    font-family: 'Poppins', sans-serif;
