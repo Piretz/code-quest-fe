@@ -108,15 +108,15 @@ export default function Page() {
           <Image
             src="/assets/bg.png"
             alt="Background Image"
-            width={1600} // Adjusted width
-            height={1600} // Adjusted height
+            width={1600}
+            height={1600}
             style={{
               position: 'absolute',
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
               zIndex: 1,
-              objectFit: 'contain', // Ensures it doesn't stretch or crop
+              objectFit: 'contain',
             }}
           />
 
@@ -124,43 +124,13 @@ export default function Page() {
           <Image
             src="/assets/character.png"
             alt="Login Illustration"
-            width={500}
-            height={500}
+            width={550}
+            height={550}
             style={{
               position: 'relative',
               zIndex: 4,
-              marginTop: '80px',
-              marginLeft: '1100px',
-            }}
-          />
-
-          {/* Facebook Image */}
-          <Image
-            src="/assets/fb.png"
-            alt="Facebook Login"
-            width={80} // Adjust the size of the Facebook image
-            height={80} // Adjust the size of the Facebook image
-            style={{
-              position: 'absolute',
-              top: '65%',
-              left: '27%',
-              zIndex: 5,
-              cursor: 'pointer', // Make it clear the image is clickable
-            }}
-          />
-
-          {/* Google Image */}
-          <Image
-            src="/assets/google.png"
-            alt="Google Login"
-            width={80} // Adjust the size of the Google image
-            height={80} // Adjust the size of the Google image
-            style={{
-              position: 'absolute',
-              top: '65%',
-              left: '35%',
-              zIndex: 5,
-              cursor: 'pointer', // Make it clear the image is clickable
+              marginTop: '30px',
+              marginLeft: '1000px',
             }}
           />
         </div>
@@ -179,14 +149,15 @@ export default function Page() {
               zIndex: 5,
             }}
           >
+            {/* Username Input */}
             <label
               htmlFor="username"
               style={{
                 color: 'white',
                 fontSize: '1rem',
-                marginLeft: '-2920px',
-                marginTop: '-150px',
                 opacity: 0.7,
+                marginLeft: '-2920px',
+                marginTop:'-60px',
               }}
             >
               Username
@@ -196,25 +167,26 @@ export default function Page() {
               type="text"
               placeholder="Username"
               style={{
-                padding: '15px', // Add padding for better height
+                padding: '7px',
                 borderRadius: '3px',
                 border: '1px solid #ccc',
                 backgroundColor: '#273239',
                 color: 'white',
-                width: '400px', // Adjust width to your desired size
-                height: '40px', // Adjust height to your desired size
-                fontSize: '1rem', // Increase font size for better readability
-                marginLeft: '-2600px', // Remove any unwanted margin
+                width: '400px',
+                height: '40px',
+                fontSize: '1rem',
+                marginLeft: '-2600px',
               }}
             />
 
+            {/* Password Input */}
             <label
               htmlFor="password"
               style={{
                 color: 'white',
                 fontSize: '1rem',
-                marginLeft: '-2920px',
                 opacity: 0.7,
+                marginLeft: '-2920px',
               }}
             >
               Password
@@ -225,7 +197,7 @@ export default function Page() {
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder="Password"
                 style={{
-                  padding: '10px',
+                  padding: '7px',
                   borderRadius: '3px',
                   border: '1px solid #ccc',
                   backgroundColor: '#273239',
@@ -260,16 +232,16 @@ export default function Page() {
               style={{
                 backgroundColor: '#000000',
                 color: 'white',
-                padding: '10px 0',
+                padding: '7px 0',
                 border: 'none',
                 borderRadius: '3px',
                 cursor: 'pointer',
                 fontSize: '18px',
-                width: '400px', // Consistent size
+                width: '400px',
                 marginTop: '20px',
                 position: 'fixed', // Fixed to stay on the left side
-                left: '410px', // Adjust position from the left edge
-                top: '550px', // Vertically center it on the screen
+                left: '412px', // Adjust position from the left edge
+                top: '530px', // Vertically center it on the screen
                 transform: 'translateY(-50%)', // Correct vertical alignment
                 zIndex: 10, // Ensure it's above other elements
               }}
@@ -277,6 +249,110 @@ export default function Page() {
               Login
             </button>
           </form>
+
+          {/* Divider Line */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              width: '400px', // Increase the width to make the line longer
+              margin: '20px 0',
+              marginLeft: '-2600px', // Shift it further left to accommodate the extended line
+              marginTop: '70px',
+              zIndex: 90,
+            }}
+          >
+            <hr
+              style={{
+                flex: 1,
+                border: '1px solid white',
+                opacity: 0.7,
+              }}
+            />
+            <span
+              style={{
+                color: 'white',
+                padding: '0 10px',
+                fontSize: '16px',
+                opacity: 0.7,
+              }}
+            >
+              or
+            </span>
+            <hr
+              style={{
+                flex: 1,
+                border: '1px solid white',
+                opacity: 0.7,
+              }}
+            />
+          </div>
+
+          {/* Social Login Section */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '20px',
+            }}
+          >
+            {/* Facebook Image */}
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <Image
+                src="/assets/fb.png"
+                alt="Facebook Login"
+                width={80}
+                height={80}
+                style={{
+                  position: 'absolute',
+                  top: '64%',
+                  left: '27%',
+                  zIndex: 5,
+                  cursor: 'pointer',
+                }}
+              />
+            </a>
+
+            {/* Google Image */}
+            <Image
+              src="/assets/google.png"
+              alt="Google Login"
+              width={80}
+              height={80}
+              style={{
+                position: 'absolute',
+                top: '64%',
+                left: '33%',
+                zIndex: 5,
+                cursor: 'pointer',
+              }}
+            />
+          </div>
+
+          {/* Forgot Password Section */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '70%', // Adjust to place it below the social login icons
+              left: '32%', // Center align it relative to the icons
+              transform: 'translateX(-50%)', // Ensure alignment with the social login icons
+              zIndex: 6,
+              textAlign: 'center',
+            }}
+          >
+            <Link href="/reset-password">
+              <span
+                style={{
+                  color: 'white',
+                  fontSize: '16px',
+                  opacity: 0.7,
+                  cursor: 'pointer',
+                }}
+              >
+                Forgot Password? <b style={{ color: '#FF0000' }}>Reset Password</b>
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
