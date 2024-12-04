@@ -205,27 +205,27 @@ const MainContent: React.FC = () => {
             ))}
           </Swiper>
 
-          <h1 className="text-4xl font-zenDots text-slate-300">Select Mode</h1>
+          <h1 className="text-4xl font-zenDots text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">Select Mode</h1>
         </div>
 
               {/* Column of Images at the bottom of Select Mode */}
-              <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 -translate-y-3">
+              <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 -translate-y-5">
                 <Image src="/assets/column.png" alt="Column Image" width={1800} height={100} className="rounded-lg" />
                 {/* Content Overlay */}
                 <div className="absolute inset-0 flex justify-between items-start px-8 py-6 h-0 text-white">
                   {/* Column 1: My Courses */}
-                      <div className="flex flex-col space-y-4 w-2/5 -translate-y-28">
+                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-28">
                         <div className="flex justify-between items-center">
                           <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 translate-x-8">
                             My Courses
                           </h3>
                           {/* See all link */}
-                          <a href="#" className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-y-16 translate-x-8">
+                          <a href="#" className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-y-16 -translate-x-8">
                             See all
                           </a>
                         </div>
-                    <div className="space-y-8 -translate-y-10 translate-x-8">
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
+                    <div className="space-y-2 -translate-y-10 translate-x-6">
+                      <div className="flex justify-between items-center border-2 border-[#019AEC] w-full">
                         <span className="text-xl w-2/4">Java Programming</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full " />
@@ -239,7 +239,7 @@ const MainContent: React.FC = () => {
                          
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
                         <span className="text-xl w-3/4">Algorithm</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -251,7 +251,7 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
                         <span className="text-xl w-3/4">Java</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -262,7 +262,33 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-3/4">Introduction to Computing</span>
+                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-3/4">Introduction to Computing</span>
+                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
                         <span className="text-xl w-3/4">Introduction to Computing</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -279,9 +305,9 @@ const MainContent: React.FC = () => {
                   </div>               
 
                   {/* Column 2: Popular Courses */}
-                      <div className="flex flex-col space-y-4 w-2/4 -translate-y-28">
+                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-28">
                         <div className="flex justify-between items-center">
-                          <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 -translate-x-12">
+                          <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 translate-x-5">
                             Popular Courses
                           </h3>
                           {/* See all link for Popular Courses */}
@@ -289,9 +315,9 @@ const MainContent: React.FC = () => {
                             See all
                           </a>
                         </div>
-                    <div className="space-y-8 -translate-y-10 -translate-x-12">
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
-                        <span className="text-xl w-2/4">HTML</span>
+                    <div className="space-y-2 -translate-y-10 -translate-x-2">
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-2/3 translate-x-8">HTML</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                           <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -300,8 +326,8 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
-                        <span className="text-xl w-2/4">Introduction to Computing</span>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-2/4 translate-x-8">Introduction to Computing</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                           <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -309,8 +335,8 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
-                        <span className="text-xl w-2/4">CSS</span>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-2/4 translate-x-8">CSS</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                         <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -320,8 +346,8 @@ const MainContent: React.FC = () => {
                         <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-4 border-[#019AEC]">
-                        <span className="text-xl w-2/4">HTML</span>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-2/4 translate-x-8">HTML</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-10">
                           <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                           <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
@@ -329,6 +355,24 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-2/4 translate-x-8">HTML</span>
+                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
+                        <span className="text-xl w-2/4 translate-x-8">HTML</span>
+                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
+                        </div>
+                      </div>  
                     </div>
                   </div>
 
