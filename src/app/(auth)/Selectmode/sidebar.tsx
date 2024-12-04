@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="flex flex-col items-center space-y-12 pt-40">
+    <aside className="flex flex-col items-center space-y-12 pt-24">
       {/* Sidebar Buttons */}
       {[
         { href: "/home", src: "/assets/btnhome.png", label: "Home" },
@@ -16,11 +16,11 @@ const Sidebar: React.FC = () => {
         { href: "/signout", src: "/assets/btnsignout.png", label: "Sign Out" },
       ].map((btn, index) => (
         <Link href={btn.href} key={index} passHref>
-          <button className="flex items-center" aria-label={btn.label}>
+          <button className="flex items-center ml-4" aria-label={btn.label}>
             <Image
               src={btn.src}
               alt={btn.label}
-              width={120}
+              width={180}
               height={110}
               className="object-cover"
             />

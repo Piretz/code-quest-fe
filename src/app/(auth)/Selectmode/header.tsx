@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="flex justify-between items-center p-4 text-white">
        {/* Left Section: User Info */}
-      <div className="flex items-start space-x-4 -translate-x-20 -translate-y-5">
+      <div className="flex items-start space-x-4 -translate-x-24 -translate-y-5">
         
           <Image
             src="/assets/mainrec.png" // Replace with the path to the mainrec image
@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({
           <h1 className="absolute z-10 text-3xl font-bold translate-x-3">Code Wizard</h1>
 
           {/* Mid Star to the right of h1 */}
-          <div className="absolute right-64 top-5">
+          <div className="absolute right-60 top-5">
             <Image
               src="/assets/midstar.png" // Replace with the path to the midstar image
               alt="Mid Star"
