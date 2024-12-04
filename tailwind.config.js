@@ -19,3 +19,19 @@ module.exports = {
   },
   plugins: [],
 };
+// tailwind.config.js
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#0B2D4E',
+        secondary: '#1E90FF',
+        accent: '#FFD700',
+        neon: '#00BFFF',
+        dark: '#001B36',
+      },
+    },
+  },
+  plugins: [],
+};

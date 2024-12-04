@@ -35,7 +35,9 @@ import {
         console.log(`Clicked on ${action}`);
       };
 
-    function toggleDarkMode(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    type NewType = MouseEvent<HTMLButtonElement, MouseEvent>;
+
+    function toggleDarkMode(event: NewType): void {
       throw new Error("Function not implemented.");
     }
 

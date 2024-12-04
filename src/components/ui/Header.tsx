@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUser, FaBell, FaCog } from "react-icons/fa";
-import { useTheme } from "./ThemeContext"; // Import Theme Context
+import { useTheme } from "./ThemeContext";
 
 const Header = () => {
   const { isDarkMode } = useTheme(); // Get isDarkMode from context
