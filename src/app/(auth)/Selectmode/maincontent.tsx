@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,27 +7,49 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 const MainContent: React.FC = () => {
-  // State to track the selected mode
   const [selectedMode, setSelectedMode] = useState<"solomode" | "multimode" | "pracmode1" | "lessonmode1">("solomode");
-  const [activeIndex, setActiveIndex] = useState<number>(0); // State to track the active slide index
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const swiperRef = useRef<any>(null); // Reference for Swiper instance
 
-  // Images for the modes
   const modeImages: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
-    solomode: "/assets/solomode.png", // Solo Mode image
+    solomode: "/assets/solomode.png",
     multimode: "/assets/multimode.png",
     pracmode1: "/assets/practicemode.png",
     lessonmode1: "/assets/lessonmode.png",
   };
 
-  const switchToNextMode = () => {
-    const modeKeys = Object.keys(modeImages) as (keyof typeof modeImages)[];
-    const currentIndex = modeKeys.indexOf(selectedMode);
-    const nextIndex = (currentIndex + 1) % modeKeys.length;
-    setSelectedMode(modeKeys[nextIndex]);
+   // Text for each mode
+   const modeTitles: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
+    solomode: "Solo Mode",
+    multimode: "Multiplayer Mode",
+    pracmode1: "Practice Mode",
+    lessonmode1: "Lesson Mode",
   };
 
   const handleSlideChange = (swiper: any) => {
-    setActiveIndex(swiper.activeIndex); // Update the active index whenever the slide changes
+    setActiveIndex(swiper.activeIndex);
+    const modeKeys = Object.keys(modeImages) as (keyof typeof modeImages)[];
+    setSelectedMode(modeKeys[swiper.activeIndex]);
+  };
+
+  const handleNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slideNext();
+      const modeKeys = Object.keys(modeImages) as (keyof typeof modeImages)[];
+      const nextIndex = (activeIndex + 1) % modeKeys.length;
+      setSelectedMode(modeKeys[nextIndex]);
+      setActiveIndex(nextIndex);
+    }
+  };
+
+  const handleBack = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slidePrev();
+      const modeKeys = Object.keys(modeImages) as (keyof typeof modeImages)[];
+      const prevIndex = (activeIndex - 1 + modeKeys.length) % modeKeys.length;
+      setSelectedMode(modeKeys[prevIndex]);
+      setActiveIndex(prevIndex);
+    }
   };
 
   // Sample data for the leaderboard
@@ -144,7 +166,7 @@ const MainContent: React.FC = () => {
       </aside>
 
       {/* Select Mode Section */}
-      <section className="flex flex-col items-center mb-5 -translate-y-16 -translate-x-9">
+      <section className="flex flex-col items-center mb-5 -translate-y-16">
         {/* Intro Text Image */}
         <div className="mb-5">
           <Image
@@ -158,55 +180,104 @@ const MainContent: React.FC = () => {
 
         {/* Swiper Slider */}
         <div className="w-full h-[500px] flex flex-col items-center -translate-y-20">
-          <Swiper
-            loop={true}
-            effect="coverflow"
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView="auto"
-            coverflowEffect={{
-              rotate: 30,
-              stretch: 10,
-              depth: 100,
-              modifier: 2.5,
-            }}
-            pagination={{ clickable: true }}
-            className="mySwiper"
-            onSlideChange={handleSlideChange} // Track slide change
-          >
-            {Object.keys(modeImages).map((mode, index) => (
-              <SwiperSlide
-                key={mode}
-                className={`flex justify-center items-center ${
-                  activeIndex === index ? "" : ""
-                }`} // Apply scale-105 if the slide is active, else apply opacity-50
-                style={{
-                  width: "250px", // Set width of each card
-                  height: "350px", // Set height of each card
-                }}
+        <Swiper
+          loop={true}
+          effect="flip"
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView="auto"
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 10,
+            depth: 100,
+            modifier: 2.5,
+          }}
+          pagination={{ clickable: true }}
+          className="mySwiper"
+          onSlideChange={handleSlideChange}
+          onSwiper={(swiper) => (swiperRef.current = swiper)} // Set swiper instance
+        >
+          {Object.keys(modeImages).map((mode, index) => (
+            <SwiperSlide
+              key={mode}
+              className={`flex justify-center items-center`}
+              style={{
+                width: "180px",
+                height: "280px",
+              }}
+            >
+              <div
+                className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 ${
+                  activeIndex === index
+                    ? "scale-110 opacity-100"
+                    : "scale-90 opacity-20 transform -skew-y-12 translate-x-6"
+                }`}
+                onClick={() => setSelectedMode(mode as keyof typeof modeImages)}
               >
-                <div
-                  className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-lg ${
-                    selectedMode === mode
-                      ? "scale-110"
-                      : "opacity-20 transform -skew-y-12 translate-x-6"
-                  }`}
-                  onClick={() => setSelectedMode(mode as keyof typeof modeImages)}
-                >
-                  <Image
-                    src={modeImages[mode as keyof typeof modeImages]}
-                    alt={mode}
-                    width={300}
-                    height={300}
-                    className="object-cover rounded-xl shadow-md mb-3"
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                <Image
+                  src={modeImages[mode as keyof typeof modeImages]}
+                  alt={mode}
+                  width={300}
+                  height={300}
+                  className="object-cover rounded-xl shadow-md mb-3"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-          <h1 className="text-4xl font-zenDots text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">Select Mode</h1>
+        {/* Next and Back Buttons */}
+        <div className="flex justify-between w-1/2 mt-5">
+          <button
+            className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition"
+            onClick={handleBack}
+            aria-label="Back"
+          >
+            {/* Heroicons Backward Arrow */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </button>
+
+          <button
+            className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition"
+            onClick={handleNext}
+            aria-label="Next"
+          >
+            {/* Heroicons Forward Arrow */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </button>
         </div>
+
+        {/* Mode Title */}
+        <h1 className="text-4xl font-zenDots -translate-y-10 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">
+          {modeTitles[selectedMode]}
+        </h1>
+      </div>
 
               {/* Column of Images at the bottom of Select Mode */}
               <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 -translate-y-5">

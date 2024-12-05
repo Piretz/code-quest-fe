@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -44,7 +45,7 @@ const Footer = () => {
                     href="https://facebook.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:scale-150  transition duration-300 cursor-pointer"
+                    className="hover:scale-150 transition duration-300 cursor-pointer"
                   >
                     <img
                       src="/assets/Facebook.png"
@@ -67,13 +68,13 @@ const Footer = () => {
                   </a>
                   {/* Google Plus Icon */}
                   <a
-                    href="https://google.com"
+                    href="https://plus.google.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:scale-150 transition duration-300 cursor-pointer"
                   >
                     <img
-                      src="/assets/Google Plus.png"
+                      src="/assets/GooglePlus.png"
                       alt="Google Plus"
                       className="w-14 h-7"
                     />
