@@ -1,126 +1,145 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import Header from '../Selectmode/header';
+import Sidebar from '../Selectmode/sidebar';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Button } from '@/components/ui/button';
+import { ChevronsUpDown } from 'lucide-react';
 
 const Page = () => {
-  const [player1Code, setPlayer1Code] = useState("");
-  const [player2Code, setPlayer2Code] = useState("");
-  const [playerPoints, setPlayerPoints] = useState(0);
-  const [teamPoints, setTeamPoints] = useState(0);
-  const [timer, setTimer] = useState(60);
-  const [chatMessages, setChatMessages] = useState([]);
-  const [chatInput, setChatInput] = useState("");
+  const [time, setTime] = useState(240); // Set initial time to 4 minutes (240 seconds)
+  const [isOpen, setIsOpen] = useState(false); // Add state for Collapsible
+  const [hasStarted, setHasStarted] = useState(false); // Track if user has started typing
+  const [isDisabled, setIsDisabled] = useState(false); // Track if terminals should be disabled
 
-  // Timer countdown effect
-  React.useEffect(() => {
-    if (timer > 0) {
-      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
-      return () => clearInterval(interval);
-    }
-  }, [timer]);
+  // Timer logic
+  useEffect(() => {
+    if (!hasStarted || time <= 0) return; // Don't start the timer until typing begins or time is over
 
-  const handleChatSubmit = (e) => {
-    e.preventDefault();
-    if (chatInput.trim()) {
-      setChatMessages((prev) => [...prev, chatInput]);
-      setChatInput("");
+    const timer = setInterval(() => {
+      setTime((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timer);
+          setIsDisabled(true); // Disable terminals when time is over
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, [hasStarted, time]); // Timer starts when hasStarted is true and stops when time is 0
+
+  // Format time
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
+  // Handle input change event to start the timer
+  const handleInputChange = () => {
+    if (!hasStarted) {
+      setHasStarted(true); // Start the timer when user starts typing
     }
   };
 
   return (
-    <div className="min-h-screen bg-blue-900 text-white p-6 relative">
-      {/* Instruction Box */}
-      <div className="border border-gray-700 bg-gray-800 rounded-lg p-2 text-center mb-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-sm font-semibold">Instructions</h2>
-          <div className="border-2 border-sky-500 bg-gray-700 rounded-full w-12 h-12 flex items-center justify-center">
-            <p className="text-lg font-bold">{teamPoints}</p>
-          </div>
-        </div>
-        <p className="mt-1 text-xs">Enter codes in your terminal before the timer runs out!</p>
+    <div className="flex flex-col h-screen">
+      <div>
+        <Header />
       </div>
 
-      {/* Team Score */}
-      <div className="absolute top-6 left-6">
-        <div className="border-2 border-sky-500 bg-gray-800 rounded-lg p-4">
-          <h3 className="text-center text-sm font-bold mb-2">Team Score</h3>
-          <div className="border-2 border-sky-500 bg-gray-700 rounded-full w-16 h-16 flex items-center justify-center mx-auto">
-            <p className="text-xl font-bold">{teamPoints}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Game Section */}
-      <div className="grid grid-cols-3 gap-4 items-start">
-        {/* Player 1 Terminal and Chat */}
+      <div className="flex flex-1">
         <div>
-          {/* Player 1 Terminal */}
-          <div className="border-2 border-sky-500 bg-gray-800 rounded-lg p-4 mb-4">
-            <h3 className="font-bold text-center mb-4">Player 1 Terminal</h3>
-            <textarea
-              className="w-full bg-gray-700 p-2 rounded text-white"
-              rows="6"
-              placeholder="Enter code..."
-              value={player1Code}
-              onChange={(e) => setPlayer1Code(e.target.value)}
-            />
-          </div>
+          <Sidebar />
+        </div>
 
-          {/* Chatbox */}
-          <div className="border-2 border-sky-500 bg-gray-900 rounded-lg p-3 max-h-40 overflow-y-auto">
-            <h3 className="text-sm font-bold mb-2">Team Chat</h3>
-            <div className="text-sm space-y-2">
-              {chatMessages.length > 0 ? (
-                chatMessages.map((message, index) => (
-                  <p key={index} className="text-gray-300">
-                    {message}
-                  </p>
-                ))
-              ) : (
-                <p className="text-gray-500">No messages yet.</p>
-              )}
+        {/* Collapsible Component */}
+        <Collapsible
+          open={isOpen}
+          onOpenChange={setIsOpen}
+          className="w-40 space-y-4 pt-96 fixed left-40"
+        >
+          <div className="flex items-center justify-between space-x-4 px-4">
+            <h4 className="text-sm font-semibold">
+             MESSAGES
+            </h4>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <ChevronsUpDown className="h-4 w-4" />
+                <span className="sr-only">Toggle</span>
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          <div className="rounded-md border px-2 py-4 font-mono text-sm shadow-sm ">
+            <img src='/assets/user.png' alt=''></img> 
+            <img src='/assets/user.png' alt=''></img>
+            <img src='/assets/user.png' alt=''></img>
+          </div>
+          <CollapsibleContent className="space-y-2">
+            <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+            <img src='/assets/user.png' alt=''></img>
+            </div>
+            <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+            <img src='/assets/user.png' alt=''></img>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <div className="flex flex-1 justify-between items-start m-2" >
+          {/* Points */}
+          <div className='pt-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500'>
+            <div className='h-12'>
+              <h1 className='text-white text-mono '> 70 PTS.</h1>
             </div>
           </div>
-          <form onSubmit={handleChatSubmit} className="mt-3 flex">
-            <input
-              type="text"
-              placeholder="Type a message..."
-              className="flex-1 bg-gray-700 p-2 rounded text-white"
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="ml-2 bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-white"
-            >
-              Send
-            </button>
-          </form>
-        </div>
+          <div className="flex flex-col flex-1">
+            <div className="relative flex flex-1 justify-between p-40 mt-10">
+              {/* Border Box above the terminals */}
+              <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 bg-white text-black w-1/2  p-4 m-10 rounded-lg shadow-md">
+                <h2 className="text-center font-bold text-xl">Instructions</h2>
+                <p className="text-center text-sm">Input Codes before the timer starts</p>
+              </div>
+              <div>
+                <img src="/assets/logo4.png" className="h-12 sm:h-20 animate-spin-slow" />
+                <img src="/assets/logo2.png" className="h-12 sm:h-20 animate-spin-slow" />
+                <img src="/assets/logo3.png" className="h-12 sm:h-20 animate-spin-slow" />
+              </div>
 
-        {/* Timer */}
-        <div className="text-center">
-          <div className="border-2 border-lime-400 rounded-md bg-gray-800 p-2 w-16 h-16 mx-auto shadow-lg shadow-lime-500/50 flex items-center justify-center">
-            <h1 className="text-xl font-bold">{timer}s</h1>
+              {/* Terminal 1 */}
+              <div className="w-1/3 bg-gray-900 text-white rounded-lg p-1 m-1 h-96">
+                <textarea
+                  className="w-full h-[calc(100%-60px)] bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
+                  onChange={handleInputChange} // Trigger when the user starts typing
+                  disabled={isDisabled} // Disable terminal when time is up
+                ></textarea>
+              </div>
+              {/* Minimal Timer */}
+              <div className="flex items-center justify-center text-center w-20 h-4 pb-40 pt-40">
+                <div>
+                  <div className="text-lg font-mono text-white pt-20">{formatTime(time)}</div>
+                </div>
+              </div>
+              {/* Terminal 2 */}
+              <div className="w-1/3 bg-gray-900 text-white rounded-lg p-4 m-1">
+                <textarea
+                  className="w-full h-[calc(100%-60px)] bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
+                  onChange={handleInputChange} // Trigger when the user starts typing
+                  disabled={isDisabled} // Disable terminal when time is up
+                ></textarea>
+              </div>
+              {/* Logos */}
+              <div className="top-14 right-4 flex flex-col space-y-2">
+                <img src="/assets/logo4.png" className="h-12 sm:h-20 animate-spin-slow" />
+                <img src="/assets/logo2.png" className="h-12 sm:h-20 animate-spin-slow" />
+                <img src="/assets/logo3.png" className="h-12 sm:h-20 animate-spin-slow" />
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Player 2 Terminal */}
-        <div className="border-2 border-sky-500 bg-gray-800 rounded-lg p-4">
-          <h3 className="font-bold text-center mb-4">Player 2 Terminal</h3>
-          <textarea
-            className="w-full bg-gray-700 p-2 rounded text-white"
-            rows="6"
-            placeholder="Enter code..."
-            value={player2Code}
-            onChange={(e) => setPlayer2Code(e.target.value)}
-          />
-        </div>
-      </div>
-
-      {/* Player Points */}
-      <div className="absolute top-6 right-6">
-        <div className="border-2 border-sky-500 bg-gray-800 rounded-lg p-2">
-          <p className="font-bold text-center">Points: {playerPoints}</p>
         </div>
       </div>
     </div>
