@@ -12,10 +12,11 @@ const MainContent: React.FC = () => {
   const swiperRef = useRef<any>(null); // Reference for Swiper instance
 
   const modeImages: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
-    solomode: "/assets/solomode.png",
     multimode: "/assets/multimode.png",
+    lessonmode1: "/assets/lessonmode.png", 
     pracmode1: "/assets/practicemode.png",
-    lessonmode1: "/assets/lessonmode.png",
+    solomode: "/assets/solomode.png",
+    
   };
 
    // Text for each mode
@@ -182,7 +183,7 @@ const MainContent: React.FC = () => {
         <div className="w-full h-[500px] flex flex-col items-center -translate-y-20">
         <Swiper
           loop={true}
-          effect="flip"
+          effect="coverflow"
           grabCursor={true}
           centeredSlides={true}
           slidesPerView="auto"
@@ -202,15 +203,19 @@ const MainContent: React.FC = () => {
               key={mode}
               className={`flex justify-center items-center`}
               style={{
-                width: "180px",
+                width: "200px",
                 height: "280px",
               }}
             >
               <div
                 className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 ${
                   activeIndex === index
-                    ? "scale-110 opacity-100"
-                    : "scale-90 opacity-20 transform -skew-y-12 translate-x-6"
+                  ? "scale-110 opacity-100 transform translate-x-40 z-10" // Active image (scaled and centered)
+                  : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
+                  ? "scale-90 opacity-50 transform translate-x-40 blur-sm" // Previous image (smaller, more opaque, and blurred)
+                  : activeIndex === (index + 1) % Object.keys(modeImages).length
+                  ? "scale-90 opacity-50 transform translate-x-40 blur-sm" // Next image (smaller, more opaque, and blurred)
+                  : "scale-75 opacity-30 transform translate-x- blur-sm" // Other images (small, faded, and blurred)
                 }`}
                 onClick={() => setSelectedMode(mode as keyof typeof modeImages)}
               >
@@ -227,7 +232,7 @@ const MainContent: React.FC = () => {
         </Swiper>
 
         {/* Next and Back Buttons */}
-        <div className="flex justify-between w-1/2 mt-5">
+        <div className="flex justify-between w-1/2 mt-5 -translate-x-6">
           <button
             className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition"
             onClick={handleBack}
@@ -274,7 +279,7 @@ const MainContent: React.FC = () => {
         </div>
 
         {/* Mode Title */}
-        <h1 className="text-4xl font-zenDots -translate-y-10 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">
+        <h1 className="text-4xl font-zenDots -translate-y-16 -translate-x-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">
           {modeTitles[selectedMode]}
         </h1>
       </div>

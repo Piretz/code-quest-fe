@@ -310,7 +310,7 @@ const Header = () => {
                       </div>
                       <div>
                         <label htmlFor="birthdayYear" className="block text-md font-medium mb-2">
-                          YY
+                          YYYY
                         </label>
                         <input
                           id="birthdayYear"
