@@ -9,18 +9,17 @@ import "swiper/css/pagination";
 const MainContent: React.FC = () => {
   const [selectedMode, setSelectedMode] = useState<"solomode" | "multimode" | "pracmode1" | "lessonmode1">("solomode");
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const swiperRef = useRef<any>(null); // Reference for Swiper instance
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true); // Cooldown for buttons
+  const swiperRef = useRef<any>(null);
 
   const modeImages: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
     multimode: "/assets/multimode.png",
-    lessonmode1: "/assets/lessonmode.png", 
+    lessonmode1: "/assets/lessonmode.png",
     pracmode1: "/assets/practicemode.png",
     solomode: "/assets/solomode.png",
-    
   };
 
-   // Text for each mode
-   const modeTitles: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
+  const modeTitles: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
     solomode: "Solo Mode",
     multimode: "Multiplayer Mode",
     pracmode1: "Practice Mode",
@@ -34,22 +33,26 @@ const MainContent: React.FC = () => {
   };
 
   const handleNext = () => {
-    if (swiperRef.current) {
+    if (swiperRef.current && isButtonEnabled) {
+      setIsButtonEnabled(false); // Disable button
       swiperRef.current.slideNext();
       const modeKeys = Object.keys(modeImages) as (keyof typeof modeImages)[];
       const nextIndex = (activeIndex + 1) % modeKeys.length;
       setSelectedMode(modeKeys[nextIndex]);
       setActiveIndex(nextIndex);
+      setTimeout(() => setIsButtonEnabled(true), 500); // Re-enable button after 500ms
     }
   };
 
   const handleBack = () => {
-    if (swiperRef.current) {
+    if (swiperRef.current && isButtonEnabled) {
+      setIsButtonEnabled(false); // Disable button
       swiperRef.current.slidePrev();
       const modeKeys = Object.keys(modeImages) as (keyof typeof modeImages)[];
       const prevIndex = (activeIndex - 1 + modeKeys.length) % modeKeys.length;
       setSelectedMode(modeKeys[prevIndex]);
       setActiveIndex(prevIndex);
+      setTimeout(() => setIsButtonEnabled(true), 500); // Re-enable button after 500ms
     }
   };
 
@@ -184,7 +187,7 @@ const MainContent: React.FC = () => {
         <Swiper
           loop={true}
           effect="coverflow"
-          grabCursor={true}
+          grabCursor={false}
           centeredSlides={true}
           slidesPerView="auto"
           coverflowEffect={{
@@ -194,14 +197,16 @@ const MainContent: React.FC = () => {
             modifier: 2.5,
           }}
           pagination={{ clickable: true }}
-          className="mySwiper"
+          noSwiping={true}
+          noSwipingClass="swiper-no-swiping"
+          className="mySwiper swiper-no-swiping"
           onSlideChange={handleSlideChange}
-          onSwiper={(swiper) => (swiperRef.current = swiper)} // Set swiper instance
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           {Object.keys(modeImages).map((mode, index) => (
             <SwiperSlide
               key={mode}
-              className={`flex justify-center items-center`}
+              className="swiper-no-swiping flex justify-center items-center"
               style={{
                 width: "200px",
                 height: "280px",
@@ -210,12 +215,12 @@ const MainContent: React.FC = () => {
               <div
                 className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 ${
                   activeIndex === index
-                  ? "scale-110 opacity-100 transform translate-x-40 z-10" // Active image (scaled and centered)
-                  : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
-                  ? "scale-90 opacity-50 transform translate-x-40 blur-sm" // Previous image (smaller, more opaque, and blurred)
-                  : activeIndex === (index + 1) % Object.keys(modeImages).length
-                  ? "scale-90 opacity-50 transform translate-x-40 blur-sm" // Next image (smaller, more opaque, and blurred)
-                  : "scale-75 opacity-30 transform translate-x- blur-sm" // Other images (small, faded, and blurred)
+                    ? "scale-110 opacity-100 transform translate-x-40 z-10"
+                    : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
+                    ? "scale-90 opacity-50 transform skew-y-12 translate-x-40 blur-sm"
+                    : activeIndex === (index + 1) % Object.keys(modeImages).length
+                    ? "scale-90 opacity-50 transform -skew-y-12 translate-x-40 blur-sm"
+                    : "scale-75 opacity-30 transform skew-y-12 blur-sm"
                 }`}
                 onClick={() => setSelectedMode(mode as keyof typeof modeImages)}
               >
@@ -231,14 +236,15 @@ const MainContent: React.FC = () => {
           ))}
         </Swiper>
 
-        {/* Next and Back Buttons */}
         <div className="flex justify-between w-1/2 mt-5 -translate-x-6">
           <button
-            className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition"
+            className={`${
+              isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+            } text-white p-3 rounded-full transition`}
             onClick={handleBack}
             aria-label="Back"
+            disabled={!isButtonEnabled} // Disable button
           >
-            {/* Heroicons Backward Arrow */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -256,11 +262,13 @@ const MainContent: React.FC = () => {
           </button>
 
           <button
-            className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition"
+            className={`${
+              isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+            } text-white p-3 rounded-full transition`}
             onClick={handleNext}
             aria-label="Next"
+            disabled={!isButtonEnabled} // Disable button
           >
-            {/* Heroicons Forward Arrow */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

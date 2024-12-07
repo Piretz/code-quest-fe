@@ -136,7 +136,7 @@ const Header: React.FC<HeaderProps> = ({
                   alt="Bell"
                   width={30}
                   height={30}
-                  className="object-cover"
+                  className="object-cover transition-transform transform hover:scale-110 cursor-pointer"
                 />
               </button>
             </Link>
@@ -148,7 +148,7 @@ const Header: React.FC<HeaderProps> = ({
                   alt="Settings"
                   width={30}
                   height={30}
-                  className="object-cover"
+                  className="object-cover transition-transform transform hover:scale-110 cursor-pointer"
                 />
               </button>
             </Link>

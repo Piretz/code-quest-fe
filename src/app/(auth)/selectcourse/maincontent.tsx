@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link"; // Import Link component
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +12,7 @@ const MainContent: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isPopupVisible, setPopupVisible] = useState(false); // State for popup visibility
   const [isPanelDiffVisible, setPanelDiffVisible] = useState(false); // State for paneldiff visibility
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true); // State for button debounce
   const swiperRef = useRef<any>(null);
 
   const courseImages: Record<"htmlcourse" | "csscourse" | "jscourse", string> = {
@@ -38,24 +40,28 @@ const MainContent: React.FC = () => {
   };
 
   const handleNext = () => {
-    if (swiperRef.current) {
+    if (isButtonEnabled && swiperRef.current) {
+      setIsButtonEnabled(false); // Disable button
       swiperRef.current.slideNext();
       const modeKeys = Object.keys(courseImages) as (keyof typeof courseImages)[];
       const nextIndex = (activeIndex + 1) % modeKeys.length;
       setSelectedCourse(modeKeys[nextIndex]);
       setActiveIndex(nextIndex);
+      setTimeout(() => setIsButtonEnabled(true), 500); // Re-enable button after 500ms
     }
   };
 
   const handleBack = () => {
-    if (swiperRef.current) {
-        swiperRef.current.slidePrev();
-        const modeKeys = Object.keys(courseImages) as (keyof typeof courseImages)[];
-        const prevIndex = (activeIndex - 1 + modeKeys.length) % modeKeys.length;
-        setSelectedCourse(modeKeys[prevIndex]);
-        setActiveIndex(prevIndex);
-      }
-    };
+    if (isButtonEnabled && swiperRef.current) {
+      setIsButtonEnabled(false); // Disable button
+      swiperRef.current.slidePrev();
+      const modeKeys = Object.keys(courseImages) as (keyof typeof courseImages)[];
+      const prevIndex = (activeIndex - 1 + modeKeys.length) % modeKeys.length;
+      setSelectedCourse(modeKeys[prevIndex]);
+      setActiveIndex(prevIndex);
+      setTimeout(() => setIsButtonEnabled(true), 500); // Re-enable button after 500ms
+    }
+  };
 
   const handleStartClick = () => {
     setPopupVisible(true); // Show popup
@@ -66,9 +72,13 @@ const MainContent: React.FC = () => {
     setPanelDiffVisible(false); // Hide paneldiff image when closing the popup
   };
 
-  const handleLessonClick = () => {
+  const handleStartGameClick = () => {
     setPanelDiffVisible(true); // Show paneldiff image when lesson button is clicked
   };
+  const PaneldiffBackButton = () => {
+    setPopupVisible(true); 
+    setPanelDiffVisible(false);
+  }
 
   return (
     <div className="w-full h-auto">
@@ -140,10 +150,13 @@ const MainContent: React.FC = () => {
 
         {/* Navigation Buttons */}
         <div className="flex justify-between w-2/5 mt-12 translate-x-2">
-          <button
-            className="bg-blue-500 text-white p-3 -translate-y-56 rounded-full hover:bg-blue-600 transition"
+        <button
+            className={`${
+              isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+            } text-white p-3 rounded-full transition -translate-y-56`}
             onClick={handleBack}
             aria-label="Back"
+            disabled={!isButtonEnabled} // Disable button
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -153,14 +166,21 @@ const MainContent: React.FC = () => {
               stroke="currentColor"
               className="w-6 h-6"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
             </svg>
           </button>
 
           <button
-            className="bg-blue-500 text-white p-3 -translate-y-56 rounded-full hover:bg-blue-600 transition"
+             className={`${
+              isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+            } text-white p-3 rounded-full transition -translate-y-56`}
             onClick={handleNext}
             aria-label="Next"
+            disabled={!isButtonEnabled} // Disable button
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -185,8 +205,24 @@ const MainContent: React.FC = () => {
 
         {/* Column of Images at the bottom of Select Mode */}
         <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 translate-y-28">
-                <Image src="/assets/lbcoursepanel.png" alt="Column Image" width={1800} height={100} className="rounded-lg" />
-                {/* Content Overlay */}
+              <Image 
+                src="/assets/lbcoursepanel2.png" 
+                alt="Main Image" 
+                width={1800} 
+                height={100} 
+                className="rounded-lg" 
+              />
+
+              {/* Content Overlay */}
+              <div className="absolute bottom-32 -translate-y-2 flex justify-center items-center z-50">
+                <Image 
+                  src="/assets/lblleaderboard.png" 
+                  alt="Leaderboard Content" 
+                  width={250} 
+                  height={100} 
+                  className="" 
+                />
+              </div>
                 <div className="absolute inset-0 flex justify-between items-start px-8 py-6 h-0 text-white">
                   {/* Column 1: My Courses */}
                       <div className="flex flex-col space-y-4 w-2/4 -translate-y-20">
@@ -302,7 +338,7 @@ const MainContent: React.FC = () => {
 
         {/* Course Panel Popup */}
       {isPopupVisible && (
-        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50 backdrop-blur-md">
+        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50 backdrop-blur-md ">
           <div className="rounded-lg p-10 relative">
             {/* Show the Close Button when the course panel is visible */}
             {!isPanelDiffVisible && (
@@ -322,7 +358,7 @@ const MainContent: React.FC = () => {
               </button>
             )}
 
-            {/* Conditional rendering: Hide course panel if paneldiff is visible */}
+            {/* Conditional rendering: Hide COURSE PANEL if PANELDIFF1 is visible */}
             {!isPanelDiffVisible && (
               <>
                 {/* Course Panel Image */}
@@ -331,37 +367,40 @@ const MainContent: React.FC = () => {
                   alt="Start Course Panel"
                   width={600}
                   height={400}
-                  className="rounded-lg"
+                  className="rounded-lg border-2 border-[#019AEC] shadow-2xl"
                 />
 
-                {/* Lesson Button */}
+                {/* Take Lesson Button */}
+                <Link href="/lesson" passHref>
                 <Image
                   src="/assets/btntklesson.png"
-                  alt="Start Course Panel"
+                  alt="HTML Course"
                   width={200}
                   height={80}
                   className="absolute translate-x-24 -translate-y-48 cursor-pointer transition-transform transform hover:scale-110"
-                  onClick={handleLessonClick} // Show paneldiff image when clicked
                 />
+              </Link>
               </>
             )}
           </div>
 
-          {/* Start Course Button */}
-          {!isPanelDiffVisible && (
-            <Image
-              src="/assets/btnstart.png"
-              alt="Start Course Panel"
-              width={200}
-              height={80}
-              className="absolute translate-x-24 cursor-pointer transition-transform transform hover:scale-110"
-            />
-          )}
+              {/* Start Course Button */}
+              {!isPanelDiffVisible && (
+                <Image
+                  src="/assets/btnstart.png"
+                  alt="Start Course Panel"
+                  width={200}
+                  height={80}
+                  className="absolute translate-x-24 cursor-pointer transition-transform transform hover:scale-110"
+                  onClick={handleStartGameClick} // Show paneldiff image when clicked
+                />
+              )}
         </div>
       )}
 
+          {/* SELECT DIFFICULTY PANEL SECTION */}
             {isPanelDiffVisible && (
-            <div className="fixed inset-0 flex justify-center items-center z-50 backdrop-blur-xl">
+            <div className="fixed inset-0 flex justify-center items-center z-50 backdrop-blur-xl border-2 border-[#019AEC]">
                 <div className="rounded-lg p-10 relative w-full max-w-5xl">
                 
                 {/* Panel Diff Image */}
@@ -370,7 +409,7 @@ const MainContent: React.FC = () => {
                     alt="Panel Diff"
                     width={1600}
                     height={400}
-                    className="rounded-lg"
+                    className="rounded-lg border-2 border-[#019AEC] shadow-2xl"
                 />
                 
                 {/* Content inside Panel Diff Image */}
@@ -415,7 +454,7 @@ const MainContent: React.FC = () => {
 
                 {/* Close Button for Panel Diff - Brings back the Course Panel */}
                 <button
-                    onClick={handleClosePopup}  // Close the paneldiff image and return to course panel
+                    onClick={PaneldiffBackButton}  // Close the paneldiff image and return to course panel
                     className="absolute top-10 left-10 cursor-pointer"
                     aria-label="Back to Course Panel"
                     type="button"

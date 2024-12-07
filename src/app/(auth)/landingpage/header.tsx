@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link"; // Import Link from Next.js for navigation
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const Header = () => {
