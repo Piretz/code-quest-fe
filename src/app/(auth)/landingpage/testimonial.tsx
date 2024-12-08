@@ -77,9 +77,9 @@ const Testimonials = () => {
         </div>
 
         {/* User Quote/Paragraphs - Positioned at the right side */}
-        <div className="absolute right-60 top-1/2 transform -translate-y-1/2 w-1/3 text-nowrap space-y-4 z-10">
+        <div className="absolute right-60 top-1/2 transform -translate-y-1/2 w-1/3 text-nowrap space-y-4 ">
           {/* First Quote */}
-          <div className="p-5 rounded-md shadow-xl mb-3">
+          <div className="p-5 rounded-md mb-3">
             <p className="text-md text-white font-semibold font-Poppins text-left break-words">
               "Cipherion is a fantastic platform for coding enthusiasts! I love
               how it bridges the <br />
@@ -95,7 +95,7 @@ const Testimonials = () => {
           </div>
 
           {/* Second Quote */}
-          <div className="p-5 rounded-md shadow-xl mb-3">
+          <div className="p-5 rounded-md mb-3">
             <p className="text-md text-white font-semibold font-Poppins text-left break-words">
               "The concept of Cipherion is brilliant—teaching programming in a
               competitive, engaging <br />
@@ -110,7 +110,7 @@ const Testimonials = () => {
           </div>
 
           {/* Third Quote */}
-          <div className="p-5 rounded-md shadow-xl mb-3">
+          <div className="p-5 rounded-md mb-3">
             <p className="text-md text-white font-semibold font-Poppins text-left break-words">
               "Unlike traditional games, Cipherion challenges you to think like
               a developer. <br />
@@ -125,7 +125,7 @@ const Testimonials = () => {
           </div>
 
           {/* Fourth Quote */}
-          <div className="p-5 rounded-md shadow-xl mb-3">
+          <div className="p-5 rounded-md mb-3">
             <p className="text-md text-white font-semibold font-Poppins text-left break-words">
               "Cipherion helped me understand coding better than any tutorial.
               It's like learning while <br />

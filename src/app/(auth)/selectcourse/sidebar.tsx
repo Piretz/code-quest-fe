@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="flex flex-col items-center space-y-12 pt-24">
+    <aside className="flex flex-col items-center space-y-12 pt-24 ">
       {/* Sidebar Buttons */}
       {[
         { href: "/home", src: "/assets/btnhome.png", label: "Home" },

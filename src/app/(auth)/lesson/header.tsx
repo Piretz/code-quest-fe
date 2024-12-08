@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({
           <h1 className="absolute z-10 text-3xl font-bold translate-x-3">Code Wizard</h1>
 
           {/* Mid Star to the right of h1 */}
-          <div className="absolute right-72 -translate-x-7 top-5">
+          <div className="absolute right-72 -translate-x-6 top-5">
             <Image
               src="/assets/midstar.png" // Replace with the path to the midstar image
               alt="Mid Star"
