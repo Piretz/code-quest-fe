@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({
             <Image
               src="/assets/midrankbadge.png" // Replace with the path to the midrankbadge image
               alt="Mid Rank Badge"
-              width={50}
+              width={40}
               height={50}
               className="object-cover"
             />
@@ -87,18 +87,18 @@ const Header: React.FC<HeaderProps> = ({
           <h1 className="absolute z-10 text-3xl font-bold translate-x-3">Code Wizard</h1>
 
           {/* Mid Star to the right of h1 */}
-          <div className="absolute right-72 -translate-x-6 top-5">
+          <div className="absolute right-72 translate-x-10 top-5">
             <Image
               src="/assets/midstar.png" // Replace with the path to the midstar image
               alt="Mid Star"
-              width={50}
+              width={40}
               height={50}
               className="object-cover"
             />
           </div>
 
           {/* Progress Bar for Mid Rec (Dynamic) */}
-          <div className="absolute w-full flex justify-center transform translate-y-10 translate-x-2">
+          <div className="absolute w-full flex justify-center transform translate-y-8 translate-x-2">
             <div className="w-64 h-4 bg-gray-300 rounded-full">
               <div
                 className="h-full bg-[#3F2958] rounded-full"

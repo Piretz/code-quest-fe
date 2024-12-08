@@ -7,23 +7,22 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 const MainContent: React.FC = () => {
-  const [selectedMode, setSelectedMode] = useState<"solomode" | "multimode" | "pracmode1" | "lessonmode1">("solomode");
+  const [selectedMode, setSelectedMode] = useState<"solomode" | "multimode" | "pracmode1">("solomode");
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isButtonEnabled, setIsButtonEnabled] = useState(true); // Cooldown for buttons
   const swiperRef = useRef<any>(null);
 
-  const modeImages: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
+  const modeImages: Record<"solomode" | "multimode" | "pracmode1", string> = {
     multimode: "/assets/multimode.png",
-    lessonmode1: "/assets/lessonmode.png",
     pracmode1: "/assets/practicemode.png",
     solomode: "/assets/solomode.png",
   };
 
-  const modeTitles: Record<"solomode" | "multimode" | "pracmode1" | "lessonmode1", string> = {
+  const modeTitles: Record<"solomode" | "multimode" | "pracmode1", string> = {
     solomode: "Solo Mode",
     multimode: "Multiplayer Mode",
     pracmode1: "Practice Mode",
-    lessonmode1: "Lesson Mode",
+    
   };
 
   const handleSlideChange = (swiper: any) => {
@@ -217,9 +216,9 @@ const MainContent: React.FC = () => {
                   activeIndex === index
                     ? "scale-110 opacity-100 transform translate-x-40 z-10"
                     : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
-                    ? "scale-90 opacity-50 transform skew-y-12 translate-x-40 blur-sm"
+                    ? "scale-90 opacity-50 transform skew-y-12 translate-x-36 blur-sm"
                     : activeIndex === (index + 1) % Object.keys(modeImages).length
-                    ? "scale-90 opacity-50 transform -skew-y-12 translate-x-40 blur-sm"
+                    ? "scale-90 opacity-50 transform -skew-y-12 translate-x-44 blur-sm"
                     : "scale-75 opacity-30 transform skew-y-12 blur-sm"
                 }`}
                 onClick={() => setSelectedMode(mode as keyof typeof modeImages)}

@@ -75,6 +75,7 @@ const MainContent: React.FC = () => {
   const handleStartGameClick = () => {
     setPanelDiffVisible(true); // Show paneldiff image when lesson button is clicked
   };
+  
   const PaneldiffBackButton = () => {
     setPopupVisible(true); 
     setPanelDiffVisible(false);
