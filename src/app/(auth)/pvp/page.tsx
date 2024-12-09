@@ -72,10 +72,10 @@ const Page = () => {
 
   return (
     <div>
-      <Header currentLevel={0} currentExperience={0} experienceNeeded={0} />
-      <div className="fixed top-0 left-0 w-32 h-screen text-white">
-        <Sidebar />
-      </div>
+        <Header currentLevel={0} currentExperience={0} experienceNeeded={0} />
+        <div className="fixed top-0 left-0 w-32 h-screen text-white">
+          <Sidebar />
+        </div>
 
       <div className="flex flex-col h-screen">
         <Collapsible
@@ -105,62 +105,72 @@ const Page = () => {
           </CollapsibleContent>
         </Collapsible>
         <div className="pt-2">
-          <div className="flex justify-center items-center w-1/4 h-20 border border-blue-900 bg-gray-800 rounded-md mx-auto mt-4">
-            <h1 className="text-white font-mono text-lg">{playerScore} PTS.</h1>
-          </div>
+  <div className="flex flex-col justify-center items-center h-20 w-20 border-4 border-blue-600 bg-gray-800 rounded-full mx-auto mt-1 ml-40">
+    <h1 className="text-white font-mono text-lg">{playerScore} PTS.</h1>
+  </div>
+
         </div>
         <div className="flex flex-1 items-center justify-center m-2">
           <div className="flex flex-col items-center">
             {/* Instructions */}
-            <div className=" top-[-40px] bg-white text-black w-1/2 p-4 rounded-lg shadow-md text-center">
-              <h2 className="font-bold text-xl">Instructions</h2>
+            <div className=" top-[-40px] bg-white text-black w-1/2  p-2 rounded-lg shadow-md text-center ">
+              <h2 className="font-bold text-xl pr-60">Instructions</h2>
               <p className="text-sm">Input Codes before the timer starts</p>
             </div>
             <div>
               {/* Terminal and Timer Container */}
               <div className="flex space-x-4 items-center justify-center">
                 {/* Left Logos */}
-                <div className="flex flex-col space-y-4 items-center">
-                  <img src="/assets/logo4.png" alt="Logo 4" className="h-12 sm:h-20 animate-spin-slow" />
-                  <img src="/assets/logo2.png" alt="Logo 2" className="h-12 sm:h-20 animate-spin-slow" />
-                  <img src="/assets/logo3.png" alt="Logo 3" className="h-12 sm:h-20 animate-spin-slow" />
-                </div>
+<div className="flex flex-col space-y-4 items-center">
+  <img src="/assets/logo4.png" alt="Logo 4" className="h-12 sm:h-36 object-contain" />
+  <img src="/assets/logo2.png" alt="Logo 2" className="h-12 sm:h-20 object-contain" />
+  <img src="/assets/logo3.png" alt="Logo 3" className="h-12 sm:h-20 object-contain" />
+</div>
 
-                {/* Terminal 1 */}
-                <div className="w-5/12 bg-gray-900 text-white rounded-lg p-4 h-[28rem] m-4">
-                  <textarea
-                    className="w-full h-full bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
-                    onChange={handleInputChange}
-                    disabled={isDisabled}
-                  ></textarea>
-                </div>
+               {/* Terminal 1 */}
+<div className="w-7/12 bg-gray-900 text-white rounded-lg p-4 h-[28rem] m-4">
+  <textarea
+    className="w-full h-full bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
+    onChange={handleInputChange}
+    disabled={isDisabled}
+  ></textarea>
+</div>
 
-                {/* Timer */}
-                <div className="flex flex-col items-center">
-                  <div className="text-lg font-mono text-white">{formatTime(time)}</div>
-                </div>
+{/* Timer */}
+<div className=''>
+<div className="flex flex-col items-center border border-red-900 ">
+  <div className="text-lg font-mono text-white">{formatTime(time)}</div>
+</div>
+</div>
+{/* Terminal 2 */}
+<div className="w-7/12 bg-gray-900 text-white rounded-lg p-4 h-[28rem] m-4">
+  <textarea
+    className="w-full h-full bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
+    onChange={handleInputChange}
+    disabled={isDisabled}
+  ></textarea>
+</div>
 
-                {/* Terminal 2 */}
-                <div className="w-5/12 bg-gray-900 text-white rounded-lg p-4 h-[28rem] m-4">
-                  <textarea
-                    className="w-full h-full bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
-                    onChange={handleInputChange}
-                    disabled={isDisabled}
-                  ></textarea>
-                </div>
 
-                {/* Right Logos */}
-                <div className="flex flex-col space-y-4 items-center">
-                  <img src="/assets/logo4.png" alt="Logo 4" className="h-12 sm:h-20 animate-spin-slow" />
-                  <img src="/assets/logo2.png" alt="Logo 2" className="h-12 sm:h-20 animate-spin-slow" />
-                  <img src="/assets/logo3.png" alt="Logo 3" className="h-12 sm:h-20 animate-spin-slow" />
-                </div>
+                
+{/* Right Logos */}
+<div className="flex flex-col space-y-4 items-center">
+  <img src="/assets/logo4.png" alt="Logo 4" className="h-12 sm:h-36 object-contain" />
+  <img src="/assets/logo2.png" alt="Logo 2" className="h-12 sm:h-20 object-contain" />
+  <img src="/assets/logo3.png" alt="Logo 3" className="h-12 sm:h-20 object-contain" />
+</div>
+<div >
+  <div>
+    <h1 className='fixed top-20 border border-blue-900 text-white font-mono p-10 '>50 PTS</h1>
+  </div>
+</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    
   );
 };
 
