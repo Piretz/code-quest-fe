@@ -1,7 +1,8 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
-import Header from '../Selectmode/header';
-import Sidebar from '../Selectmode/sidebar';
+import Header from '../lesson/header';
+import Sidebar from '../lesson/sidebar';
 import {
   Collapsible,
   CollapsibleContent,
@@ -15,59 +16,75 @@ const Page = () => {
   const [isOpen, setIsOpen] = useState(false); // Add state for Collapsible
   const [hasStarted, setHasStarted] = useState(false); // Track if user has started typing
   const [isDisabled, setIsDisabled] = useState(false); // Track if terminals should be disabled
+  const [playerScore, setPlayerScore] = useState(0); // Track player's score
+  const [codeInput, setCodeInput] = useState(''); // Track code input
 
   // Timer logic
   useEffect(() => {
-    if (!hasStarted || time <= 0) return; // Don't start the timer until typing begins or time is over
+    if (!hasStarted || time <= 0) return;
 
     const timer = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(timer);
-          setIsDisabled(true); // Disable terminals when time is over
+          setIsDisabled(true);
+          calculateScore(); // Calculate score when timer ends
         }
         return prevTime - 1;
       });
     }, 1000);
-    
-    return () => clearInterval(timer);
-  }, [hasStarted, time]); // Timer starts when hasStarted is true and stops when time is 0
 
-  // Format time
+    return () => clearInterval(timer);
+  }, [hasStarted, time]);
+
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  // Handle input change event to start the timer
-  const handleInputChange = () => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (!hasStarted) {
-      setHasStarted(true); // Start the timer when user starts typing
+      setHasStarted(true);
     }
+    setCodeInput(e.target.value); // Update code input
+  };
+
+  const calculateScore = () => {
+    let correctnessPoints = 0;
+    let timeComplexityPoints = 0;
+
+    // Simulate correctness evaluation (example logic)
+    if (codeInput.includes('correct')) {
+      correctnessPoints = 50; // Example score for correct code
+    }
+
+    // Simulate time complexity evaluation
+    if (time > 180) {
+      timeComplexityPoints = 20; // Bonus for fast completion
+    } else if (time > 120) {
+      timeComplexityPoints = 10; // Smaller bonus for intermediate speed
+    }
+
+    // Update the player's score
+    setPlayerScore(correctnessPoints + timeComplexityPoints);
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <div>
-        <Header />
+    <div>
+      <Header currentLevel={0} currentExperience={0} experienceNeeded={0} />
+      <div className="fixed top-0 left-0 w-32 h-screen text-white">
+        <Sidebar />
       </div>
 
-      <div className="flex flex-1">
-        <div>
-          <Sidebar />
-        </div>
-
-        {/* Collapsible Component */}
+      <div className="flex flex-col h-screen">
         <Collapsible
           open={isOpen}
           onOpenChange={setIsOpen}
           className="w-40 space-y-4 pt-96 fixed left-40"
         >
           <div className="flex items-center justify-between space-x-4 px-4">
-            <h4 className="text-sm font-semibold">
-             MESSAGES
-            </h4>
+            <h4 className="text-sm font-semibold">MESSAGES</h4>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="sm">
                 <ChevronsUpDown className="h-4 w-4" />
@@ -76,67 +93,68 @@ const Page = () => {
             </CollapsibleTrigger>
           </div>
           <div className="rounded-md border px-2 py-4 font-mono text-sm shadow-sm ">
-            <img src='/assets/user.png' alt=''></img> 
-            <img src='/assets/user.png' alt=''></img>
-            <img src='/assets/user.png' alt=''></img>
+            <img src="/assets/user.png" alt=""></img>
           </div>
           <CollapsibleContent className="space-y-2">
             <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-            <img src='/assets/user.png' alt=''></img>
+              <img src="/assets/user.png" alt=""></img>
             </div>
             <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-            <img src='/assets/user.png' alt=''></img>
+              <img src="/assets/user.png" alt=""></img>
             </div>
           </CollapsibleContent>
         </Collapsible>
-
-        <div className="flex flex-1 justify-between items-start m-2" >
-          {/* Points */}
-          <div className='pt-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500'>
-            <div className='h-12'>
-              <h1 className='text-white text-mono '> 70 PTS.</h1>
-            </div>
+        <div className="pt-2">
+          <div className="flex justify-center items-center w-1/4 h-20 border border-blue-900 bg-gray-800 rounded-md mx-auto mt-4">
+            <h1 className="text-white font-mono text-lg">{playerScore} PTS.</h1>
           </div>
-          <div className="flex flex-col flex-1">
-            <div className="relative flex flex-1 justify-between p-40 mt-10">
-              {/* Border Box above the terminals */}
-              <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 bg-white text-black w-1/2  p-4 m-10 rounded-lg shadow-md">
-                <h2 className="text-center font-bold text-xl">Instructions</h2>
-                <p className="text-center text-sm">Input Codes before the timer starts</p>
-              </div>
-              <div>
-                <img src="/assets/logo4.png" className="h-12 sm:h-20 animate-spin-slow" />
-                <img src="/assets/logo2.png" className="h-12 sm:h-20 animate-spin-slow" />
-                <img src="/assets/logo3.png" className="h-12 sm:h-20 animate-spin-slow" />
-              </div>
-
-              {/* Terminal 1 */}
-              <div className="w-1/3 bg-gray-900 text-white rounded-lg p-1 m-1 h-96">
-                <textarea
-                  className="w-full h-[calc(100%-60px)] bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
-                  onChange={handleInputChange} // Trigger when the user starts typing
-                  disabled={isDisabled} // Disable terminal when time is up
-                ></textarea>
-              </div>
-              {/* Minimal Timer */}
-              <div className="flex items-center justify-center text-center w-20 h-4 pb-40 pt-40">
-                <div>
-                  <div className="text-lg font-mono text-white pt-20">{formatTime(time)}</div>
+        </div>
+        <div className="flex flex-1 items-center justify-center m-2">
+          <div className="flex flex-col items-center">
+            {/* Instructions */}
+            <div className=" top-[-40px] bg-white text-black w-1/2 p-4 rounded-lg shadow-md text-center">
+              <h2 className="font-bold text-xl">Instructions</h2>
+              <p className="text-sm">Input Codes before the timer starts</p>
+            </div>
+            <div>
+              {/* Terminal and Timer Container */}
+              <div className="flex space-x-4 items-center justify-center">
+                {/* Left Logos */}
+                <div className="flex flex-col space-y-4 items-center">
+                  <img src="/assets/logo4.png" alt="Logo 4" className="h-12 sm:h-20 animate-spin-slow" />
+                  <img src="/assets/logo2.png" alt="Logo 2" className="h-12 sm:h-20 animate-spin-slow" />
+                  <img src="/assets/logo3.png" alt="Logo 3" className="h-12 sm:h-20 animate-spin-slow" />
                 </div>
-              </div>
-              {/* Terminal 2 */}
-              <div className="w-1/3 bg-gray-900 text-white rounded-lg p-4 m-1">
-                <textarea
-                  className="w-full h-[calc(100%-60px)] bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
-                  onChange={handleInputChange} // Trigger when the user starts typing
-                  disabled={isDisabled} // Disable terminal when time is up
-                ></textarea>
-              </div>
-              {/* Logos */}
-              <div className="top-14 right-4 flex flex-col space-y-2">
-                <img src="/assets/logo4.png" className="h-12 sm:h-20 animate-spin-slow" />
-                <img src="/assets/logo2.png" className="h-12 sm:h-20 animate-spin-slow" />
-                <img src="/assets/logo3.png" className="h-12 sm:h-20 animate-spin-slow" />
+
+                {/* Terminal 1 */}
+                <div className="w-5/12 bg-gray-900 text-white rounded-lg p-4 h-[28rem] m-4">
+                  <textarea
+                    className="w-full h-full bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
+                    onChange={handleInputChange}
+                    disabled={isDisabled}
+                  ></textarea>
+                </div>
+
+                {/* Timer */}
+                <div className="flex flex-col items-center">
+                  <div className="text-lg font-mono text-white">{formatTime(time)}</div>
+                </div>
+
+                {/* Terminal 2 */}
+                <div className="w-5/12 bg-gray-900 text-white rounded-lg p-4 h-[28rem] m-4">
+                  <textarea
+                    className="w-full h-full bg-black text-white p-2 rounded-lg resize-none focus:outline-none focus:ring-4 focus:ring-lightblue-500 outline outline-offset-2 outline-blue-500"
+                    onChange={handleInputChange}
+                    disabled={isDisabled}
+                  ></textarea>
+                </div>
+
+                {/* Right Logos */}
+                <div className="flex flex-col space-y-4 items-center">
+                  <img src="/assets/logo4.png" alt="Logo 4" className="h-12 sm:h-20 animate-spin-slow" />
+                  <img src="/assets/logo2.png" alt="Logo 2" className="h-12 sm:h-20 animate-spin-slow" />
+                  <img src="/assets/logo3.png" alt="Logo 3" className="h-12 sm:h-20 animate-spin-slow" />
+                </div>
               </div>
             </div>
           </div>

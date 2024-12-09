@@ -33,7 +33,7 @@
 //     </html>
 //   );
 // }
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../app/globals.css';
 
 export default function RootLayout({

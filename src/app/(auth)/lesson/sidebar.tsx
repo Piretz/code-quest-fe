@@ -8,12 +8,12 @@ const Sidebar: React.FC = () => {
     <aside className="flex flex-col items-center space-y-12 pt-24 ">
       {/* Sidebar Buttons */}
       {[
-        { href: "/home", src: "/assets/btnhome.png", label: "Home" },
+        { href: "/landingpage", src: "/assets/btnhome.png", label: "Home" },
         { href: "/lesson", src: "/assets/btnlesson.png", label: "Lessons" },
         { href: "/achievements", src: "/assets/btnachi.png", label: "Achievements" },
         { href: "/darkmode", src: "/assets/btndark.png", label: "Dark Mode" },
         { href: "/info", src: "/assets/btninfo.png", label: "Info" },
-        { href: "/signout", src: "/assets/btnsignout.png", label: "Sign Out" },
+        { href: "/login", src: "/assets/btnsignout.png", label: "Sign Out" },
       ].map((btn, index) => (
         <Link href={btn.href} key={index} passHref>
           <button className="flex items-center ml-4" aria-label={btn.label}>

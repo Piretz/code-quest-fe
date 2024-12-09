@@ -4,6 +4,8 @@ import Link from "next/link"; // Import Link from Next.js for navigation
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 const Header = () => {
   const [activeButton, setActiveButton] = useState<string>("");
@@ -26,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      {/* Header Navigation */}
+      {/* Header Navigation */} 
       <header className="fixed top-0 left-0 right-0 z-50 w-screen bg-opacity-80 bg-transparent text-white px-4 sm:px-8 py-4 flex justify-between items-center shadow-lg">
         {/* Logo */}
         <img
@@ -383,3 +385,7 @@ const Header = () => {
   };
 
 export default Header;
+  function yupResolver(schema: any): import("react-hook-form").Resolver<import("react-hook-form").FieldValues, any> | undefined {
+    throw new Error("Function not implemented.");
+  }
+

@@ -227,24 +227,27 @@ export default function Page() {
               }}
             />
 
-            {/* Email Input */}
-            <label htmlFor="email" style={{ color: 'white', fontSize: '1rem', marginLeft: '-20px', opacity: 1 }}>
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your Email"
-              style={{
-                padding: '10px',
-                borderRadius: '3px',
-                border: '1px solid #ccc',
-                backgroundColor: '#273239',
-                color: 'white',
-                width: '100%',
-                fontSize: '1rem',
-                marginLeft:'330px',
-              }}
+                  {/* Email Input */}
+          <label
+            htmlFor="email"
+            style={{ color: 'white', fontSize: '1rem', marginLeft: '-20px', opacity: 1 }}
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your Email"
+            style={{
+              padding: '10px',
+              borderRadius: '3px',
+              border: '1px solid #ccc',
+              backgroundColor: '#273239',
+              color: 'white',
+              width: '100%',
+              fontSize: '1rem',
+              marginLeft: '330px',
+            }}
             />
 
             {/* Username Input */}
