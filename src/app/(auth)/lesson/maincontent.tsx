@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const MainContent: React.FC = () => {
   // State to manage the selected video ID and lesson information
@@ -42,24 +42,24 @@ const MainContent: React.FC = () => {
 
   return (
     <div
-      className="relative bg-cover bg-center h-[100vh] w-[85%] translate-x-28 -translate-y-10"
+      className="relative bg-center h-[100vh] w-[85%] translate-x-36 -translate-y-20 p-10 border-2 "
       style={{
         backgroundImage: "url('/assets/lessonpanel.png')", // Path for background image
       }}
     >
       {/* Content */}
-      <h1 className="absolute top-96 translate-y-32 translate-x-20 text-white text-3xl font-zenDots font-bold">
+      <h1 className="absolute bottom-60 mt-1 translate-x-1 text-white text-2xl font-zenDots font-bold">
         {selectedLesson.title}
       </h1>
-      <p className="relative top-96 translate-y-44 translate-x-20 w-[50%] text-white text-lg text-justify font-poppins font-normal break-words">
-        {selectedLesson.content}
+      <p className="relative top-80 translate-y-48 translate-x-10 w-[50%] text-white text-sm text-justify font-poppins font-normal break-words">
+      • {selectedLesson.content}
       </p>
 
       {/* Video Panel */}
       {selectedLesson.videoId && (
-  <div className="fixed top-[5%] left-[7%] z-10">
+  <div className="fixed top-[4%] left-[4%] z-10 border-4 border-black -translate-x-10">
     <iframe
-      className="h-[45vh] aspect-video lg:aspect-video border-4 border-[#019AEC]"
+      className="h-[45vh] w-[100vh] aspect-video lg:aspect-video  "
       src={`https://www.youtube.com/embed/${selectedLesson.videoId}`}
       title="Lesson Video"
       frameBorder="0"
@@ -70,14 +70,14 @@ const MainContent: React.FC = () => {
 )}
 
      {/* Container for the Lesson section */}
-<div className="absolute left-2/3 -translate-x-16 translate-y-5 bottom-12 flex flex-col space-y-2 w-2/6 text-md font-poppins">
+<div className="absolute left-2/3 -translate-x-12 -translate-y-6 bottom-12 flex flex-col space-y-2 w-2/6 text-md font-poppins">
   {/* Lesson label */}
-  <h1 className="font-poppins font-bold text-2xl mb-2 translate-y-2">Lessons:</h1>
+  <h1 className="font-poppins font-bold text-xl mb-2 translate-y-16 ">Lessons:</h1>
 
   {/* Scrollable button container */}
-  <div className="max-h-64 overflow-y-auto space-y-2">
+  <div className="max-h-56 overflow-y-auto space-y-2 translate-y-16">
     <button
-      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 rounded-md transition-transform transform hover:text-slate-700 cursor-pointer w-full"
+      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
       onClick={() =>
         handleLessonSelection(
           "salY_Sm6mv4",
@@ -86,15 +86,15 @@ const MainContent: React.FC = () => {
         )
       }
     >
-      <p className="text-lg text-black font-semibold font-Poppins text-left break-words ">
+      <p className="text-xs text-black font-semibold font-Poppins text-left break-words ">
         Lesson 1: HTML (15.00)
       </p>
-      <p className="mt-1 text-lg text-black font-Poppins text-left italic">
+      <p className="mt-1 text-xs text-black font-Poppins text-left italic">
         - Robert Brown
       </p>
     </button>
     <button
-      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 rounded-md transition-transform transform hover:text-slate-700 cursor-pointer w-full"
+      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
       onClick={() =>
         handleLessonSelection(
           "Z4pCqK-V_Wo",
@@ -103,15 +103,15 @@ const MainContent: React.FC = () => {
         )
       }
     >
-      <p className="text-lg text-black font-semibold font-Poppins text-left break-words">
+      <p className="text-xs text-black font-semibold font-Poppins text-left break-words">
         Lesson 2: Cascading Style Sheet CSS (15.00)
       </p>
-      <p className="mt-1 text-lg text-black font-Poppins text-left italic">
+      <p className="mt-1 text-xs text-black font-Poppins text-left italic">
         - Robert Brown
       </p>
     </button>
     <button
-      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 rounded-md transition-transform transform hover:text-slate-700 cursor-pointer w-full"
+      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
       onClick={() =>
         handleLessonSelection(
           "DHjqpvDnNGE",
@@ -120,27 +120,27 @@ const MainContent: React.FC = () => {
         )
       }
     >
-      <p className="text-lg text-black font-semibold font-Poppins text-left break-words">
+      <p className="text-xs text-black font-semibold font-Poppins text-left break-words">
         Lesson 3: JavaScript (15.00)
       </p>
-      <p className="mt-1 text-lg text-black font-Poppins text-left italic">
+      <p className="mt-1 text-xs text-black font-Poppins text-left italic">
         - Robert Brown
       </p>
     </button>
     <button
-      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 rounded-md transition-transform transform hover:text-slate-700 cursor-pointer w-full"
+      className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
       onClick={() =>
         handleLessonSelection(
           "DHjqpvDnNGE",
-          "Lesson 3: JavaScript",
+          "Lesson 4: JavaScript",
           "JavaScript is a scripting language that enables you to create dynamically updating content, control multimedia, animate images, and pretty much everything else. (Okay, not everything, but it is amazing what you can achieve with a few lines of JavaScript code.)"
         )
       }
     >
-      <p className="text-lg text-black font-semibold font-Poppins text-left break-words">
-        Lesson 3: JavaScript (15.00)
+      <p className="text-xs text-black font-semibold font-Poppins text-left break-words">
+        Lesson 4: JavaScript (15.00)
       </p>
-      <p className="mt-1 text-lg text-black font-Poppins text-left italic">
+      <p className="mt-1 text-xs text-black font-Poppins text-left italic">
         - Robert Brown
       </p>
     </button>
@@ -151,50 +151,51 @@ const MainContent: React.FC = () => {
 
 
       {/* Fixed Comment Section */}
-      <div className="absolute top-3/4 left-2/4 translate-x-52 -translate-y-48">
+      <div className="absolute top-3/4 left-2/4 translate-x-72 -translate-y-40 w-2/5">
         <form
           onSubmit={handleCommentSubmit}
           className="flex items-center space-x-2"
         >
           {/* Profile Icon */}
-          <FontAwesomeIcon icon={faUser} className="text-white text-2xl" />
+          <FontAwesomeIcon icon={faUser} className="text-white text-lg translate-x-1" />
 
           {/* Comment Input */}
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            className="w-96 h-10 p-2 border border-gray-300 rounded-lg text-black font-poppins"
+            className="w-3/5 h-8 border border-gray-300 p-1 rounded-lg text-black font-poppins text-sm"
             placeholder="Add your comment..."
             rows={3}
           ></textarea>
 
-          {/* Send Button */}
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-          >
-            Send
-          </button>
+           {/* Send Icon Button */}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 flex items-center justify-center"
+          aria-label="Send Comment"
+        >
+          <FontAwesomeIcon icon={faPaperPlane} className="text-white text-lg" />
+        </button>
         </form>
       </div>
 
       {/* Display Comments */}
-      <div className="absolute left-2/4 translate-x-48 top-96 -translate-y-80 text-white font-poppins w-1/3 max-w-xl">
-      <h1 className="text-lg font-poppins font-bold -translate-y-3">Comments:</h1>
+      <div className="absolute left-2/4 translate-x-56 top-80 -translate-y-80 text-white font-poppins w-2/5 max-w-xl">
+      <h1 className="text-xl font-poppins font-bold mb-2 translate-x-1">Comments:</h1>
         {/* Scrollable Container */}
-        <div className="max-h-80 overflow-y-auto space-y-2 p-2 border border-gray-700 rounded-lg">
+        <div className="max-h-96 overflow-y-auto space-y-2 p-2 border border rounded-lg">
           {comments.map((comment) => (
             <div
               key={comment.id}
-              className="flex flex-col bg-black bg-opacity-60 p-2 rounded-lg"
+              className="flex flex-col border bg-opacity-60 p-2 rounded-lg"
             >
               {/* User Info */}
               <div className="flex items-center space-x-2">
-                <FontAwesomeIcon icon={faUser} className="text-white text-2xl" />
-                <p className="text-sm font-semibold">{comment.name}</p>
+                <FontAwesomeIcon icon={faUser} className="text-white text-xs" />
+                <p className="text-xs font-semibold">{comment.name}</p>
               </div>
               {/* Comment Text */}
-              <p className="break-words mt-1 ml-8">{comment.text}</p>
+              <p className="break-words mt-1 ml-8 text-xs">{comment.text}</p>
             </div>
           ))}
         </div>

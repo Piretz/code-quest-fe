@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="flex flex-col items-center space-y-12 pt-24 ">
+    <aside className="flex flex-col items-center space-y-10 translate-y-24 -translate-x-3 h-0">
       {/* Sidebar Buttons */}
       {[
         { href: "/Selectmode", src: "/assets/btnhome.png", label: "Home" },
@@ -20,8 +20,8 @@ const Sidebar: React.FC = () => {
             <Image
               src={btn.src}
               alt={btn.label}
-              width={180}
-              height={110}
+              width={90}
+              height={50}
               className="object-cover transition-transform transform hover:scale-110 cursor-pointer"
             />
           </button>

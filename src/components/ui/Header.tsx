@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     >
       {/* Animated H1 Text with Infinite Animation */}
       <h1 className="font-poppins font-extrabold text-xl overflow-hidden whitespace-nowrap animate-typewriter">
-        Welcome, KUPAL
+        Welcome, User
       </h1>
 
       <div className="flex space-x-6">

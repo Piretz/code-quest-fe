@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -77,7 +78,7 @@ const MainContent: React.FC = () => {
       <aside className="absolute left-12 p-2 rounded-lg w-80 h-auto -translate-y-20 shadow-xl shadow-[#019AEC] drop-shadow border-4 border-sky-300">
         {/* Leaderboards Title and "See all" Button */}
         <div className="flex justify-between items-center mb-4 ">
-          <h2 className="text-xl font-bold underline underline-offset-4">Leaderboards</h2>
+          <h2 className="text-md font-bold underline underline-offset-4">Leaderboards</h2>
           {/* see all link */}
           <a href="#" className="text-white font-semibold text-sm hover:underline hover:underline-offset-2 hover:text-blue-500 hover:cursor-pointer">
             See all
@@ -111,15 +112,15 @@ const MainContent: React.FC = () => {
                       : "order-3 scale-100" //end rank 3
                   }`}
                 >
-                  <span className="text-md font-semibold text-white">{player.rank}</span>
+                  <span className="text-sm font-semibold text-white">{player.rank}</span>
                   <Image
                     src={avatar} // Use the determined avatar
                     alt={player.name}
-                    width={60} // Adjusted size for better visibility
-                    height={60}
+                    width={40} // Adjusted size for better visibility
+                    height={40}
                     className="rounded-full"
                   />
-                  <span className="text-sm mt-2">{player.name}</span>
+                  <span className="text-xs mt-2">{player.name}</span>
                 </div>
               );
             })}
@@ -151,16 +152,16 @@ const MainContent: React.FC = () => {
 
                     return (
                       <div key={player.rank} className="flex items-center bg-transparent p-2 border-b border-t border-gray-300">
-                        <span className="text-sm font-bold text-slate-100">{player.rank}</span>
+                        <span className="text-xs font-bold text-slate-100">{player.rank}</span>
                         <Image
                           src={avatar} // Use the determined avatar
                           alt="Avatar"
-                          width={30}
+                          width={20}
                           height={30}
                           className="rounded-full ml-1"
                         />
                         <div className="ml-3">
-                          <span className="font-normal text-sm">{player.name}</span>
+                          <span className="font-normal text-xs">{player.name}</span>
                         </div>
                       </div>
                     );
@@ -169,20 +170,20 @@ const MainContent: React.FC = () => {
       </aside>
 
       {/* Select Mode Section */}
-      <section className="flex flex-col items-center mb-5 -translate-y-16">
+      <section className="flex flex-col items-center mb-5 -translate-y-20">
         {/* Intro Text Image */}
-        <div className="mb-5">
+        <div className="mb-5 -translate-y-8 -translate-x-20">
           <Image
             src="/assets/introtxt.png"
             alt="Intro Text"
-            width={800}
+            width={600}
             height={100}
             className="mx-auto"
           />
         </div>
 
         {/* Swiper Slider */}
-        <div className="w-full h-[500px] flex flex-col items-center -translate-y-20">
+        <div className="w-full h-[500px] flex flex-col items-center -translate-y-20 -translate-x-10">
         <Swiper
           loop={true}
           effect="coverflow"
@@ -210,32 +211,35 @@ const MainContent: React.FC = () => {
                 width: "200px",
                 height: "280px",
               }}
-            >
-              <div
-                className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 ${
-                  activeIndex === index
-                    ? "scale-110 opacity-100 transform translate-x-40 z-10"
-                    : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
-                    ? "scale-90 opacity-50 transform skew-y-12 translate-x-36 blur-sm"
-                    : activeIndex === (index + 1) % Object.keys(modeImages).length
-                    ? "scale-90 opacity-50 transform -skew-y-12 translate-x-44 blur-sm"
-                    : "scale-75 opacity-30 transform skew-y-12 blur-sm"
-                }`}
-                onClick={() => setSelectedMode(mode as keyof typeof modeImages)}
               >
-                <Image
-                  src={modeImages[mode as keyof typeof modeImages]}
-                  alt={mode}
-                  width={300}
-                  height={300}
-                  className="object-cover rounded-xl shadow-md mb-3"
-                />
-              </div>
+              {/* Wrap the image div in a Link to navigate to /selectcourse */}
+              <Link href="/selectcourse" passHref>
+                <div
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 cursor-pointer ${
+                    activeIndex === index
+                      ? "scale-110 opacity-100 transform translate-x-40 z-10"
+                      : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
+                      ? "scale-90 opacity-50 transform skew-y-12 translate-x-36 blur-sm"
+                      : activeIndex === (index + 1) % Object.keys(modeImages).length
+                      ? "scale-90 opacity-50 transform -skew-y-12 translate-x-44 blur-sm"
+                      : "scale-75 opacity-30 transform skew-y-12 blur-sm"
+                  }`}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <Image
+                    src={modeImages[mode as keyof typeof modeImages]}
+                    alt={mode}
+                    width={300}
+                    height={300}
+                    className="object-cover rounded-xl shadow-md mb-3"
+                  />
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
 
-        <div className="flex justify-between w-1/2 mt-5 -translate-x-6">
+        <div className="flex justify-between w-1/3 mt-5 -translate-x-6">
           <button
             className={`${
               isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
@@ -293,11 +297,11 @@ const MainContent: React.FC = () => {
 
               {/* Column of Images at the bottom of Select Mode */}
               <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 -translate-y-5">
-                <Image src="/assets/column.png" alt="Column Image" width={1800} height={100} className="rounded-lg" />
+                <Image src="/assets/column1.png" alt="Column Image" width={1700} height={100} className="rounded-lg" />
                 {/* Content Overlay */}
                 <div className="absolute inset-0 flex justify-between items-start px-8 py-6 h-0 text-white">
                   {/* Column 1: My Courses */}
-                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-28">
+                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-20">
                         <div className="flex justify-between items-center">
                           <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 translate-x-8">
                             My Courses
@@ -371,24 +375,12 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-3/4">Introduction to Computing</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>               
 
                   {/* Column 2: Popular Courses */}
-                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-28">
+                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-20">
                         <div className="flex justify-between items-center">
                           <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 translate-x-5">
                             Popular Courses
@@ -447,15 +439,7 @@ const MainContent: React.FC = () => {
                           <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
                         </div>
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-2/4 translate-x-8">HTML</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
-                      </div>  
+                       
                     </div>
                   </div>
 
