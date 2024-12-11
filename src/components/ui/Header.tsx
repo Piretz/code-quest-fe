@@ -22,89 +22,38 @@ const Header: React.FC<HeaderProps> = ({
   );
 
   return (
-    <header className="flex justify-between items-center p-4 text-white">
-       {/* Left Section: User Info */}
-      <div className="flex items-start space-x-4 -translate-x-24 -translate-y-5">
-        
-          <Image
-            src="/assets/mainrec.png" // Replace with the path to the mainrec image
-            alt="Main Rec"
-            width={1000} // Increased width from 600 to 800
-            height={80}
-            className="object-cover"
-          />
-          <div className="absolute top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 flex items-center space-x-4">
-            {/* Avatar and User Info */}
-            <Image
-              src="/assets/avatar.png" // Replace with the path to the avatar image
-              alt="User Avatar"
-              width={50}
-              height={50}
-              className="rounded-full"
-            />
-            <div>
-              <p className="font-bold font-poppins text-lg">Christopher Potter</p>
-              <div className="flex items-center space-x-2">
-                <p className="text-sm text-gray-300">Level {currentLevel}</p>
-                {/* Level Bar */}
-                <div className="w-16 h-3 bg-gray-300 rounded-full">
-                  <div
-                    className="h-full bg-[#3F2958] rounded-full"
-                    style={{ width: `${progressPercentage}%` }} // Dynamic progress bar width
-                  ></div>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400">
-                {/* {currentExperience}/{experienceNeeded} XP */}
-              </p>
-            </div>
-          </div>
-        </div>
+    <div
+      className={`flex items-center justify-between px-7 py-4 h-15 font-poppins drop-shadow-2xl ${
+        isDarkMode ? "bg-gray-800 text-white" : " bg-[#082751] text-white"
+      }`} // Swap background colors for light and dark mode
+    >
+      {/* Animated H1 Text with Infinite Animation */}
+      <h1 className="font-poppins font-extrabold text-xl overflow-hidden whitespace-nowrap animate-typewriter">
+        Welcome, KUPAL
+      </h1>
 
-        {/* Container for Mid Rec with h1 text and icons */}
-        <div className="relative flex flex-col items-center w-full -translate-y-2/4 right-9">
-          {/* Mid Rec Image */}
-          <Image
-            src="/assets/midrec.png" // Replace with the path to the midrec image
-            alt="Mid Rec"
-            width={1400}
-            height={100}
-            className="object-cover"
-          />
-
-          {/* Mid Rank Badge to the left of h1 */}
-          <div className="absolute transform -translate-x-36 top-3">
-            <Image
-              src="/assets/midrankbadge.png" // Replace with the path to the midrankbadge image
-              alt="Mid Rank Badge"
-              width={50}
-              height={50}
-              className="object-cover"
-            />
-          </div>
-
-          {/* h1 text centered */}
-          <h1 className="absolute z-10 text-3xl font-bold translate-x-3">Code Wizard</h1>
-
-          {/* Mid Star to the right of h1 */}
-          <div className="absolute right-72 -translate-x-7 top-5">
-            <Image
-              src="/assets/midstar.png" // Replace with the path to the midstar image
-              alt="Mid Star"
-              width={50}
-              height={50}
-              className="object-cover"
-            />
-          </div>
-
-          {/* Progress Bar for Mid Rec (Dynamic) */}
-          <div className="absolute w-full flex justify-center transform translate-y-10 translate-x-2">
-            <div className="w-64 h-4 bg-gray-300 rounded-full">
-              <div
-                className="h-full bg-[#3F2958] rounded-full"
-                style={{ width: `${50}%` }} // Dynamic progress bar width {progressPercentage}
-              ></div>
-            </div>
+      <div className="flex space-x-6">
+        {/* Dark Mode Toggle Button with Icon Sliding Animation */}
+        <button
+          type="button" // Set type to button for dark mode toggle
+          onClick={toggleDarkMode}
+          aria-label={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"} // Accessibility
+          className={`flex items-center justify-center space-x-1 p-3 rounded-full 
+            transition-all duration-500 transform shadow-lg
+            ${isDarkMode ? "bg-gray-700 border-gray-400" : "bg-white border-blue-600"} 
+            border-2`}
+        >
+          {/* Conditionally render the sun or moon icon based on dark mode */}
+          <div
+            className={`transition-transform duration-500 transform ${
+              isDarkMode ? "translate-x-6" : "-translate-x-6"
+            }`}
+          >
+            {isDarkMode ? (
+              <FaMoon className="h-5 w-12 text-black" /> // Moon icon in dark mode
+            ) : (
+              <FaSun className="h-5 w-12 text-yellow-500" /> // Sun icon in light mode
+            )}
           </div>
         </div>
 

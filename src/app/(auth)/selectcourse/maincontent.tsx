@@ -75,21 +75,22 @@ const MainContent: React.FC = () => {
   const handleStartGameClick = () => {
     setPanelDiffVisible(true); // Show paneldiff image when lesson button is clicked
   };
+  
   const PaneldiffBackButton = () => {
     setPopupVisible(true); 
     setPanelDiffVisible(false);
   }
 
   return (
-    <div className="w-full h-auto">
+    <div className="flex w-full h-auto">
       {/* Background container with conditional blur */}
       <div
-        className={`relative w-full h-auto flex flex-col items-center ${
+        className={`relative w-full h-auto flex flex-col items-center -translate-y-20 -translate-x-20 ${
           isPopupVisible ? "blur-sm" : ""
         } -translate-x-8`}
       >
         {/* lblcourse.png image above the Swiper slider */}
-        <div className="-translate-y-10 translate-x-2">
+        <div className="-translate-y-2 -translate-x-10">
           <Image
             src="/assets/lblcourse.png"
             alt="Label Course"
@@ -120,7 +121,7 @@ const MainContent: React.FC = () => {
           {Object.keys(courseImages).map((mode, index) => (
             <SwiperSlide
               key={mode}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center -translate-x-12 translate-y-5"
               style={{
                 width: "200px",
                 height: "300px",
@@ -129,8 +130,8 @@ const MainContent: React.FC = () => {
               <div
                 className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 ${
                   activeIndex === index
-                    ? "scale-110 opacity-100 transform translate-x-52 z-10"
-                    : "scale-90 opacity-50 transform translate-x-52 blur-sm"
+                    ? "scale-110 opacity-100 transform translate-x-56 z-10"
+                    : "scale-90 opacity-50 transform -skew-y-12 translate-x-56 blur-sm"
                 }`}
                 onClick={() => setSelectedCourse(mode as keyof typeof courseImages)}
               >
@@ -138,7 +139,7 @@ const MainContent: React.FC = () => {
                   <Image
                     src={courseImages[mode as keyof typeof courseImages]}
                     alt={mode}
-                    width={350}
+                    width={200}
                     height={300}
                     className="object-cover rounded-xl shadow-md mb-3"
                   />
@@ -149,7 +150,7 @@ const MainContent: React.FC = () => {
         </Swiper>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between w-2/5 mt-12 translate-x-2">
+        <div className="flex justify-between w-3/6 mt-12 -translate-x-2 translate-y-10">
         <button
             className={`${
               isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
@@ -197,14 +198,14 @@ const MainContent: React.FC = () => {
 
         {/* Start Button */}
         <button
-          className="font-zenDots px-5 py-2 -translate-y-24 translate-x-2 bg-[#0190E6] text-white rounded-full text-lg hover:bg-[#76D5FE] transition-transform transform hover:scale-110 cursor-pointer hover:text-black"
+          className="font-zenDots px-5 py-2 -translate-y-24 -translate-x-6 bg-[#0190E6] text-white rounded-full text-lg hover:bg-[#76D5FE] transition-transform transform hover:scale-110 cursor-pointer hover:text-black"
           onClick={handleStartClick}
         >
           Start Course
         </button>
 
         {/* Column of Images at the bottom of Select Mode */}
-        <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 translate-y-28">
+        <div className="relative flex justify-center items-center font-poppins h-0 translate-y-40 translate-x-2">
               <Image 
                 src="/assets/lbcoursepanel2.png" 
                 alt="Main Image" 
@@ -223,11 +224,11 @@ const MainContent: React.FC = () => {
                   className="" 
                 />
               </div>
-                <div className="absolute inset-0 flex justify-between items-start px-8 py-6 h-0 text-white">
+                <div className="absolute inset-0 flex justify-between items-start px-8  h-0 text-white">
                   {/* Column 1: My Courses */}
-                      <div className="flex flex-col space-y-4 w-2/4 -translate-y-20">
+                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-20">
                         
-                    <div className="space-y-8 -translate-y-10 translate-x-6">
+                    <div className="space-y-6 translate-y-5 translate-x-5">
                       <div className="flex justify-between items-center border-2 border-[#019AEC] w-full">
                         <span className="text-xl w-2/4">Java Programming</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-20">
@@ -286,7 +287,7 @@ const MainContent: React.FC = () => {
                   {/* Column 2: Popular Courses */}
                       <div className="flex flex-col space-y-4 w-2/4 -translate-y-20">
                         
-                    <div className="space-y-8 -translate-y-10 -translate-x-4">
+                    <div className="space-y-6 translate-y-5 -translate-x-4">
                       <div className="flex justify-between items-center border-2 border-[#019AEC]">
                         <span className="text-xl w-2/3 translate-x-12">HTML</span>
                         <div className="flex -space-x-2 overflow-hidden -translate-x-20">

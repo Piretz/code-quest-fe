@@ -24,16 +24,16 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="flex justify-between items-center p-4 text-white">
        {/* Left Section: User Info */}
-      <div className="flex items-start space-x-4 -translate-x-24 -translate-y-5">
+      <div className="flex items-start space-x-4 -translate-x-14 -translate-y-14">
         
           <Image
             src="/assets/mainrec.png" // Replace with the path to the mainrec image
             alt="Main Rec"
-            width={1000} // Increased width from 600 to 800
+            width={550} // Increased width from 600 to 800
             height={80}
             className="object-cover"
           />
-          <div className="absolute top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 flex items-center space-x-4">
+          <div className="absolute top-1/3 left-1/4 transform -translate-x-24 flex items-center space-x-4">
             {/* Avatar and User Info */}
             <Image
               src="/assets/avatar.png" // Replace with the path to the avatar image
@@ -43,13 +43,13 @@ const Header: React.FC<HeaderProps> = ({
               className="rounded-full"
             />
             <div>
-              <p className="font-bold font-poppins text-lg">Christopher Potter</p>
+              <p className="font-bold font-poppins text-sm -translate-x-5">Christopher Potter</p>
               <div className="flex items-center space-x-2">
-                <p className="text-sm text-gray-300">Level {currentLevel}</p>
+                <p className="text-xs text-gray-300 -translate-x-5">Level {currentLevel}</p>
                 {/* Level Bar */}
-                <div className="w-16 h-3 bg-gray-300 rounded-full">
+                <div className="w-16 h-3 bg-gray-300 rounded-full -translate-x-5">
                   <div
-                    className="h-full bg-[#3F2958] rounded-full"
+                    className="h-full bg-[#3F2958] rounded-full "
                     style={{ width: `${progressPercentage}%` }} // Dynamic progress bar width
                   ></div>
                 </div>
@@ -62,18 +62,18 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Container for Mid Rec with h1 text and icons */}
-        <div className="relative flex flex-col items-center w-full -translate-y-2/4 right-9">
+        <div className="absolute flex flex-col items-center w-full top-1 right-6">
           {/* Mid Rec Image */}
           <Image
             src="/assets/midrec.png" // Replace with the path to the midrec image
             alt="Mid Rec"
-            width={1400}
+            width={900}
             height={100}
             className="object-cover"
           />
 
           {/* Mid Rank Badge to the left of h1 */}
-          <div className="absolute transform -translate-x-36 top-3">
+          <div className="absolute transform -translate-x-36 top-1">
             <Image
               src="/assets/midrankbadge.png" // Replace with the path to the midrankbadge image
               alt="Mid Rank Badge"
@@ -84,10 +84,10 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* h1 text centered */}
-          <h1 className="absolute z-10 text-3xl font-bold translate-x-3">Code Wizard</h1>
+          <h1 className="absolute z-10 text-2xl font-bold translate-x-3">Code Wizard</h1>
 
           {/* Mid Star to the right of h1 */}
-          <div className="absolute right-72 -translate-x-6 top-5">
+          <div className="absolute translate-x-40 top-3">
             <Image
               src="/assets/midstar.png" // Replace with the path to the midstar image
               alt="Mid Star"
@@ -98,8 +98,8 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Progress Bar for Mid Rec (Dynamic) */}
-          <div className="absolute w-full flex justify-center transform translate-y-10 translate-x-2">
-            <div className="w-64 h-4 bg-gray-300 rounded-full">
+          <div className="absolute w-full flex justify-center transform translate-y-8 translate-x-2">
+            <div className="w-56 h-4 bg-gray-300 rounded-full">
               <div
                 className="h-full bg-[#3F2958] rounded-full"
                 style={{ width: `${50}%` }} // Dynamic progress bar width {progressPercentage}
@@ -109,12 +109,12 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Right Rec Image with Icons */}
-        <div className="relative -translate-y-4">
+        <div className="relative -translate-y-8 translate-x-4">
           <Image
             src="/assets/rightrec.png" // Replace with the path to the rightrec image
             alt="Right Rec"
-            width={1000} // Increased width here
-            height={60} // Adjust the height accordingly
+            width={550} // Increased width here
+            height={80} // Adjust the height accordingly
             className="object-cover"
           />
 
