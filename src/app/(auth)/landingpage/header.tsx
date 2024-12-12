@@ -1,8 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link"; // Import Link from Next.js for navigation
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const Header = () => {
@@ -13,11 +11,23 @@ const Header = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
+  // Effect to disable/enable scrolling based on `isLoginVisible` or `isSignUpVisible`
+  useEffect(() => {
+    if (isLoginVisible || isSignUpVisible) {
+      document.body.style.overflow = "hidden"; // Disable scroll
+    } else {
+      document.body.style.overflow = ""; // Enable scroll
+    }
+    return () => {
+      document.body.style.overflow = ""; // Cleanup on unmount
+    };
+  }, [isLoginVisible, isSignUpVisible]); // Explicitly include both dependencies here
+
   const toggleSignUp = () => {
     setIsSignUpVisible(!isSignUpVisible);
     setIsLoginVisible(false);
   };
-  
+
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);
 
@@ -30,6 +40,10 @@ const Header = () => {
 
   const closeLoginForm = () => {
     setIsLoginVisible(false); // Close login form
+  };
+
+  const closeSignUpForm = () => {
+    setIsSignUpVisible(false); // Close sign-up form
   };
 
   return (
@@ -184,7 +198,7 @@ const Header = () => {
               {/* Logolog Image Positioned at the Bottom */}
               <div className="absolute right-40">
                 <img
-                  src="/assets/logolog.png"
+                  src="/assets/loginlogo.png"
                   alt="Logo"
                   className="w-[500px] h-[700px] object-contain"
                 />
@@ -396,7 +410,7 @@ const Header = () => {
       {/* Side Logo Image */}
       <div className="absolute -right-72">
         <img
-          src="/assets/logosign.png"
+          src="/assets/signuplogo.png"
           alt="Logo"
           className="w-[500px] h-[700px] object-contain"
         />

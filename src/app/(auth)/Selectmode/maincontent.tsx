@@ -75,7 +75,7 @@ const MainContent: React.FC = () => {
   return (
     <main className="flex-grow bg-[#223F77] text-white relative">
       {/* Leaderboards Section */}
-      <aside className="absolute left-12 p-2 rounded-lg w-80 h-auto -translate-y-20 shadow-xl shadow-[#019AEC] drop-shadow border-4 border-sky-300">
+      <aside className="absolute left-20 p-2 rounded-lg w-80 h-auto -translate-y-20 shadow-xl shadow-[#019AEC] drop-shadow border-4 border-sky-300">
         {/* Leaderboards Title and "See all" Button */}
         <div className="flex justify-between items-center mb-4 ">
           <h2 className="text-md font-bold underline underline-offset-4">Leaderboards</h2>
@@ -170,9 +170,9 @@ const MainContent: React.FC = () => {
       </aside>
 
       {/* Select Mode Section */}
-      <section className="flex flex-col items-center mb-5 -translate-y-20">
+      <section className="absolute bottom-52 left-20 flex-col items-center mb-5">
         {/* Intro Text Image */}
-        <div className="mb-5 -translate-y-8 -translate-x-20">
+        <div className="fixed top-28 left-1/2 -translate-x-1/2 -translate-y-8 mb-5">
           <Image
             src="/assets/introtxt.png"
             alt="Intro Text"
@@ -183,7 +183,7 @@ const MainContent: React.FC = () => {
         </div>
 
         {/* Swiper Slider */}
-        <div className="w-full h-[500px] flex flex-col items-center -translate-y-20 -translate-x-10">
+        <div className="fixed top-64 left-5 -translate-y-20 w-full h-[500px] flex flex-col items-center">
         <Swiper
           loop={true}
           effect="coverflow"
@@ -205,37 +205,45 @@ const MainContent: React.FC = () => {
         >
           {Object.keys(modeImages).map((mode, index) => (
             <SwiperSlide
-              key={mode}
-              className="swiper-no-swiping flex justify-center items-center"
-              style={{
-                width: "200px",
-                height: "280px",
-              }}
+            key={mode}
+            className="swiper-no-swiping flex justify-center items-center"
+            style={{
+              width: "200px",
+              height: "280px",
+            }}
+          >
+            {/* Wrap the image div in a Link to navigate to /selectcourse */}
+            <Link href="/selectcourse" passHref>
+              <div
+                className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 ${
+                  activeIndex === index
+                    ? "scale-110 opacity-100 transform translate-x-40 z-10 cursor-pointer"
+                    : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
+                    ? "scale-90 opacity-50 transform skew-y-12 translate-x-36 blur-sm cursor-not-allowed"
+                    : activeIndex === (index + 1) % Object.keys(modeImages).length
+                    ? "scale-90 opacity-50 transform -skew-y-12 translate-x-44 blur-sm cursor-not-allowed"
+                    : "scale-75 opacity-30 transform skew-y-12 blur-sm cursor-not-allowed"
+                }`}
+                onClick={() => {
+                  // Allow clicking only if the card is centered (opacity 100 and scale 110)
+                  if (activeIndex === index) {
+                    setActiveIndex(index);
+                  }
+                }}
+                style={{
+                  pointerEvents: activeIndex === index ? "auto" : "none", // Enable clicks only if the card is centered
+                }}
               >
-              {/* Wrap the image div in a Link to navigate to /selectcourse */}
-              <Link href="/selectcourse" passHref>
-                <div
-                  className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 cursor-pointer ${
-                    activeIndex === index
-                      ? "scale-110 opacity-100 transform translate-x-40 z-10"
-                      : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
-                      ? "scale-90 opacity-50 transform skew-y-12 translate-x-36 blur-sm"
-                      : activeIndex === (index + 1) % Object.keys(modeImages).length
-                      ? "scale-90 opacity-50 transform -skew-y-12 translate-x-44 blur-sm"
-                      : "scale-75 opacity-30 transform skew-y-12 blur-sm"
-                  }`}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  <Image
-                    src={modeImages[mode as keyof typeof modeImages]}
-                    alt={mode}
-                    width={300}
-                    height={300}
-                    className="object-cover rounded-xl shadow-md mb-3"
-                  />
-                </div>
-              </Link>
-            </SwiperSlide>
+                <Image
+                  src={modeImages[mode as keyof typeof modeImages]}
+                  alt={mode}
+                  width={300}
+                  height={300}
+                  className="object-cover rounded-xl shadow-md mb-3"
+                />
+              </div>
+            </Link>
+          </SwiperSlide>
           ))}
         </Swiper>
 
