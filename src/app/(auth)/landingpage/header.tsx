@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import useLoginSchema from "../../../../providers/schema/loginschema";
+
 
 const Header = () => {
   const [activeButton, setActiveButton] = useState<string>("");
@@ -14,11 +15,13 @@ const Header = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [errors, setErrors] = useState({ email: "", password: "" });
 
   const toggleSignUp = () => {
     setIsSignUpVisible(!isSignUpVisible);
     setIsLoginVisible(false);
   };
+  
   
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);
@@ -33,6 +36,47 @@ const Header = () => {
   const closeLoginForm = () => {
     setIsLoginVisible(false); // Close login form
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setErrors({ email: "", password: "" });
+  //   setLoading(true);
+  //   setSuccess(false);
+
+  //   try {
+  //     // Validate the form data
+  //     loginSchema.parse(formData);
+
+  //     // Make the API call for login
+  //     const response = await axios.post("http://localhost:8080/api/admin/authenticate", formData);
+
+  //     // Handle success response
+  //     setSuccess(true);
+  //     console.log("Login successful", response.data);
+  //   } catch (error) {
+  //     if (error.name === "ZodError") {
+  //       // Handle validation errors
+  //       const newErrors = {};
+  //       error.errors.forEach((err) => {
+  //         newErrors[err.path[0]] = err.message;
+  //       });
+  //       setErrors(newErrors);
+  //     } else if (axios.isAxiosError(error)) {
+  //       // Handle API call errors
+  //       setErrors({ general: error.response?.data?.message || "An error occurred" });
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const handleChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  
 
   return (
     <>
@@ -194,7 +238,6 @@ const Header = () => {
             </div>
           </div>
         )}
-
 
             {/* Sign-Up Form Modal */}
             {isSignUpVisible && (

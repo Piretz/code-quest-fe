@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
         { href: "/achievements", src: "/assets/btnachi.png", label: "Achievements" },
         { href: "/darkmode", src: "/assets/btndark.png", label: "Dark Mode" },
         { href: "/info", src: "/assets/btninfo.png", label: "Info" },
-        { href: "/signout", src: "/assets/btnsignout.png", label: "Sign Out" },
+        { href: "/login", src: "/assets/btnsignout.png", label: "Sign Out" },
       ].map((btn, index) => (
         <Link href={btn.href} key={index} passHref>
           <button className="flex items-center ml-4" aria-label={btn.label}>

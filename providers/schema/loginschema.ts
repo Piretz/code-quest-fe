@@ -1,12 +1,13 @@
-import * as yup from "yup";
+// schema/useLoginSchema.ts
+import { z } from "zod";
 
-const loginSchema = yup.object().shape({
-  username: yup
+const useLoginSchema = z.object({
+  email: z.string().email("Invalid email address").nonempty("Email is required"),
+  password: z
     .string()
-    .email("Please enter a valid email address")
-    .required("Username is required"),
-  password: yup
-    .string()
-    .min(6, "Password must be at least 6 characters long")
-    .required("Password is required"),
+    .min(8, "Password must be at least 8 characters")
+    .nonempty("Password is required"),
+  rememberPassword: z.boolean(),
 });
+
+export default useLoginSchema;
