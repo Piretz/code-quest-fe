@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="fixed left-0 top-0 flex flex-col items-center space-y-1 pt-32 h-full w-20">
+    <aside className="fixed left-0 top-0 flex flex-col items-center space-y-1 pt-32 h-full w-20 z-50 bg-white shadow-md">
       {/* Sidebar Buttons (Top Section) */}
-      {[ 
+      {[
         { href: "/Selectmode", src: "/assets/btnhome.png", label: "Home" },
         { href: "/videolesson", src: "/assets/btnlesson.png", label: "Lessons" },
         { href: "/achievements", src: "/assets/btnachi.png", label: "Achievements" },
@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
 
       {/* Footer Buttons */}
       <div className="mt-auto translate-y-32">
-        {[ 
+        {[
           { href: "/darkmode", src: "/assets/btndark.png", label: "Dark Mode" },
           { href: "/info", src: "/assets/btninfo.png", label: "Info" },
           { href: "/landingpage", src: "/assets/btnsignout.png", label: "Sign Out" },
