@@ -50,7 +50,7 @@ const MainContent: React.FC = () => {
   ];
 
   return (
-    <div className="fixed top-1/2 left-2/4 transform -translate-x-2/4 -translate-y-1/3 w-full h-full flex justify-center items-center shadow-2xl font-poppins">
+    <div className="fixed top-96 left-2/4 transform -translate-x-2/4 -translate-y-48 w-full h-full flex justify-center items-center font-poppins">
       <div className="flex flex-row justify-center items-center w-full h-full">
         {/* Lesson Panel 1 */}
         <div className="w-[1000px] h-[800px] flex justify-center items-center p-1 translate-x-20 -translate-y-28 rounded-lg bg-[#0286DF] relative">

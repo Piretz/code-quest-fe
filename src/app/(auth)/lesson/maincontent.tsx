@@ -12,9 +12,11 @@ const MainContent: React.FC = () => {
   });
 
   // State to manage comments
-  const [comments, setComments] = useState<
-    { text: string; id: number; name: string }[]
-  >([]);
+  const [comments, setComments] = useState<{
+    text: string;
+    id: number;
+    name: string;
+  }[]>([]);
 
   // State to manage the new comment input
   const [newComment, setNewComment] = useState<string>("");
@@ -40,49 +42,51 @@ const MainContent: React.FC = () => {
     }
   };
 
-      return (
-        <div
-          className="relative bg-center h-[100vh] w-[85%] translate-x-36 -translate-y-20 p-10 border-2 shadow-2xl"
-          style={{
-            backgroundImage: "url('/assets/lessonpanel.png')", // Path for background image
-          }}
-        >
-          {/* Content */}
-          <h1 className="absolute bottom-60 mt-1 translate-x-1 text-white text-2xl font-zenDots font-bold">
-            {selectedLesson.title}
-          </h1>
-          <p className="relative top-80 translate-y-48 translate-x-10 w-[50%] text-white text-sm text-justify font-poppins font-normal break-words">
-          • {selectedLesson.content}
-          </p>
+  return (
+    <div
+      className="relative bg-center h-[90vh] w-[85%] translate-x-36 translate-y-20 p-10 border-2 shadow-2xl"
+      style={{
+        backgroundImage: "url('/assets/lessonpanel.png')", // Path for background image
+      }}
+    >
+      {/* Content */}
+      <h1 className="absolute bottom-72 mt-1 translate-x-1 text-white text-2xl font-zenDots font-bold">
+        {selectedLesson.title}
+      </h1>
+      <p className="absolute top-96 translate-y-60 translate-x-10 w-[50%] text-white text-sm text-justify font-poppins font-normal break-words">
+        • {selectedLesson.content}
+      </p>
 
-          {/* Text and Image for Download File */}
-          <div className="absolute bottom-10 left-10 text-white text-xs font-poppins">
-            <p className="mb-2">File to Study:</p> {/* Text above the image */}
-            <img
-              src="/assets/btndownloadfile.png"
-              alt="Download File"
-              className="w-32 h-8 transition-transform transform hover:scale-110 cursor-pointer"
-            />
-          </div>
-
-          {/* Video Panel */}
-          {selectedLesson.videoId && (
-      <div className="fixed top-[4%] left-[4%] z-10 border-4 border-black -translate-x-10">
-        <iframe
-          className="h-[45vh] w-[100vh] aspect-video lg:aspect-video  "
-          src={`https://www.youtube.com/embed/${selectedLesson.videoId}`}
-          title="Lesson Video"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+      {/* Text and Image for Download File */}
+      <div className="absolute bottom-10 left-10 text-white text-xs font-poppins">
+        <p className="mb-2">File to Study:</p> {/* Text above the image */}
+        <img
+          src="/assets/btndownloadfile.png"
+          alt="Download File"
+          className="w-32 h-8 transition-transform transform hover:scale-110 cursor-pointer"
+        />
       </div>
-    )}
 
-          {/* Container for the Lesson section */}
+      {/* Video Panel */}
+      {selectedLesson.videoId && (
+        <div className="fixed top-[4%] left-[4%] z-10 border-4 border-black -translate-x-10">
+          <iframe
+            className="h-[45vh] w-[100vh] aspect-video lg:aspect-video"
+            src={`https://www.youtube.com/embed/${selectedLesson.videoId}`}
+            title="Lesson Video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
+
+      {/* Container for the Lesson section */}
       <div className="absolute left-2/3 -translate-x-8 -translate-y-6 bottom-12 flex flex-col space-y-2 w-2/6 text-md font-poppins">
         {/* Lesson label */}
-        <h1 className="font-poppins font-bold text-xl mb-2 translate-y-16 ">Lessons:</h1>
+        <h1 className="font-poppins font-bold text-xl mb-2 translate-y-16 ">
+          Lessons:
+        </h1>
 
         {/* Scrollable button container */}
         <div className="max-h-56 overflow-y-auto space-y-2 translate-y-16">
@@ -157,9 +161,6 @@ const MainContent: React.FC = () => {
         </div>
       </div>
 
-
-
-
       {/* Fixed Comment Section */}
       <div className="absolute top-3/4 left-2/4 translate-x-72 -translate-y-40 w-2/5">
         <form
@@ -178,20 +179,20 @@ const MainContent: React.FC = () => {
             rows={3}
           ></textarea>
 
-           {/* Send Icon Button */}
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 flex items-center justify-center"
-          aria-label="Send Comment"
-        >
-          <FontAwesomeIcon icon={faPaperPlane} className="text-white text-lg" />
-        </button>
+          {/* Send Icon Button */}
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 flex items-center justify-center"
+            aria-label="Send Comment"
+          >
+            <FontAwesomeIcon icon={faPaperPlane} className="text-white text-lg" />
+          </button>
         </form>
       </div>
 
       {/* Display Comments */}
       <div className="absolute left-2/4 translate-x-56 top-80 -translate-y-80 text-black w-2/5 max-w-xl font-poppins">
-      <h1 className="text-xl font-bold mb-2 translate-x-3 text-white translate-y-2">Comments:</h1>
+        <h1 className="text-xl font-bold mb-2 translate-x-3 text-white translate-y-2">Comments:</h1>
         {/* Scrollable Container */}
         <div className="max-h-96 overflow-y-auto space-y-2 p-2 rounded-lg">
           {comments.map((comment) => (

@@ -82,7 +82,7 @@ const MainContent: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-auto">
+    <div className="flex w-full h-auto translate-y-48">
       {/* Background container with conditional blur */}
       <div
         className={`relative w-full h-auto flex flex-col items-center -translate-y-20 -translate-x-20 ${
@@ -90,7 +90,7 @@ const MainContent: React.FC = () => {
         } -translate-x-8`}
       >
         {/* lblcourse.png image above the Swiper slider */}
-        <div className="-translate-y-2 -translate-x-10">
+        <div className="flex translate-x-5">
           <Image
             src="/assets/lblcourse.png"
             alt="Label Course"
@@ -101,111 +101,133 @@ const MainContent: React.FC = () => {
         </div>
 
         {/* Swiper Slider for Course Images */}
-        <Swiper
-          loop={true}
-          effect="coverflow"
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView="auto"
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 10,
-            depth: 100,
-            modifier: 2.5,
-          }}
-          pagination={{ clickable: true }}
-          className="mySwiper"
-          onSlideChange={handleSlideChange}
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
-        >
-          {Object.keys(courseImages).map((mode, index) => (
-            <SwiperSlide
-              key={mode}
-              className="flex justify-center items-center -translate-x-12 translate-y-5"
-              style={{
-                width: "200px",
-                height: "300px",
-              }}
-            >
-              <div
-                className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 ${
-                  activeIndex === index
-                    ? "scale-110 opacity-100 transform translate-x-56 z-10"
-                    : "scale-90 opacity-50 transform -skew-y-12 translate-x-56 blur-sm"
-                }`}
-                onClick={() => setSelectedCourse(mode as keyof typeof courseImages)}
+        <div className="fixed top-20 left-8 w-full h-[400px] flex flex-col items-center ">
+          <Swiper
+            loop={true}
+            effect="coverflow"
+            grabCursor={false}
+            centeredSlides={true}
+            slidesPerView="auto"
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 10,
+              depth: 100,
+              modifier: 2.5,
+            }}
+            pagination={{ clickable: true }}
+            noSwiping={true}
+            noSwipingClass="swiper-no-swiping"
+            className="mySwiper swiper-no-swiping"
+            onSlideChange={handleSlideChange}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+          >
+            {Object.keys(courseImages).map((mode, index) => (
+              <SwiperSlide
+                key={mode}
+                className="swiper-no-swiping flex justify-center items-center -translate-x-3"
+                style={{
+                  width: "200px",
+                  height: "280px",
+                }}
               >
-                <a href={courseLinks[mode as keyof typeof courseLinks]} target="_blank" rel="noopener noreferrer">
-                  <Image
-                    src={courseImages[mode as keyof typeof courseImages]}
-                    alt={mode}
-                    width={200}
-                    height={300}
-                    className="object-cover rounded-xl shadow-md mb-3"
-                  />
-                </a>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                <div
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 ${
+                    activeIndex === index
+                    ? "scale-110 opacity-100 transform translate-x-48 z-10"
+                    : activeIndex === (index - 1 + Object.keys(courseImages).length) % Object.keys(courseImages).length
+                    ? "scale-90 opacity-50 transform skew-y-12 translate-x-48 blur-sm"
+                    : activeIndex === (index + 1) % Object.keys(courseImages).length
+                    ? "scale-90 opacity-50 transform -skew-y-12 translate-x-48 blur-sm"
+                    : "scale-75 opacity-30 transform skew-y-12 blur-sm"
+                  }`}
+                  onClick={() => setSelectedCourse(mode as keyof typeof courseImages)}
+                >
+                  {/* Remove link and swiper for specific courses */}
+                  {["htmlcourse", "csscourse", "jscourse"].includes(mode) ? (
+                    <Image
+                      src={courseImages[mode as keyof typeof courseImages]}
+                      alt={mode}
+                      width={200}
+                      height={300}
+                      className="object-cover rounded-xl shadow-md mb-3"
+                    />
+                  ) : (
+                    <a
+                      href={courseLinks[mode as keyof typeof courseLinks]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Image
+                        src={courseImages[mode as keyof typeof courseImages]}
+                        alt={mode}
+                        width={200}
+                        height={300}
+                        className="object-cover rounded-xl shadow-md mb-3"
+                      />
+                    </a>
+                  )}
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between w-3/6 mt-12 -translate-x-2 translate-y-10">
-        <button
-            className={`${
-              isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
-            } text-white p-3 rounded-full transition -translate-y-56`}
-            onClick={handleBack}
-            aria-label="Back"
-            disabled={!isButtonEnabled} // Disable button
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
+          {/* Navigation Buttons */}
+          <div className="flex justify-between w-3/6 mt-12 -translate-x-5 translate-y-10">
+            <button
+              className={`${
+                isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+              } text-white p-3 rounded-full transition -translate-y-56`}
+              onClick={handleBack}
+              aria-label="Back"
+              disabled={!isButtonEnabled} // Disable button
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </button>
 
+            <button
+              className={`${
+                isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+              } text-white p-3 rounded-full transition -translate-y-56`}
+              onClick={handleNext}
+              aria-label="Next"
+              disabled={!isButtonEnabled} // Disable button
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Start Button */}
           <button
-             className={`${
-              isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
-            } text-white p-3 rounded-full transition -translate-y-56`}
-            onClick={handleNext}
-            aria-label="Next"
-            disabled={!isButtonEnabled} // Disable button
+            className="font-zenDots px-5 py-2 -translate-y-20 -translate-x-4 bg-[#0190E6] text-white rounded-full text-lg hover:bg-[#76D5FE] transition-transform transform hover:scale-110 cursor-pointer hover:text-black"
+            onClick={handleStartClick}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
+            Start Course
           </button>
-        </div>
-
-        {/* Start Button */}
-        <button
-          className="font-zenDots px-5 py-2 -translate-y-24 -translate-x-6 bg-[#0190E6] text-white rounded-full text-lg hover:bg-[#76D5FE] transition-transform transform hover:scale-110 cursor-pointer hover:text-black"
-          onClick={handleStartClick}
-        >
-          Start Course
-        </button>
-
+        
         {/* Column of Images at the bottom of Select Mode */}
-        <div className="relative flex justify-center items-center font-poppins h-0 translate-y-40 translate-x-2">
+        <div className="relative flex justify-center items-center font-poppins h-0 translate-y-36 translate-x-2">
               <Image 
                 src="/assets/lbcoursepanel2.png" 
                 alt="Main Image" 
@@ -335,12 +357,13 @@ const MainContent: React.FC = () => {
                
                 </div>
               </div>
+              </div>
       </div>
 
-        {/* Course Panel Popup */}
+        {/* Course Panel Popup if start game or take lesson */}
       {isPopupVisible && (
-        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50 backdrop-blur-md ">
-          <div className="rounded-lg p-10 relative">
+        <div className="fixed top-56 right-8 inset-0 flex justify-center items-center z-50 backdrop-blur-3xl ">
+          <div className="rounded-lg p-10 relative drop-shadow-2xl">
             {/* Show the Close Button when the course panel is visible */}
             {!isPanelDiffVisible && (
               <button
@@ -398,11 +421,12 @@ const MainContent: React.FC = () => {
               )}
         </div>
       )}
+      
 
           {/* SELECT DIFFICULTY PANEL SECTION */}
             {isPanelDiffVisible && (
-            <div className="fixed inset-0 flex justify-center items-center z-50 backdrop-blur-xl border-2 border-[#019AEC]">
-                <div className="rounded-lg p-10 relative w-full max-w-5xl">
+            <div className="fixed top-56 right-8 inset-0 flex justify-center items-center z-50 backdrop-blur-3xl  ">
+                <div className="rounded-lg p-10 relative w-full max-w-5xl drop-shadow-2xl ">
                 
                 {/* Panel Diff Image */}
                 <Image

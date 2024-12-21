@@ -55,8 +55,8 @@ const Header: React.FC<HeaderProps> = ({
           <Image
             src={avatarUrl}
             alt="User Avatar"
-            width={50}
-            height={50}
+            width={60}
+            height={70}
             className="rounded-full"
           />
           <div>
@@ -74,9 +74,9 @@ const Header: React.FC<HeaderProps> = ({
                 ></div>
               </div>
             </div>
-            <p className="text-xs text-gray-400">
+            {/* <p className="text-xs text-gray-400">
               {currentExperience}/{experienceNeeded} XP
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
@@ -130,14 +130,7 @@ const Header: React.FC<HeaderProps> = ({
           height={80}
           className="object-cover"
         />
-        <div className="absolute right-5 top-1/3 transform -translate-y-1/2 flex items-center space-x-3">
-          <Image
-            src={wifiLeftUrl}
-            alt="Wifi Left"
-            width={30}
-            height={30}
-            className="object-cover"
-          />
+        <div className="absolute right-6 top-1/3 transform -translate-y-1/2 flex items-center space-x-5">
           <Link href="/notifications" passHref>
             <button aria-label="Notifications" className="flex items-center">
               <Image

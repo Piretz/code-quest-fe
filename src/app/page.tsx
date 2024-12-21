@@ -17,19 +17,14 @@
 //   return <Dashboard />;
 // }
 // _app.tsx or root file
-import React from "react";
-import { ThemeProvider } from "../components/ui/ThemeContext"; // Import the ThemeProvider
-import Dashboard from "../components/ui/Dashboard";
+import LandingPage from "./(auth)/landingpage/page";
 
-const App = () => {
+export default function Home() {
   return (
-    <ThemeProvider>
-      <Dashboard />
-    </ThemeProvider>
+    <LandingPage />
   );
-};
+}
 
-export default App;
 
 
 

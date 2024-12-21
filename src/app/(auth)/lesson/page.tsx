@@ -2,6 +2,7 @@
 import React from "react";
 import Header from "../../../components/ui/newheader"; // Correct path to the updated Header component
 import Sidebar from "../../../components/ui/newsidebar"; // Correct path to Sidebar
+import MainContent from "./maincontent"; // Correct path to MainContent
 
 const Page: React.FC = () => {
   const currentLevel = 1;
@@ -17,7 +18,7 @@ const Page: React.FC = () => {
   const rightRecUrl = "/assets/rightrec.png";
   const wifiLeftUrl = "/assets/wifileft.png";
   const bellUrl = "/assets/bell.png";
-  const settingsUrl = "/assets/settings.png";
+  const settingsUrl = "/assets/setting.png";
 
   return (
     <div className="flex h-screen bg-[#223F77]">
@@ -40,6 +41,9 @@ const Page: React.FC = () => {
           bellUrl={bellUrl}
           settingsUrl={settingsUrl}
         />
+        
+        {/* Main Content */}
+        <MainContent />
       </div>
     </div>
   );
