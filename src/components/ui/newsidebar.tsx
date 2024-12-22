@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div>
-      <aside className="fixed left-0 top-0 flex flex-col items-center space-y-1 pt-40 h-full w-20 z-50 ">
+      <aside className="fixed left-0 top-24  flex flex-col items-center space-y-1 h-full w-20 z-50 bg-transparent">
         {/* Sidebar Buttons (Top Section) */}
         {[
           { href: "/Selectmode", src: "/assets/btnhome.png", label: "Home" },

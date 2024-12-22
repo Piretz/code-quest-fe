@@ -21,7 +21,7 @@ const Heropage = () => {
       </div>
 
       {/* About Ellipse Image sa Top Right */}
-      <div className="absolute top-0 right-0 transform -translate-y-10 z-0">
+      <div className="absolute top-0 right-0 transform translate-y-28 z-0">
         <Image
           src="/assets/aboutellipse.png"
           alt="About Ellipse Decoration"

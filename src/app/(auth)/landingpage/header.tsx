@@ -4,7 +4,7 @@ import Link from "next/link"; // Import Link from Next.js for navigation
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const Header = () => {
-  const [activeButton, setActiveButton] = useState<string>("");
+  const [activeButton, setActiveButton] = useState<string>("home");
   const [isLoginVisible, setIsLoginVisible] = useState<boolean>(false); // State for login form
   const [isSignUpVisible, setIsSignUpVisible] = useState<boolean>(false); // State for sign-up form
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +22,20 @@ const Header = () => {
       document.body.style.overflow = ""; // Cleanup on unmount
     };
   }, [isLoginVisible, isSignUpVisible]); // Explicitly include both dependencies here
+
+ // Effect to track the active button based on the current section in the URL
+ useEffect(() => {
+  const currentHash = window.location.hash;
+  if (currentHash === "#intro") {
+    setActiveButton("home");
+  } else if (currentHash === "#heropage") {
+    setActiveButton("about");
+  } else if (currentHash === "#courses") {
+    setActiveButton("courses");
+  } else if (currentHash === "#footer") {
+    setActiveButton("contact us");
+  }
+}, [window.location.hash]); // This will trigger every time the hash changes
 
   const toggleSignUp = () => {
     setIsSignUpVisible(!isSignUpVisible);
@@ -208,31 +222,31 @@ const Header = () => {
         )}
 
 
-            {/* Sign-Up Form Modal */}
-            {isSignUpVisible && (
-  <div
-    className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black bg-opacity-50 backdrop-blur-md"
-  >
-    <div
-      className="relative w-[1234px] h-[800px] bg-cover bg-center rounded-xl right-20 shadow-lg flex flex-col justify-between bg-[url('/assets/logsignPanel.png')]"
-      onClick={(e) => e.stopPropagation()} // Prevent click event propagation
-    >
-      {/* Sign-Up Form Content */}
-      <div className="flex flex-col items-start justify-center p-40 w-full h-full text-white font-poppins -translate-y-8 z-10">
-        {/* Title with Image Positioned to the Left */}
-        <div className="flex items-center mb-3 translate-x-14 -translate-y-5 z-10">
-          {/* Image for Sign-Up */}
-          <img
-            src="/assets/btnback.png" // Your image path
-            alt="Back to Login"
-            className="w-50 h-30 -translate-x-16 translate-y-2 transition-transform transform hover:scale-110 cursor-pointer"
-            onClick={() => {
-              setIsSignUpVisible(false); // Hide Sign-Up Form
-              setIsLoginVisible(true);  // Show Login Form
-            }}
-          />
-          <h2 className="text-5xl font-bold font-poppins -translate-x-4 translate-y-2 p-2 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">Sign Up</h2>
-        </div>
+      {/* Sign-Up Form Modal */}
+      {isSignUpVisible && (
+        <div
+          className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black bg-opacity-50 backdrop-blur-md"
+        >
+          <div
+            className="relative w-[1234px] h-[800px] bg-cover bg-center rounded-xl right-20 shadow-lg flex flex-col justify-between bg-[url('/assets/logsignPanel.png')]"
+            onClick={(e) => e.stopPropagation()} // Prevent click event propagation
+          >
+            {/* Sign-Up Form Content */}
+            <div className="flex flex-col items-start justify-center p-40 w-full h-full text-white font-poppins -translate-y-8 z-10">
+              {/* Title with Image Positioned to the Left */}
+              <div className="flex items-center mb-3 translate-x-14 -translate-y-5 z-10">
+                {/* Image for Sign-Up */}
+                <img
+                  src="/assets/btnback.png" // Your image path
+                  alt="Back to Login"
+                  className="w-50 h-30 -translate-x-16 translate-y-2 transition-transform transform hover:scale-110 cursor-pointer"
+                  onClick={() => {
+                    setIsSignUpVisible(false); // Hide Sign-Up Form
+                    setIsLoginVisible(true);  // Show Login Form
+                  }}
+                />
+                <h2 className="text-5xl font-bold font-poppins -translate-x-4 translate-y-2 p-2 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">Sign Up</h2>
+              </div>
 
         {/* Form Container */}
         <div className="font-poppins bg-opacity-70 p-6 rounded-lg">

@@ -50,16 +50,16 @@ const MainContent: React.FC = () => {
   ];
 
   return (
-    <div className="fixed top-96 left-2/4 transform -translate-x-2/4 -translate-y-48 w-full h-full flex justify-center items-center font-poppins">
-      <div className="flex flex-row justify-center items-center w-full h-full">
+    <div className="fixed top-96 left-2/4 transform -translate-x-2/4 -translate-y-48 w-full h-full flex justify-center items-center font-poppins ">
+      <div className="flex flex-row justify-center items-center w-full h-full gap-16">
         {/* Lesson Panel 1 */}
-        <div className="w-[1000px] h-[800px] flex justify-center items-center p-1 translate-x-20 -translate-y-28 rounded-lg bg-[#0286DF] relative">
+        <div className="w-[1000px] h-[800px] flex justify-center items-center p-1 translate-x-20 -translate-y-28 border-l border-r border-t border-b-4 border-[#019AEC] shadow-drop-blue rounded-lg relative">
               {/* Panel Header above Lesson Panel 1 */}
           <div className="absolute top-[-50px] left-1/2 transform -translate-x-1/2 w-[920px] flex justify-between items-center p-0 bg-[#123775] rounded-t-lg">
             {/* Header Buttons */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-6">
               <button
-                className="px-1 py-1 w-28 bg-[#0F62E6] text-white rounded-lg hover:bg-white hover:text-black"
+                className="px-1 py-1 ml-2 w-28 bg-[#0F62E6] text-white rounded-lg hover:bg-white hover:text-black"
                 type="button"
                 aria-label="Show all lessons"
               >
@@ -108,14 +108,14 @@ const MainContent: React.FC = () => {
             </div>
           </div>
           <div className="w-full h-full bg-gradient-to-b from-[#123775] via-[#164592] to-[#07152C] rounded-lg overflow-y-scroll">
-            <div className="grid grid-cols-1 p-4 -translate-x-10">
+            <div className="grid grid-cols-1 p-1 -translate-x-4 space-y-0">
               {lessons.map((lesson) => (
-                <div key={lesson.id} className="relative mb-4">
+                <div key={lesson.id} className="relative">
                   {/* Lesson Image */}
                   <img
                     src="/assets/lessoncontentpanel.png"
                     alt={lesson.title}
-                    className="w-full h-auto max-h-52 object-cover rounded-lg"
+                    className="w-full h-auto max-h-52 object-cover"
                   />
                   {/* Lesson Info */}
                   <div className="absolute bottom-24 left-36 text-white space-y-1">
@@ -151,89 +151,89 @@ const MainContent: React.FC = () => {
         </div>
 
         {/* Lesson Panel 2 */}
-<div className="w-[600px] h-[800px] flex justify-center items-center p-1 -translate-y-28 rounded-lg ml-6 bg-[#0286DF]">
-  <div className="w-full h-full bg-gradient-to-b from-[#123775] via-[#164592] to-[#07152C] rounded-lg flex flex-col items-start justify-start p-4 ">
-    {selectedLesson.videoUrl ? (
-      <>
-        {/* Video */}
-        <div className="relative w-full pb-[56.25%]">
-          <iframe
-            className="absolute top-0 left-0 w-full h-full"
-            src={selectedLesson.videoUrl}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-
-        {/* Lesson Title */}
-        <h2 className="text-white text-xl font-semibold mt-4 text-left">
-          {selectedLesson.title}
-        </h2>
-
-        {/* Instructor Info */}
-        <div className="flex items-center mt-2 text-left">
-          <FontAwesomeIcon icon={faUser} className="text-white mr-2" />
-          <span className="text-white text-sm">{selectedLesson.instructor}</span>
-        </div>
-
-        {/* Lesson Description */}
-        <p className="text-white text-sm mt-2 space-y-10 text-left">
-          {selectedLesson.description}
-        </p>
-
-        {/* Underline based on description length */}
-        <div
-          className="h-1 bg-white mt-2"
-          style={{
-            width: `${selectedLesson.description.length}%`, // Adjust underline length based on description length
-            maxWidth: "100%", // Ensure it doesn't exceed the full width
-          }}
-        ></div>
-
-        {/* Images and Experience Bar at the bottom */}
-        <div className="flex justify-between w-full mt-4 items-center">
-          {/* Bronze Image */}
-          <div className="flex items-center space-x-4">
-            <img
-              src="/assets/bronze.png"
-              alt="Bronze"
-              className="w-16 h-16 object-cover"
-            />
-            {/* Experience Level Bar */}
-            <div className="flex flex-col w-80">
-              
-              <div className="w-full h-4 bg-[#FC0000] mt-2 rounded-md">
-                <div className="h-full rounded-md bg-[#00FC08]" style={{ width: '35%' }}></div> {/* Example: 35% progress */}
-                <span className="text-white text-sm">+35 EXP</span>
+      <div className="w-[600px] h-[800px] flex justify-center items-center p-1 -translate-y-28 rounded-lg ml-6 border-l border-r border-t border-b-4 border-[#019AEC] shadow-drop-blue">
+        <div className="w-full h-full bg-gradient-to-b from-[#123775] via-[#164592] to-[#07152C] rounded-lg flex flex-col items-start justify-start p-4 ">
+          {selectedLesson.videoUrl ? (
+            <>
+              {/* Video */}
+              <div className="relative w-full pb-[56.25%]">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src={selectedLesson.videoUrl}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
+
+              {/* Lesson Title */}
+              <h2 className="text-white text-xl font-semibold mt-4 text-left">
+                {selectedLesson.title}
+              </h2>
+
+              {/* Instructor Info */}
+              <div className="flex items-center mt-2 text-left">
+                <FontAwesomeIcon icon={faUser} className="text-white mr-2" />
+                <span className="text-white text-sm">{selectedLesson.instructor}</span>
+              </div>
+
+              {/* Lesson Description */}
+              <p className="text-white text-sm mt-2 space-y-10 text-left">
+                {selectedLesson.description}
+              </p>
+
+              {/* Underline based on description length */}
+              <div
+                className="h-1 bg-white mt-2"
+                style={{
+                  width: `${selectedLesson.description.length}%`, // Adjust underline length based on description length
+                  maxWidth: "100%", // Ensure it doesn't exceed the full width
+                }}
+              ></div>
+
+              {/* Images and Experience Bar at the bottom */}
+              <div className="flex justify-between w-full mt-4 items-center">
+                {/* Bronze Image */}
+                <div className="flex items-center space-x-4">
+                  <img
+                    src="/assets/bronze.png"
+                    alt="Bronze"
+                    className="w-16 h-16 object-cover"
+                  />
+                  {/* Experience Level Bar */}
+                  <div className="flex flex-col w-80">
+                    
+                    <div className="w-full h-4 bg-[#FC0000] mt-2 rounded-md">
+                      <div className="h-full rounded-md bg-[#00FC08]" style={{ width: '35%' }}></div> {/* Example: 35% progress */}
+                      <span className="text-white text-sm">+35 EXP</span>
+                    </div>
+                  </div>
+                </div>
+
+              {/* Watch Lesson Button */}
+                  <a
+                  href="/lesson"  // Replace this with the URL or path you want to navigate to
+                  className="bg-transparent p-0 transition-transform hover:scale-110 cursor-pointer translate-y-52"
+                  >
+                  <img
+                      src="/assets/btnwatchlesson.png"
+                      alt="Watch Lesson"
+                      className="w-32 h-16"
+                  />
+                  </a>
+
+                  </div>
+                  </>
+                  ) : (
+                  <p className="text-white text-center">Select a lesson to view details.</p>
+                  )}
+              </div>
+              </div>
+
+
             </div>
           </div>
-
-         {/* Watch Lesson Button */}
-            <a
-            href="/lesson"  // Replace this with the URL or path you want to navigate to
-            className="bg-transparent p-0 transition-transform hover:scale-110 cursor-pointer translate-y-52"
-            >
-            <img
-                src="/assets/btnwatchlesson.png"
-                alt="Watch Lesson"
-                className="w-32 h-16"
-            />
-            </a>
-
-            </div>
-            </>
-            ) : (
-            <p className="text-white text-center">Select a lesson to view details.</p>
-            )}
-        </div>
-        </div>
-
-
-      </div>
-    </div>
-  );
-};
+        );
+      };
 
 export default MainContent;

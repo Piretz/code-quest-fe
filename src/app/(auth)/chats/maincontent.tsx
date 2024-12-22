@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faSmile,
+  faSearch,
   faPaperclip,
   faMicrophone,
   faPaperPlane,
@@ -16,13 +17,13 @@ const Message = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedUserGender, setSelectedUserGender] = useState<string | null>(null);
   const [conversations, setConversations] = useState<any>({
-    "Santa Claus": [
-      { sender: "Santa Claus", message: "Hey! How are you?" },
+    "CAPSTONE": [
+      { sender: "CAPSTONE", message: "Hey! How are you?" },
       { sender: "You", message: "I'm okay" },
     ],
-    "Isagani Tano": [
-      { sender: "Isagani Tano", message: "Can we meet tomorrow?" },
-      { sender: "You", message: "Ulol" },
+    "Kathlyn Ulep": [
+      { sender: "Kathlyn Ulep", message: "Hey" },
+      { sender: "You", message: "Yes" },
     ],
   });
 
@@ -129,13 +130,19 @@ const Message = () => {
           </div>
 
           {/* Search Bar */}
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Search"
-            className="w-full px-3 py-2 border border-[#326993] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#019AEC] bg-[#326993]"
-          />
+          <div className="relative w-full">
+            <FontAwesomeIcon
+              icon={faSearch}
+              className="absolute top-1/2 left-3 transform -translate-y-1/2 text-white"
+            />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search"
+              className="w-full pl-10 py-2 border border-[#326993] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#019AEC] bg-[#326993]"
+            />
+          </div>
         </div>
 
         {/* List of User Messages */}

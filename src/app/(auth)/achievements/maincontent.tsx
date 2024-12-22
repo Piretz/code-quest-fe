@@ -83,7 +83,7 @@ const AchievementsPage: React.FC = () => {
     }
 
     return (
-      <div className="relative text-white py-8 px-4 text-center border border-[#019AEC] drop-shadow-2xl rounded-lg opacity-100 bg-[url('/assets/bgbadge.png')] bg-cover h-[140px] w-[150px]">
+      <div className="relative text-white py-8 px-4 text-center border-l border-r border-b-4 border-[#019AEC] drop-shadow-2xl rounded-lg opacity-100 bg-[url('/assets/bgbadge.png')] bg-cover h-[140px] w-[150px]">
         {userProgress[type] ? (
           // If the user has met the criteria, show the corresponding badge
           <img
@@ -149,12 +149,12 @@ const AchievementsPage: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-start h-screen bg-[#223F77] pt-24">
+    <div className="flex flex-col items-center justify-start h-screen bg-[#223F77] pt-20">
       <h1 className="text-4xl font-bold font-zenDots text-transparent bg-clip-text bg-gradient-to-r from-[#7CD8FF] via-[#e2f6ff] to-[#7CD8FF] mb-6 -translate-x-5">
         My Achievements
       </h1>
 
-      <div className="w-[1550px] h-[800px] bg-[#223F77] border border-[#019AEC] rounded-lg drop-shadow-2xl shadow-inner-blue p-4 ">
+      <div className="w-[1550px] h-[800px] bg-[#223F77] border-l border-r border-b-4 border-t border-[#019AEC] drop-shadow-2xl rounded-lg shadow-drop-blue p-4 ">
         {/* Content inside the panel */}
         <div className="grid grid-cols-8 gap-4 ml-4">
           {badgeTypes.map((type, index) => (

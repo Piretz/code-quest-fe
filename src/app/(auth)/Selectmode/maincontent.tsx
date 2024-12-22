@@ -75,14 +75,14 @@ const MainContent: React.FC = () => {
   return (
     <main className="flex-grow bg-[#223F77] text-white relative">
       {/* Leaderboards Section */}
-      <aside className="fixed left-36 bottom-96 -translate-y-6 p-2 rounded-lg w-80 h-auto shadow-xl shadow-[#019AEC] drop-shadow border-2 border-sky-300">
+      <aside className="fixed left-36 bottom-96 -translate-y-6 p-2 rounded-lg w-80 h-auto bg-gradient-to-b from-[#035CC2] to-[#073269] border-l border-r border-t border-b-4 border-[#019AEC] shadow-drop-blue">
         {/* Leaderboards Title and "See all" Button */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-md font-bold underline underline-offset-4">Leaderboards</h2>
           {/* see all link */}
           <a
             href="#"
-            className="text-white font-semibold text-sm hover:underline hover:text-blue-500 cursor-pointer ml-4"
+            className="text-white  text-sm hover:underline hover:text-blue-300 cursor-pointer ml-4"
           >
             See all
           </a>
@@ -312,157 +312,217 @@ const MainContent: React.FC = () => {
           </div>
 
 
-              {/* Column of Images at the bottom of Select Mode */}
-              <div className="relative flex justify-center items-center font-poppins h-0 min-h-0 -translate-y-5">
-                <Image src="/assets/column1.png" alt="Column Image" width={1700} height={100} className="rounded-lg" />
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex justify-between items-start px-8 py-6 h-0 text-white">
-                  {/* Column 1: My Courses */}
-                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-20">
-                        <div className="flex justify-between items-center">
-                          <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 translate-x-8">
-                            My Courses
-                          </h3>
-                          {/* See all link */}
-                          <a href="#" className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-y-16 -translate-x-8">
-                            See all
-                          </a>
-                        </div>
-                    <div className="space-y-2 -translate-y-10 translate-x-6">
-                      <div className="flex justify-between items-center border-2 border-[#019AEC] w-full">
-                        <span className="text-xl w-2/4">Java Programming</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full " />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full " />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full " />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full " />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                         
-                        </div>
+              {/* Panel Box */}
+            <div className="relative flex justify-center items-center font-poppins translate-y-36 w-[1700px] h-[300px] bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-lg border-l border-r border-b-4 border-[#019AEC] shadow-drop-blue mx-auto">
+              {/* Content Overlay */}
+              <div className="absolute inset-0 flex justify-between items-start px-8 py-2 text-white w-full h-full">
+                {/* Column 1: My Courses */}
+                <div className="flex flex-col space-y-2 w-2/4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-zenDots font-semibold text-3xl translate-x-2">
+                      My Courses
+                    </h3>
+                    {/* See all link */}
+                    <a
+                      href="#"
+                      className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-x-4"
+                    >
+                      See all
+                    </a>
+                  </div>
+                  <div className="space-y-2">
+                    {/* Course Items */}
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">Java Programming</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-3/4">Algorithm</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-3/4">Java</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-3/4">Introduction to Computing</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
-                      </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-3/4">Introduction to Computing</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
-                      </div>
-                      
                     </div>
-                  </div>               
+                    {/* Add additional courses here */}
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">Java Programming</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                      </div>
+                    </div>
 
-                  {/* Column 2: Popular Courses */}
-                      <div className="flex flex-col space-y-2 w-2/4 -translate-y-20">
-                        <div className="flex justify-between items-center">
-                          <h3 className="font-zenDots font-semibold text-2xl -translate-y-16 translate-x-5">
-                            Popular Courses
-                          </h3>
-                          {/* See all link for Popular Courses */}
-                          <a href="#" className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-y-16 -translate-x-12">
-                            See all
-                          </a>
-                        </div>
-                    <div className="space-y-2 -translate-y-10 -translate-x-2">
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-2/3 translate-x-8">HTML</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/jane.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/john.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">Java Programming</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-2/4 translate-x-8">Introduction to Computing</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
+                    </div>
+
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">Java Programming</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-2/4 translate-x-8">CSS</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                        <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Column 2: Popular Courses */}
+                <div className="flex flex-col space-y-2 w-2/4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-zenDots font-semibold text-3xl translate-x-2">
+                      Popular Courses
+                    </h3>
+                    {/* See all link */}
+                    <a
+                      href="#"
+                      className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-x-4"
+                    >
+                      See all
+                    </a>
+                  </div>
+                  <div className="space-y-2">
+                    {/* Course Items */}
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">HTML</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-2/4 translate-x-8">HTML</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
+                    </div>
+                    {/* Add additional courses here */}
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">HTML</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
                       </div>
-                      <div className="flex justify-between items-center border-2 border-[#019AEC]">
-                        <span className="text-xl w-2/4 translate-x-8">HTML</span>
-                        <div className="flex -space-x-2 overflow-hidden -translate-x-10">
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/annette.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                          <Image src="/assets/avatar.png" alt="Contributor" width={30} height={30} className="inline-block rounded-full" />
-                        </div>
+                    </div>
+
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">HTML</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
                       </div>
-                       
+                    </div>
+
+                    <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                      <span className="text-xl w-2/4">HTML</span>
+                      <div className="flex -space-x-2 overflow-hidden">
+                        {/* Contributor Images */}
+                        <Image
+                          src="/assets/jane.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                        <Image
+                          src="/assets/john.png"
+                          alt="Contributor"
+                          width={30}
+                          height={30}
+                          className="inline-block rounded-full"
+                        />
+                      </div>
                     </div>
                   </div>
-
-               
                 </div>
               </div>
+            </div>
+
 
       </section>
     </main>
