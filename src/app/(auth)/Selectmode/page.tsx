@@ -9,6 +9,36 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
+interface AvatarGroupProps {
+  contributors: { src: string; alt: string }[];
+  maxVisible: number;
+}
+
+const AvatarGroup: React.FC<AvatarGroupProps> = ({ contributors, maxVisible }) => {
+  const visibleContributors = contributors.slice(0, maxVisible);
+  const extraCount = contributors.length - maxVisible;
+  
+  return (
+    <div className="flex items-center">
+      {visibleContributors.map((contributor, index) => (
+        <Image
+          key={index}
+          src={contributor.src}
+          alt={contributor.alt}
+          width={30}
+          height={30}
+          className="inline-block rounded-full border-2 border-white -ml-2 first:ml-0"
+        />
+      ))}
+      {extraCount > 0 && (
+        <span className="text-sm bg-blue-500 text-white rounded-full px-2 ml-2">
+          +{extraCount}
+        </span>
+      )}
+    </div>
+  );
+};
+
 const Page: React.FC = () => {
   const currentLevel = 1;
   const currentExperience = 11;
@@ -310,7 +340,7 @@ const Page: React.FC = () => {
                     <div className="flex justify-between w-1/3 mt-5 -translate-x-8">
                       <button
                         className={`${
-                          isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+                          isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-blue-500 cursor-pointer"
                         } text-white p-3 rounded-full transition`}
                         onClick={handleBack}
                         aria-label="Back"
@@ -330,7 +360,7 @@ const Page: React.FC = () => {
 
                       <button
                         className={`${
-                          isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+                          isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-blue-500 cursor-pointer "
                         } text-white p-3 rounded-full transition`}
                         onClick={handleNext}
                         aria-label="Next"
@@ -380,218 +410,69 @@ const Page: React.FC = () => {
                   </div>
 
                       {/* Panel Box */}
-                    <div className="relative flex justify-center items-center font-poppins translate-y-36 w-[1700px] h-[300px] bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-lg border-l border-r border-b-4 border-[#019AEC] shadow-drop-blue mx-auto">
-                      {/* Content Overlay */}
-                      <div className="absolute inset-0 flex justify-between items-start px-8 py-2 text-white w-full h-full">
-                        {/* Column 1: My Courses */}
-                        <div className="flex flex-col space-y-2 w-2/4">
-                          <div className="flex justify-between items-center">
-                            <h3 className="font-zenDots font-semibold text-3xl translate-x-2">
-                              My Courses
-                            </h3>
-                            {/* See all link */}
-                            <a
-                              href="#"
-                              className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-x-4"
-                            >
-                              See all
-                            </a>
-                          </div>
-                          <div className="space-y-2">
-                            {/* Course Items */}
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">Java Programming</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-                            {/* Add additional courses here */}
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">Java Programming</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">Java Programming</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">Java Programming</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-
-                        {/* Column 2: Popular Courses */}
-                        <div className="flex flex-col space-y-2 w-2/4">
-                          <div className="flex justify-between items-center">
-                            <h3 className="font-zenDots font-semibold text-3xl translate-x-2">
-                              Popular Courses
-                            </h3>
-                            {/* See all link */}
-                            <a
-                              href="#"
-                              className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-x-4"
-                            >
-                              See all
-                            </a>
-                          </div>
-                          <div className="space-y-2">
-                            {/* Course Items */}
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">HTML</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-                            {/* Add additional courses here */}
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">HTML</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">HTML</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                              <span className="text-xl w-2/4">HTML</span>
-                              <div className="flex -space-x-2 overflow-hidden">
-                                {/* Contributor Images */}
-                                <Image
-                                  src="/assets/jane.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                                <Image
-                                  src="/assets/john.png"
-                                  alt="Contributor"
-                                  width={30}
-                                  height={30}
-                                  className="inline-block rounded-full"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="relative flex justify-center items-center font-poppins translate-y-36 w-[1700px] h-[300px] bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-lg border-l border-r border-b-4 border-[#019AEC] shadow-drop-blue mx-auto">
+                <div className="absolute inset-0 flex justify-between items-start px-8 py-2 text-white w-full h-full">
+                  {/* Column 1: My Courses */}
+                  <div className="flex flex-col space-y-2 w-2/4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-zenDots font-semibold text-3xl translate-x-2">
+                        My Courses
+                      </h3>
+                      <a
+                        href="#"
+                        className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-x-4"
+                      >
+                        See all
+                      </a>
+                    </div>
+                    <div className="space-y-2">
+                      {/* Course Items */}
+                      <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                        <span className="text-xl w-2/4">Java Programming</span>
+                        <AvatarGroup
+                          contributors={[
+                            { src: "/assets/john.png", alt: "John" },
+                            { src: "/assets/jane.png", alt: "Jane" },
+                            { src: "/assets/annette.png", alt: "Annette" },
+                          ]}
+                          maxVisible={2}
+                        />
                       </div>
                     </div>
+                  </div>
 
-              </section>
-            </main>   
+                  {/* Column 2: Popular Courses */}
+                  <div className="flex flex-col space-y-2 w-2/4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-zenDots font-semibold text-3xl translate-x-2">
+                        Popular Courses
+                      </h3>
+                      <a
+                        href="#"
+                        className="text-lg font-poppins text-white ml-auto hover:underline hover:text-blue-400 -translate-x-4"
+                      >
+                        See all
+                      </a>
+                    </div>
+                    <div className="space-y-2">
+                      {/* Course Items */}
+                      <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
+                        <span className="text-xl w-2/4">HTML</span>
+                        <AvatarGroup
+                          contributors={[
+                            { src: "/assets/jane.png", alt: "Jane" },
+                            { src: "/assets/john.png", alt: "John" },
+                            { src: "/assets/emily.png", alt: "Emily" },
+                          ]}
+                          maxVisible={2}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>   
       </div>
     </div>
   );

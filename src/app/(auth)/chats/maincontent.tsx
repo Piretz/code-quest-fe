@@ -190,7 +190,7 @@ const Message = () => {
 
         {/* Conversation Body */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#091A36]">
-        {selectedUser &&
+          {selectedUser &&
             conversations[selectedUser]?.map((msg: any, index: number) => (
             <div key={index} className={`flex ${msg.sender === "You" ? "justify-end" : "justify-start"}`}>
                 <div
@@ -204,7 +204,7 @@ const Message = () => {
                 <div className="text-xs text-gray-300 mt-1">{msg.time}</div>
                 </div>
             </div>
-            ))}
+          ))}
         </div>
 
         {/* Chat Input Section */}

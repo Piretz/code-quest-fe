@@ -11,6 +11,36 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
+interface AvatarGroupProps {
+  contributors: { src: string; alt: string }[];
+  maxVisible: number;
+}
+
+const AvatarGroup: React.FC<AvatarGroupProps> = ({ contributors, maxVisible }) => {
+  const visibleContributors = contributors.slice(0, maxVisible);
+  const extraCount = contributors.length - maxVisible;
+
+  return (
+    <div className="flex items-center">
+      {visibleContributors.map((contributor, index) => (
+        <Image
+          key={index}
+          src={contributor.src}
+          alt={contributor.alt}
+          width={30}
+          height={30}
+          className="inline-block rounded-full border-2 border-white -ml-2 first:ml-0"
+        />
+      ))}
+      {extraCount > 0 && (
+        <span className="text-sm bg-blue-500 text-white rounded-full px-2 ml-2">
+          +{extraCount}
+        </span>
+      )}
+    </div>
+  );
+};
+
 const Page: React.FC = () => {
   const currentLevel = 1;
   const currentExperience = 11;
@@ -27,16 +57,19 @@ const Page: React.FC = () => {
   const bellUrl = "/assets/bell.png";
   const settingsUrl = "/assets/setting.png";
 
-  const [selectedMode, setSelectedCourse] = useState<"htmlcourse" | "csscourse" | "jscourse">("htmlcourse");
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [selectedCourse, setSelectedCourse] = useState<"htmlcourse" | "csscourse" | "jscourse">("htmlcourse");
+  
+  const [activeIndex, setActiveIndex] = useState<number>(0); //FOR CAROUSEL COURSE CARD SLIDER
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true); // FOR NEXT AND PREV BUTTON FOR COURSE CARD
+  const swiperRef = useRef<any>(null);
+
   const [isSoloPanelVisible, setSoloPanelVisible] = useState(false); // State for solopanel visibility for solomode
   const [isLobbyPanelVisible, setIsLobbyPanelVisible] = useState(false); // State for lobbypanel for  multiplayer
   const [isJoinLobbyVisible, setIsJoinLobbyVisible] = useState(false); // State for joinlobbypanel for  multiplayer
   const [isPanelCreateVisible, setIsPanelCreatelVisible] = useState(false); // State for lobbypanel for  multiplayer
   const [isLobbyFullVisible, setIsLobbyFullVisible] = useState(false); // State for joinlobbypanel for  multiplayer
   const [isPanelDiffVisible, setPanelDiffVisible] = useState(false); // State for paneldiff visibility both solomode and multiplayer mode
-  const [isButtonEnabled, setIsButtonEnabled] = useState(true); // State for button debounce
-  const swiperRef = useRef<any>(null);
+  
 
   const courseImages: Record<"htmlcourse" | "csscourse" | "jscourse", string> = {
     jscourse: "/assets/jscourse.png",
@@ -136,6 +169,24 @@ const Page: React.FC = () => {
     
     
   };
+
+  switch (selectedCourse) {
+    case "htmlcourse":
+      console.log("HTML Course Selected");
+      // Add any specific logic for HTML course
+      break;
+    case "csscourse":
+      console.log("CSS Course Selected");
+      // Add any specific logic for CSS course
+      break;
+    case "jscourse":
+      console.log("JavaScript Course Selected");
+      // Add any specific logic for JavaScript course
+      break;
+    default:
+      console.log("No course selected");
+      break;
+  }
 
   return (
       <div className="flex h-screen bg-[#223F77]">
@@ -253,7 +304,7 @@ const Page: React.FC = () => {
             <div className="flex justify-between w-3/6 mt-12 -translate-x-5 translate-y-10">
               <button
                 className={`${
-                  isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+                  isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-blue-500 cursor-pointer"
                 } text-white p-3 rounded-full transition -translate-y-56`}
                 onClick={handleBack}
                 aria-label="Back"
@@ -277,7 +328,7 @@ const Page: React.FC = () => {
 
               <button
                 className={`${
-                  isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+                  isButtonEnabled ? "bg-blue-500 hover:bg-blue-600" : "bg-blue-500 cursor-pointer"
                 } text-white p-3 rounded-full transition -translate-y-56`}
                 onClick={handleNext}
                 aria-label="Next"
@@ -325,88 +376,29 @@ const Page: React.FC = () => {
                         <div className="space-y-2">
                           {/* Course Items */}
                           <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">Java Programming</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
+                            <span className="text-xl w-2/4">HTML</span>
+                            <AvatarGroup
+                              contributors={[
+                                { src: "/assets/jane.png", alt: "Jane" },
+                                { src: "/assets/john.png", alt: "John" },
+                                { src: "/assets/annette.png", alt: "Annette" },
+                              ]}
+                              maxVisible={2} // Display 3 avatars with the rest as a count
+                            />
                           </div>
-                          {/* Add additional courses here */}
+
                           <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">Java Programming</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
+                            <span className="text-xl w-2/4">HTML</span>
+                            <AvatarGroup
+                              contributors={[
+                                { src: "/assets/jane.png", alt: "Jane" },
+                                { src: "/assets/john.png", alt: "John" },
+                                { src: "/assets/annette.png", alt: "Annette" },
+                              ]}
+                              maxVisible={2} // Display 3 avatars with the rest as a count
+                            />
                           </div>
-      
-                          <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">Java Programming</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
-                          </div>
-      
-                          <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">Java Programming</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
-                          </div>
+
       
                         </div>
                       </div>
@@ -417,87 +409,28 @@ const Page: React.FC = () => {
                           {/* Course Items */}
                           <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
                             <span className="text-xl w-2/4">HTML</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
+                            <AvatarGroup
+                              contributors={[
+                                { src: "/assets/jane.png", alt: "Jane" },
+                                { src: "/assets/john.png", alt: "John" },
+                                { src: "/assets/annette.png", alt: "Annette" },
+                              ]}
+                              maxVisible={2} // Display 3 avatars with the rest as a count
+                            />
                           </div>
-                          {/* Add additional courses here */}
+
                           <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">HTML</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
+                            <span className="text-xl w-2/4">CSS</span>
+                            <AvatarGroup
+                              contributors={[
+                                { src: "/assets/jane.png", alt: "Jane" },
+                                { src: "/assets/john.png", alt: "John" },
+                                { src: "/assets/annette.png", alt: "Annette" },
+                              ]}
+                              maxVisible={2} // Display 3 avatars with the rest as a count
+                            />
                           </div>
-      
-                          <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">HTML</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
-                          </div>
-      
-                          <div className="flex justify-between items-center bg-gradient-to-r from-[#035CC2] to-[#073267] border border-[#019AEC] rounded-md p-2">
-                            <span className="text-xl w-2/4">HTML</span>
-                            <div className="flex -space-x-2 overflow-hidden">
-                              {/* Contributor Images */}
-                              <Image
-                                src="/assets/jane.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                              <Image
-                                src="/assets/john.png"
-                                alt="Contributor"
-                                width={30}
-                                height={30}
-                                className="inline-block rounded-full"
-                              />
-                            </div>
-                          </div>
+
                         </div>
                       </div>
                     </div>
