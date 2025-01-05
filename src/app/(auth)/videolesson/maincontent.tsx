@@ -152,13 +152,13 @@ const MainContent: React.FC = () => {
 
         {/* Lesson Panel 2 */}
       <div className="w-[600px] h-[800px] flex justify-center items-center p-1 -translate-y-28 rounded-lg ml-6 border-l border-r border-t border-b-4 border-[#019AEC] shadow-drop-blue">
-        <div className="w-full h-full bg-gradient-to-b from-[#123775] via-[#164592] to-[#07152C] rounded-lg flex flex-col items-start justify-start p-4 ">
+        <div className="w-full h-full bg-gradient-to-b from-[#123775] via-[#164592] to-[#07152C] rounded-lg flex flex-col items-start justify-start p-4  ">
           {selectedLesson.videoUrl ? (
             <>
               {/* Video */}
               <div className="relative w-full pb-[56.25%]">
                 <iframe
-                  className="absolute top-0 left-0 w-full h-full"
+                  className="absolute top-0 left-0 w-full h-full border-l border-r border-t border-b-4 drop-shadow-2xl border border-gray-300 rounded-lg"
                   src={selectedLesson.videoUrl}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -213,12 +213,12 @@ const MainContent: React.FC = () => {
               {/* Watch Lesson Button */}
                   <a
                   href="/lesson"  // Replace this with the URL or path you want to navigate to
-                  className="bg-transparent p-0 transition-transform hover:scale-110 cursor-pointer translate-y-52"
+                  className="bg-transparent p-0 transition-transform hover:scale-110 cursor-pointer translate-y-44"
                   >
                   <img
                       src="/assets/btnwatchlesson.png"
                       alt="Watch Lesson"
-                      className="w-32 h-16"
+                      className="w-40 h-20"
                   />
                   </a>
 

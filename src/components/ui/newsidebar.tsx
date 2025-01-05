@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Import useRouter from Next.js
+import { useRouter, usePathname } from "next/navigation"; // Import useRouter from Next.js
 
 const Sidebar: React.FC = () => {
   // State for handling modal visibility
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter(); // Instantiate useRouter
+  const pathname = usePathname();
 
   // Open the modal when "Sign Out" is clicked
   const handleSignOutClick = () => {
@@ -28,7 +29,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div>
-      <aside className="fixed left-0 top-24  flex flex-col items-center space-y-1 h-full w-20 z-50 bg-transparent">
+      <aside className="fixed left-2 top-32 flex flex-col items-center space-y-1 h-full w-20 z-50 bg-transparent">
         {/* Sidebar Buttons (Top Section) */}
         {[
           { href: "/Selectmode", src: "/assets/btnhome.png", label: "Home" },
@@ -38,7 +39,9 @@ const Sidebar: React.FC = () => {
         ].map((btn, index) => (
           <Link href={btn.href} key={index} passHref>
             <button
-              className="flex items-center justify-center bg-transparent border-none rounded-full"
+              className={`flex items-center justify-center bg-transparent border-none rounded-full ${
+                pathname === btn.href ? 'scale-125' : ''
+              }`} // Conditionally apply scale-110 for active button
               aria-label={btn.label}
             >
               <Image
@@ -61,7 +64,9 @@ const Sidebar: React.FC = () => {
           ].map((btn, index) => (
             <Link href={btn.href} key={index} passHref>
               <button
-                className="flex items-center justify-center bg-transparent border-none rounded-full"
+                className={`flex items-center justify-center bg-transparent border-none rounded-full ${
+                  pathname === btn.href ? 'scale-125' : ''
+                }`} // Conditionally apply scale-110 for active button
                 aria-label={btn.label}
                 onClick={btn.onClick} // Trigger the modal on click
               >

@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { FaPlay, FaPause } from "react-icons/fa";
 import Link from "next/link";
 
 // Define the HeaderProps interface
@@ -35,8 +36,16 @@ const Header: React.FC<HeaderProps> = ({
   bellUrl,
   settingsUrl,
 }) => {
+  const [isSettingModal, setIsSettingModal] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false); // Initially set to false, so the panel is hidden
   const [isProfileOpen, setIsProfileOpen] = useState(false); // State for profile modal
+  const [isPlaying, setIsPlaying] = useState(false); // for audio settings
+  const audioRef = React.createRef<HTMLAudioElement>(); // for audio settings
+  const openModal = () => setIsSettingModal(true); // for settings
+  const closeModal = () => {
+    setIsSettingModal(false);  // Close the modal
+    // Do nothing with the audio, it will continue playing as is
+  }
   const progressPercentage = Math.min(
     (currentExperience / experienceNeeded) * 100,
     100
@@ -55,18 +64,28 @@ const Header: React.FC<HeaderProps> = ({
     setNotifications([]); // Clear all notifications
   };
 
+// for bg music
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && isPlaying) {
+      audio.play();
+    } else if (audio && !isPlaying) {
+      audio.pause();
+    }
+  }, [isPlaying]);
+
   return (
-    <header className="fixed top-0 left-0 w-full h-[85px] z-50 flex justify-between items-start pt-4 p-4 text-white bg-transparent">
+    <header className="fixed top-0 left-0 w-full h-[85px] z-50 flex justify-between items-center text-white bg-transparent">
       {/* Left Section: User Info */}
-      <div className="relative space-x-4 transform -translate-x-16 -translate-y-16">
+      <div className="relative flex justify-center items-center space-x-4 transform -translate-x-12 -translate-y-1 w-[1500px] h-[50px]">
         <Image
           src={backgroundUrl}
           alt="Background"
-          width={550}
-          height={80}
+          width={1500}
+          height={70}
           className="object-cover"
         />
-        <div className="fixed top-0 left-0 transform flex items-center space-x-4 pt-12 pl-10">
+        <div className="fixed left-10 transform -translate-y-1 flex items-center justify-start">
           {/* Avatar */}
           <div className="cursor-pointer transition-transform transform hover:scale-110">
             <Image
@@ -93,9 +112,9 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Profile Pop-Up Panel */}
+      {/* Profile Info Pop-Up Panel */}
         {isProfileOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
             <div className="relative bg-transparent rounded-lg shadow-lg p-4">
               {/* Back Button */}
               <div className="absolute top-16 left-24 cursor-pointer transition-transform transform hover:scale-110 z-50">
@@ -164,11 +183,11 @@ const Header: React.FC<HeaderProps> = ({
                 </div>
 
                 {/* Badges and Trophy Icon */}
-                <div className="absolute top-32 left-60 flex items-center translate-y-4 w-[100px] translate-x-3 -space-x-1 space-y-4">
+                <div className="absolute top-32 left-60 flex items-center translate-y-4 w-[90px] translate-x-3 -space-x-1 space-y-4">
                   <Image
-                    src="/assets/bronze.png" // Example badge, replace with actual badge paths
+                    src={midRankBadgeUrl} // Example badge, replace with actual badge paths
                     alt="Bronze Badge"
-                    width={100}
+                    width={90}
                     height={30}
                     className="object-contain"
                   />
@@ -227,20 +246,20 @@ const Header: React.FC<HeaderProps> = ({
         )}
 
 
-      {/* Mid Rec with h1 text and icons */}
-      <div className="absolute flex flex-col items-center w-full top-1 right-6">
+      {/* Mid image Panel */}
+      <div className="relative flex flex-col items-center w-[2000px] -translate-y-2">
         <Image
           src={midRecUrl}
           alt="Mid Rec"
-          width={900}
-          height={100}
+          width={2000}
+          height={500}
           className="object-cover"
         />
-        <div className="absolute transform -translate-x-36 top-1">
+        <div className="absolute transform -translate-x-32 top-1">
           <Image
             src={midRankBadgeUrl}
             alt="Mid Rank Badge"
-            width={50}
+            width={40}
             height={50}
             className="object-cover"
           />
@@ -248,11 +267,11 @@ const Header: React.FC<HeaderProps> = ({
         <h1 className="absolute z-10 text-2xl font-bold translate-x-3">
           Code Wizard
         </h1>
-        <div className="absolute translate-x-40 top-3">
+        <div className="absolute translate-x-36 top-3">
           <Image
             src={midStarUrl}
             alt="Mid Star"
-            width={50}
+            width={40}
             height={50}
             className="object-cover"
           />
@@ -267,19 +286,19 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Right Rec Image with Icons */}
-      <div className="relative -translate-y-8 translate-x-6">
+      {/* Right Image Panel */}
+      <div className="relative translate-y-5 translate-x-2 flex justify-end items-center transform w-[1500px] h-[70px]">
         <Image
           src={rightRecUrl}
           alt="Right Rec"
-          width={550}
-          height={80}
+          width={1500}
+          height={70}
           className="object-cover"
         />
-        <div className="absolute right-6 top-1/3 transform -translate-y-1/2 flex items-center space-x-5">
+        <div className="absolute right-6 top-1/3 transform -translate-y-7 flex items-center space-x-5">
           <button
             aria-label="Notifications"
-            className="flex items-center"
+            className="flex items-center relative"
             onClick={toggleNotifPanel}
           >
             <Image
@@ -289,9 +308,18 @@ const Header: React.FC<HeaderProps> = ({
               height={30}
               className="object-cover transition-transform transform hover:scale-110 cursor-pointer"
             />
+            {notifications.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {notifications.length}
+              </span>
+            )}
           </button>
-          <Link href="/settings" passHref>
-            <button aria-label="Settings" className="flex items-center">
+          {/* Button to trigger the modal */}
+            <button
+              aria-label="Settings"
+              className="flex items-center"
+              onClick={openModal}
+            >
               <Image
                 src={settingsUrl}
                 alt="Settings"
@@ -300,12 +328,11 @@ const Header: React.FC<HeaderProps> = ({
                 className="object-cover transition-transform transform hover:scale-110 cursor-pointer"
               />
             </button>
-          </Link>
         </div>
       </div>
 
-      {/* Notification Panel */}
-      {isNotifOpen && (
+      {/* Bell Icon Notification Panel */}
+      {isNotifOpen && notifications.length > 0 && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="w-[1300px] h-[700px] bg-[#172842] text-white rounded-lg shadow-lg p-4 border-l border-r border-b-4 border-[#0286DF] drop-shadow-2xl">
             <div className="flex justify-between items-center mb-4">
@@ -381,6 +408,50 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
       )}
+      <>
+        {/* Audio Element Outside the Modal */}
+        <audio ref={audioRef} loop>
+          <source src="/assets/sample.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+
+        {/* Settings Modal */}
+        {isSettingModal && (
+          <div className="fixed inset-0 z-50">
+            {/* Background Overlay */}
+            <div
+              className="absolute inset-0 bg-black bg-opacity-50"
+              onClick={closeModal} // Close modal on overlay click
+            ></div>
+
+            {/* Modal Content */}
+            <div className="absolute top-16 right-4 bg-gradient-to-b from-[#035CC2] to-[#073269] border-l border-r border-t border-b-4 border-[#019AEC] shadow-drop-blue rounded-lg p-6 h-[400px] w-96 text-white">
+              <h1 className="text-2xl font-semibold font-zenDots text-center mb-2 -translate-y-4">
+                Settings
+              </h1>
+
+              {/* Background Music Section */}
+              <div className="mb-6">
+                <h3 className="text-lg font-normal mb-2">Background Music</h3>
+                <button
+                  className="flex items-center justify-center p-3 bg-[#073269] text-white w-full"
+                  onClick={() => setIsPlaying(!isPlaying)} // Toggle play/pause
+                >
+                  {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
+                </button>
+              </div>
+
+              {/* Close Button */}
+              <button
+                className="absolute bottom-4 right-4 px-4 py-2 bg-[#073269] w-20 rounded-full text-white hover:bg-[#035CC2]"
+                onClick={closeModal} // Close modal without affecting audio
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </>
     </header>
   );
 };
