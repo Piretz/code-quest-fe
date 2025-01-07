@@ -8,12 +8,12 @@ const Sidebar: React.FC = () => {
     <aside className="fixed left-0 top-0 flex flex-col items-center space-y-10 pt-24 h-full w-20 ">
       {/* Sidebar Buttons */}
       {[
-        { href: "/landingpage", src: "/assets/btnhome.png", label: "Home" },
+        { href: "/Selectmode", src: "/assets/btnhome.png", label: "Home" },
         { href: "/lesson", src: "/assets/btnlesson.png", label: "Lessons" },
-        { href: "#", src: "/assets/btnachi.png", label: "Achievements" },
-        { href: "", src: "/assets/btndark.png", label: "Dark Mode" },
-        { href: "#", src: "/assets/btninfo.png", label: "Info" },
-        { href: "/login", src: "/assets/btnsignout.png", label: "Sign Out" },
+        { href: "/achievements", src: "/assets/btnachi.png", label: "Achievements" },
+        { href: "/darkmode", src: "/assets/btndark.png", label: "Dark Mode" },
+        { href: "/info", src: "/assets/btninfo.png", label: "Info" },
+        { href: "/landingpage", src: "/assets/btnsignout.png", label: "Sign Out" },
       ].map((btn, index) => (
         <Link href={btn.href} key={index} passHref>
           <button
@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
             <Image
               src={btn.src}
               alt={btn.label}
-              width={90}  
+              width={90}
               height={50}
               className="object-cover transition-transform transform hover:scale-110 cursor-pointer"
             />

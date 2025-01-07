@@ -5,15 +5,13 @@ import Link from "next/link";
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="flex flex-col items-center space-y-10 translate-y-24 -translate-x-3 h-0">
-      {/* Sidebar Buttons */}
-      {[
+    <aside className="fixed left-0 top-0 flex flex-col items-center space-y-1 pt-32 h-full w-20">
+      {/* Sidebar Buttons (Top Section) */}
+      {[ 
         { href: "/Selectmode", src: "/assets/btnhome.png", label: "Home" },
-        { href: "/lesson", src: "/assets/btnlesson.png", label: "Lessons" },
+        { href: "/videolesson", src: "/assets/btnlesson.png", label: "Lessons" },
         { href: "/achievements", src: "/assets/btnachi.png", label: "Achievements" },
-        { href: "/darkmode", src: "/assets/btndark.png", label: "Dark Mode" },
-        { href: "/info", src: "/assets/btninfo.png", label: "Info" },
-        { href: "/landingpage", src: "/assets/btnsignout.png", label: "Sign Out" },
+        { href: "/chats", src: "/assets/btnchat.png", label: "Message" },
       ].map((btn, index) => (
         <Link href={btn.href} key={index} passHref>
           <button
