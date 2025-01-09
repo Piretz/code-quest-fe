@@ -4,6 +4,7 @@ import React from "react";
 const Testimonials = () => {
   return (
     <section
+      id="testimonial"
       className="bg-cover bg-center h-screen text-white py-0 px-0 relative" // Add `relative` for proper positioning
       style={{ backgroundImage: 'url("/assets/bgtestimonial.png")' }} // Path to your background image
     >
@@ -90,7 +91,7 @@ const Testimonials = () => {
               and having fun."
             </p>
             <p className="mt-1 text-lg text-white font-Poppins text-left italic">
-              — Alex P., Software Developer
+              — Alex P. Software Developer
             </p>
           </div>
 
@@ -105,7 +106,7 @@ const Testimonials = () => {
               game."
             </p>
             <p className="mt-1 text-lg text-white font-Poppins text-left italic">
-              — Jordan K., Game Designer
+              — Jordan K. Game Designer
             </p>
           </div>
 
@@ -134,7 +135,7 @@ const Testimonials = () => {
               to see where this platform goes!"
             </p>
             <p className="mt-1 text-lg text-white font-Poppins text-left italic">
-              - Sarah L., Web Developer
+              - Sarah L. Web Developer
             </p>
           </div>
         </div>

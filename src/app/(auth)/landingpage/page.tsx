@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import Header from "./header";
-import Hero from "./intro";
+import Hero from "./home";
 import Heropage from "./about";
 import Stats from "./stats";
 import CoursesOffered from "./course";
 import Testimonials from "./testimonial";
-import Footer from "./footer";
+import Footer from "./contactus";
 
 const App = () => {
   return (

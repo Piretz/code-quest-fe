@@ -13,7 +13,7 @@ const Hero = () => {
 
   return (
     <section
-      id="intro"
+      id="home"
       className="bg-cover bg-center text-white h-screen flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 lg:px-24"
       style={{ backgroundImage: 'url(/assets/bglanding.png)' }}
     >

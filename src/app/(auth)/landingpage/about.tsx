@@ -5,7 +5,7 @@ import Image from "next/image"; // Para sa optimized na pag-load ng imahe
 const Heropage = () => {
   return (
     <section
-      id="heropage"
+      id="about"
       className="bg-cover bg-center text-white text-center py-0 h-screen relative"
       style={{ backgroundImage: 'url(/assets/heropage-bg.png)' }}
     >

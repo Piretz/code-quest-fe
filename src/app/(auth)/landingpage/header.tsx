@@ -4,6 +4,17 @@ import Link from "next/link"; // Import Link from Next.js for navigation
 import '@fortawesome/fontawesome-free/css/all.css';
 
 const Header = () => {
+  const [loading, setLoading] = useState(false); // Add loading state
+
+  const handleLoginClick = () => {
+    setLoading(true);
+    // Simulate a login process or API call
+    setTimeout(() => {
+      // After loading is finished, set loading to false
+      setLoading(false);
+      // Optionally, redirect or perform some other action
+    }, 2000); // Simulating a 2-second delay
+  };
   const [activeButton, setActiveButton] = useState<string>("home");
   const [isLoginVisible, setIsLoginVisible] = useState<boolean>(false); // State for login form
   const [isSignUpVisible, setIsSignUpVisible] = useState<boolean>(false); // State for sign-up form
@@ -32,7 +43,7 @@ const Header = () => {
     setActiveButton("about");
   } else if (currentHash === "#courses") {
     setActiveButton("courses");
-  } else if (currentHash === "#footer") {
+  } else if (currentHash === "#contactUs") {
     setActiveButton("contact us");
   }
 }, [window.location.hash]); // This will trigger every time the hash changes
@@ -56,64 +67,102 @@ const Header = () => {
     setIsLoginVisible(false); // Close login form
   };
 
+  const handleScroll = () => {
+    const sections = ["home", "about", "courses", "contactus"];
+    const scrollPosition = window.scrollY;
+  
+    sections.forEach((section) => {
+      const sectionElement = document.getElementById(section);
+      if (sectionElement) {
+        const sectionTop = sectionElement.offsetTop;
+        const sectionHeight = sectionElement.offsetHeight;
+  
+        if (section === "contactus") {
+          // Special condition for "Contact Us" section (footer)
+          if (
+            scrollPosition >= sectionTop - 70 &&
+            scrollPosition < sectionTop + sectionHeight - 70
+          ) {
+            setActiveButton(section);
+          }
+        } else {
+          // General condition for other sections
+          if (
+            scrollPosition >= sectionTop - 70 &&
+            scrollPosition < sectionTop + sectionHeight - 70
+          ) {
+            setActiveButton(section);
+          }
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-screen bg-opacity-80 bg-transparent text-white px-4 sm:px-8 py-4 flex justify-between items-center shadow-lg">
-        {/* Logo */}
-        <img
-          src="/assets/Steamcircle.png"
-          alt="Cipherion Logo"
-          className="h-12 sm:h-14 animate-spin-slow"
-        />
+      <header className="fixed top-0 left-0 right-0 z-50 w-screen bg-[#00172D] text-white px-4 sm:px-8 py-4 flex justify-between items-center shadow-lg">
+      {/* Logo */}
+      <img
+        src="/assets/Steamcircle.png"
+        alt="Cipherion Logo"
+        className="h-12 sm:h-14 animate-spin-slow"
+      />
 
-        {/* Centered Navigation Links */}
-        <nav className="flex-grow flex justify-center space-x-4 sm:space-x-14 text-sm sm:text-xl font-zenDots">
-          {["Home", "About", "Courses", "Contact Us"].map((item, index) => (
-            <a
-              key={index}
-              href={
-                item.toLowerCase() === "home"
-                  ? "#intro"
-                  : item.toLowerCase() === "about"
-                  ? "#heropage"
-                  : item.toLowerCase() === "courses"
-                  ? "#courses"
-                  : "#footer"
-              }
-              onClick={() => handleButtonClick(item.toLowerCase())}
-              className={`rounded-full w-20 sm:w-28 text-center py-1 ${
-                activeButton === item.toLowerCase()
-                  ? "bg-gray-300 text-black"
-                  : "hover:bg-gray-600 hover:text-white"
-              }`}
-            >
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        {/* LOGIN AND SIGN UP Buttons */}
-        <div className="flex space-x-2 sm:space-x-4">
-          {/* Login Button */}
-          <button
-            onClick={() => handleButtonClick("login")}
-            className={`px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots ${
-              activeButton === "login" ? "bg-green-600" : "hover:bg-green-600"
+      {/* Centered Navigation Links */}
+      <nav className="flex-grow flex justify-center space-x-4 sm:space-x-14 text-sm sm:text-xl font-zenDots">
+        {["Home", "About", "Courses", "Contact Us"].map((item, index) => (
+          <a
+            key={index}
+            href={
+              item.toLowerCase() === "home"
+                ? "#home"
+                : item.toLowerCase() === "about"
+                ? "#about"
+                : item.toLowerCase() === "courses"
+                ? "#courses"
+                : "#contactUs"
+            }
+            onClick={() => handleButtonClick(item.toLowerCase())}
+            className={`rounded-full w-20 sm:w-28 text-center py-1 ${
+              activeButton === item.toLowerCase()
+                ? "bg-gray-300 text-black"
+                : "hover:bg-gray-600 hover:text-white"
             }`}
           >
-            Login
-          </button>
+            {item}
+          </a>
+        ))}
+      </nav>
 
-          {/* Sign Up Button */}
-          <button
-            onClick={() => handleButtonClick("signup")}
-            className="bg-blue-600 hover:bg-blue-700 px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots"
-          >
-            Sign Up
-          </button>
-        </div>
-      </header>
+      {/* LOGIN AND SIGN UP Buttons */}
+      <div className="flex space-x-2 sm:space-x-4">
+        {/* Login Button */}
+        <button
+          onClick={() => handleButtonClick("login")}
+          className={`px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots ${
+            activeButton === "login" ? "bg-green-600" : "hover:bg-green-600"
+          }`}
+        >
+          Login
+        </button>
+
+        {/* Sign Up Button */}
+        <button
+          onClick={() => handleButtonClick("signup")}
+          className="bg-blue-600 hover:bg-blue-700 px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-lg font-zenDots"
+        >
+          Sign Up
+        </button>
+      </div>
+    </header>
 
               {/* Login Form Modal */}
               {isLoginVisible && (
@@ -132,12 +181,12 @@ const Header = () => {
               {/* Login Form Content */}
               <div className="flex flex-col items-start justify-center p-40 w-full h-full text-white font-poppins">
                 {/* Title with Image Positioned to the Left */}
-                <div className="flex items-center mb-3 translate-x-14 -translate-y-5 z-20">
-                  <h2 className="text-5xl font-bold font-poppins p-2 translate-x-10 -translate-y-10 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">Login</h2>
+                <div className="flex items-center fixed top-48 h-24 left-96 translate-x-52 z-50">
+                  <h2 className="text-5xl font-bold font-poppins p-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-300 to-pink-300">Login</h2>
                 </div>
 
                 {/* Form Container */}
-                <div className="w-[450px] bg-opacity-70 p-6 rounded-lg">
+                <div className="fixed top-80 w-[450px] bg-opacity-70 p-10 rounded-lg">
                   {/* Username Input */}
                   <div className="mb-4 relative">
                     <label htmlFor="username" className="block text-md font-medium mb-2">
@@ -183,20 +232,8 @@ const Header = () => {
                     </button>
                   </div>
 
-                  {/* Login Button with Image */}
-                  <Link href="/Selectmode">
-                    <button className="w-52 h-35 rounded-lg py-2 text-lg font-semibold">
-                      <img
-                        src="/assets/btnlog.png" // Your image path
-                        alt="Login Button"
-                        className="w-full h-full object-cover rounded-lg translate-x-24 transition-transform transform hover:scale-110"
-                      />
-                    </button>
-                  </Link>
-                </div>
-
                 {/* Social Login & Links */}
-                <div className="text-center translate-x-28 -translate-y-5">
+                <div className="flex py-1 justify-center items-center">
                   <p className="mt-4 text-sm">
                     Forgot password?{" "}
                     <a href="#" className="text-red-500 hover:underline">
@@ -204,6 +241,31 @@ const Header = () => {
                     </a>
                   </p>
                 </div>
+
+                  {/* Login Button with Image */}
+                  <Link href="/Selectmode">
+                  <button
+                    className="w-52 h-35 rounded-lg p-6 text-lg font-semibold"
+                    onClick={handleLoginClick}
+                    disabled={loading} // Disable the button when loading
+                  >
+                    {loading ? (
+                      <div className="w-full h-full flex justify-center items-center translate-x-20 ">
+                        {/* DaisyUI Loading Spinner */}
+                        <div className="loading loading-spinner loading-lg"></div>
+                      </div>
+                    ) : (
+                      <img
+                        src="/assets/btnlog.png"
+                        alt="Login Button"
+                        className="w-full h-full object-cover rounded-lg translate-x-20 transition-transform transform hover:scale-110"
+                      />
+                    )}
+                  </button>
+                </Link>
+                </div>
+
+                
               </div>
 
               {/* Logolog Image Positioned at the Bottom */}
