@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./header";
 import Hero from "./intro";
-import Heropage from "./heropage";
+import Heropage from "./about";
 import Stats from "./stats";
 import CoursesOffered from "./course";
 import Testimonials from "./testimonial";
@@ -11,25 +11,25 @@ import Footer from "./footer";
 const App = () => {
   return (
     <div className="w-full min-h-screen flex flex-col">
-      {/* Header */}
+      {/* Home */}
       <Header />
 
-      {/* Hero Section */}
+      {/* Home */}
       <Hero />
 
-      {/* Hero Page Section */}
+      {/* About */}
       <Heropage />
 
       {/* Stats Section */}
       <Stats />
 
-      {/* Courses Offered Section */}
+      {/* Course Section */}
       <CoursesOffered />
 
       {/* Testimonials Section */}
       <Testimonials />
 
-      {/* Footer */}
+      {/* ContactUs */}
       <Footer />
     </div>
   );

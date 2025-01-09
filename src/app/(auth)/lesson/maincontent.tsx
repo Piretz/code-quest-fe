@@ -4,22 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const MainContent: React.FC = () => {
-  // State to manage the selected video ID and lesson information
   const [selectedLesson, setSelectedLesson] = useState({
     videoId: "",
     title: "Lesson Description",
     content: "Select a lesson to display its description here.",
   });
 
-  // State to manage comments
   const [comments, setComments] = useState<
     { text: string; id: number; name: string }[]
   >([]);
 
-  // State to manage the new comment input
   const [newComment, setNewComment] = useState<string>("");
 
-  // Function to handle video and lesson selection
   const handleLessonSelection = (
     videoId: string,
     title: string,
@@ -28,7 +24,6 @@ const MainContent: React.FC = () => {
     setSelectedLesson({ videoId, title, content });
   };
 
-  // Function to handle comment submission
   const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
@@ -40,174 +35,183 @@ const MainContent: React.FC = () => {
     }
   };
 
-      return (
-        <div
-          className="relative bg-center h-[100vh] w-[85%] translate-x-36 -translate-y-20 p-10 border-2 shadow-2xl"
-          style={{
-            backgroundImage: "url('/assets/lessonpanel.png')", // Path for background image
-          }}
-        >
-          {/* Content */}
-          <h1 className="absolute bottom-60 mt-1 translate-x-1 text-white text-2xl font-zenDots font-bold">
+  return (
+    <div className="flex items-center justify-center h-[90vh] w-[85%] translate-y-20 mx-auto border-l border-r border-t border-b-4 border-[#019AEC] shadow-drop-blue rounded-lg relative">
+      {/* Main Grid */}
+      <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full p-6">
+        {/* First Panel: Video Section */}
+        <div className="bg-transparent col-span-1 row-span-1 w-[900px] h-[500px] border-l border-r border-t border-b-4 drop-shadow-2xl flex items-center justify-center border border-gray-300 rounded-lg">
+          {selectedLesson.videoId ? (
+            <iframe
+              className="w-full h-full rounded-lg"
+              src={`https://www.youtube.com/embed/${selectedLesson.videoId}`}
+              title="Lesson Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <p className="text-gray-400">Select a lesson to view the video.</p>
+          )}
+        </div>
+
+        {/* Second Panel: Comment Section */}
+        <div className="bg-[#103E7C] col-span-1 row-span-1 w-[670px] h-[500px] translate-x-28 border-l border-r border-t border-b-4 border-[#000000] drop-shadow-2xl rounded-lg flex flex-col">
+          {/* Display Comments */}
+          <div className="flex-1 overflow-y-auto p-4 relative">
+            {/* Fixed Header */}
+            <h1 className="fixed top-0 left-0 right-0 text-2xl font-bold font-zenDots text-white text-center bg-gradient-to-r from-[#035CC2] to-[#073269] py-2 shadow-lg z-10">
+              COMMENTS
+            </h1>
+            
+            {/* Comments List */}
+            <div className="mt-10"> {/* Adds spacing to account for the fixed header */}
+              {comments.length > 0 ? (
+                comments.map((comment) => (
+                  <div
+                    key={comment.id}
+                    className="bg-gradient-to-r from-[#035CC2] to-[#073269] bg-opacity-60 p-2 rounded-lg mb-2"
+                  >
+                    <div className="flex items-start space-x-2">
+                      {/* Icon */}
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className="text-gray-300 text-3xl self-center"
+                      />
+
+                      {/* Name and Comment */}
+                      <div>
+                        <p className="text-md font-bold font-poppins">{comment.name}</p>
+                        <p className="text-xs font-normal mt-1 indent-5 font-poppins">{comment.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500">No comments yet.</p>
+              )}
+            </div>
+
+          </div>
+
+          {/* Fixed Comment Section */}
+          <div className="flex items-center p-4 space-x-2">
+            <FontAwesomeIcon
+              icon={faUser}
+              className="text-white text-lg translate-x-1"
+            />
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="w-[600px] h-full bg-gradient-to-r from-[#035CC2] to-[#073269] p-2 rounded-lg text-white font-poppins text-sm"
+              placeholder="Add a comment..."
+              rows={3}
+            ></textarea>
+            <button
+              type="submit"
+              onClick={handleCommentSubmit}
+              className="bg-gradient-to-r from-[#035CC2] to-[#073269] text-white p-2 rounded-md hover:bg-blue-600 flex items-center justify-center"
+              aria-label="Send Comment"
+            >
+              <FontAwesomeIcon
+                icon={faPaperPlane}
+                className="text-white text-lg"
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* Third Panel: Content, Text, and Download File */}
+        <div className="bg-transparent col-span-1 row-span-1 w-[900px] h-[300px] translate-y-24 border-l border-r border-t border-b-4 border-[#000000] drop-shadow-2xl rounded-lg p-4">
+          <h1 className="text-2xl font-bold text-white">
             {selectedLesson.title}
           </h1>
-          <p className="relative top-80 translate-y-48 translate-x-10 w-[50%] text-white text-sm text-justify font-poppins font-normal break-words">
-          • {selectedLesson.content}
+          <p className="text-sm text-white mt-4">
+            • {selectedLesson.content}
           </p>
-
-          {/* Text and Image for Download File */}
-          <div className="absolute bottom-10 left-10 text-white text-xs font-poppins">
-            <p className="mb-2">File to Study:</p> {/* Text above the image */}
+          <div className="mt-6">
+            <p className="text-xs text-white">File to Study:</p>
             <img
               src="/assets/btndownloadfile.png"
               alt="Download File"
-              className="w-32 h-8 transition-transform transform hover:scale-110 cursor-pointer"
+              className="w-32 h-8 mt-2 transition-transform transform hover:scale-110 cursor-pointer"
             />
           </div>
-
-          {/* Video Panel */}
-          {selectedLesson.videoId && (
-      <div className="fixed top-[4%] left-[4%] z-10 border-4 border-black -translate-x-10">
-        <iframe
-          className="h-[45vh] w-[100vh] aspect-video lg:aspect-video  "
-          src={`https://www.youtube.com/embed/${selectedLesson.videoId}`}
-          title="Lesson Video"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-    )}
-
-          {/* Container for the Lesson section */}
-      <div className="absolute left-2/3 -translate-x-8 -translate-y-6 bottom-12 flex flex-col space-y-2 w-2/6 text-md font-poppins">
-        {/* Lesson label */}
-        <h1 className="font-poppins font-bold text-xl mb-2 translate-y-16 ">Lessons:</h1>
-
-        {/* Scrollable button container */}
-        <div className="max-h-56 overflow-y-auto space-y-2 translate-y-16">
-          <button
-            className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
-            onClick={() =>
-              handleLessonSelection(
-                "salY_Sm6mv4",
-                "Lesson 1: HTML",
-                "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. It defines the content and structure of web content. It is often assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript, a programming language."
-              )
-            }
-          >
-            <p className="text-xs text-black font-semibold font-Poppins text-left break-words ">
-              Lesson 1: Introduction to HTML (15.00)
-            </p>
-            <p className="mt-1 text-xs text-black font-Poppins text-left italic">
-              - Mr. John Doe
-            </p>
-          </button>
-          <button
-            className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
-            onClick={() =>
-              handleLessonSelection(
-                "1Rs2ND1ryYc",
-                "Lesson 2: Cascading Style Sheet CSS",
-                "Cascading Style Sheets (CSS) is a style sheet language used for specifying the presentation and styling of a document written in a markup language such as HTML or XML (including XML dialects such as SVG, MathML or XHTML)."
-              )
-            }
-          >
-            <p className="text-xs text-black font-semibold font-Poppins text-left break-words">
-              Lesson 2: Introduction to CSS (15.00)
-            </p>
-            <p className="mt-1 text-xs text-black font-Poppins text-left italic">
-              - Ms. Jane Smith
-            </p>
-          </button>
-          <button
-            className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
-            onClick={() =>
-              handleLessonSelection(
-                "W6NZfCO5SIk",
-                "Lesson 3: JavaScript",
-                "JavaScript is a scripting language that enables you to create dynamically updating content, control multimedia, animate images, and pretty much everything else. (Okay, not everything, but it is amazing what you can achieve with a few lines of JavaScript code.)"
-              )
-            }
-          >
-            <p className="text-xs text-black font-semibold font-Poppins text-left break-words">
-              Lesson 3: Introduction to JavaScript (15.00)
-            </p>
-            <p className="mt-1 text-xs text-black font-Poppins text-left italic">
-              - Mr. Michael Brown
-            </p>
-          </button>
-          <button
-            className="bg-[#F9F8FD] text-black text-left font-poppins p-2 transition-transform transform hover:text-slate-700 cursor-pointer w-full"
-            onClick={() =>
-              handleLessonSelection(
-                "QFvqStqPCRU",
-                "Lesson 4: JavaScript",
-                "JavaScript is a scripting language that enables you to create dynamically updating content, control multimedia, animate images, and pretty much everything else. (Okay, not everything, but it is amazing what you can achieve with a few lines of JavaScript code.)"
-              )
-            }
-          >
-            <p className="text-xs text-black font-semibold font-Poppins text-left break-words">
-              Lesson 4: ADVANCED HTML AND FORMS (15.00)
-            </p>
-            <p className="mt-1 text-xs text-black font-Poppins text-left italic">
-              - Ms. Emily Davis
-            </p>
-          </button>
         </div>
-      </div>
 
-
-
-
-      {/* Fixed Comment Section */}
-      <div className="absolute top-3/4 left-2/4 translate-x-72 -translate-y-40 w-2/5">
-        <form
-          onSubmit={handleCommentSubmit}
-          className="flex items-center space-x-2"
-        >
-          {/* Profile Icon */}
-          <FontAwesomeIcon icon={faUser} className="text-white text-lg translate-x-1" />
-
-          {/* Comment Input */}
-          <textarea
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            className="w-3/5 h-8 border border-gray-300 p-1 rounded-lg text-black font-poppins text-sm"
-            placeholder="Add a comment..."
-            rows={3}
-          ></textarea>
-
-           {/* Send Icon Button */}
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 flex items-center justify-center"
-          aria-label="Send Comment"
-        >
-          <FontAwesomeIcon icon={faPaperPlane} className="text-white text-lg" />
-        </button>
-        </form>
-      </div>
-
-      {/* Display Comments */}
-      <div className="absolute left-2/4 translate-x-56 top-80 -translate-y-80 text-black w-2/5 max-w-xl font-poppins">
-      <h1 className="text-xl font-bold mb-2 translate-x-3 text-white translate-y-2">Comments:</h1>
-        {/* Scrollable Container */}
-        <div className="max-h-96 overflow-y-auto space-y-2 p-2 rounded-lg">
-          {comments.map((comment) => (
-            <div
-              key={comment.id}
-              className="flex flex-col bg-white bg-opacity-60 p-2 rounded-lg"
+        {/* Fourth Panel: Lesson Section */}
+        <div className="bg-transparent col-span-1 row-span-1 w-[670px] h-[300px] translate-y-24 translate-x-28 border-l border-r border-t border-b-4 border-[#000000] drop-shadow-2xl rounded-lg p-4">
+          <h1 className="font-bold font-zenDots text-xl mb-4">LESSONS:</h1>
+          <div className="space-y-2 overflow-y-auto max-h-56 text-black font-poppins">
+            <button
+              className="bg-[#F9F8FD] p-2 w-full text-left"
+              onClick={() =>
+                handleLessonSelection(
+                  "salY_Sm6mv4",
+                  "Lesson 1: HTML",
+                  "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. It defines the content and structure of web content. It is often assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript, a programming language."
+                )
+              }
             >
-              {/* User Info */}
-              <div className="flex items-center space-x-2">
-                <FontAwesomeIcon icon={faUser} className="text-black text-xl text-semibold" />
-                <p className="text-xs font-semibold">{comment.name}</p>
-              </div>
-              {/* Comment Text */}
-              <p className="break-words text-light mt-1 ml-8 text-xs">{comment.text}</p>
-            </div>
-          ))}
+              <p className="text-sm font-semibold">Lesson 1: Introduction to HTML</p>
+              <p className="indent-4 text-xs italic">- Mr. John Doe</p>
+            </button>
+            <button
+              className="bg-[#F9F8FD] p-2  w-full text-left"
+              onClick={() =>
+                handleLessonSelection(
+                  "1Rs2ND1ryYc",
+                  "Lesson 2: CSS",
+                  "CSS is a style sheet language used for specifying the presentation of a document written in a markup language."
+                )
+              }
+            >
+              <p className="text-sm font-semibold">Lesson 2: Introduction to CSS</p>
+              <p className="indent-4 text-xs italic">- Ms. Jane Smith</p>
+            </button>
+            {/* Add more lessons as needed */}
+            <button
+              className="bg-[#F9F8FD] p-2  w-full text-left"
+              onClick={() =>
+                handleLessonSelection(
+                  "1Rs2ND1ryYc",
+                  "Lesson 2: CSS",
+                  "CSS is a style sheet language used for specifying the presentation of a document written in a markup language."
+                )
+              }
+            >
+              <p className="text-sm font-semibold">Lesson 2: Introduction to CSS</p>
+              <p className="indent-4 text-xs italic">- Ms. Jane Smith</p>
+            </button>
+
+            <button
+              className="bg-[#F9F8FD] p-2  w-full text-left"
+              onClick={() =>
+                handleLessonSelection(
+                  "1Rs2ND1ryYc",
+                  "Lesson 2: CSS",
+                  "CSS is a style sheet language used for specifying the presentation of a document written in a markup language."
+                )
+              }
+            >
+              <p className="text-sm font-semibold">Lesson 2: Introduction to CSS</p>
+              <p className="indent-4 text-xs italic">- Ms. Jane Smith</p>
+            </button>
+
+            <button
+              className="bg-[#F9F8FD] p-2  w-full text-left"
+              onClick={() =>
+                handleLessonSelection(
+                  "1Rs2ND1ryYc",
+                  "Lesson 2: CSS",
+                  "CSS is a style sheet language used for specifying the presentation of a document written in a markup language."
+                )
+              }
+            >
+              <p className="text-sm font-semibold">Lesson 2: Introduction to CSS</p>
+              <p className="indent-4 text-xs italic">- Ms. Jane Smith</p>
+            </button>
+          </div>
         </div>
       </div>
     </div>

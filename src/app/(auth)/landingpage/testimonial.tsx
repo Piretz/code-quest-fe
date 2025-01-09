@@ -144,7 +144,7 @@ const Testimonials = () => {
           <img
             src="/assets/testimonialellipse.png" // Replace with your testimonialellipse image path
             alt="Testimonial Ellipse"
-            className="relative w-auto h-auto"
+            className="relative w-72 h-auto"
           />
         </div>
       </div>
