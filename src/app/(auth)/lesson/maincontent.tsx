@@ -82,7 +82,7 @@ const MainContent: React.FC = () => {
                       {/* Name and Comment */}
                       <div>
                         <p className="text-md font-bold font-poppins">{comment.name}</p>
-                        <p className="text-xs font-normal mt-1 indent-5 font-poppins">{comment.text}</p>
+                        <p className="text-xs font-normal mt-1 indent-5 font-poppins w-[550px] break-words">{comment.text}</p>
                       </div>
                     </div>
                   </div>
@@ -140,8 +140,8 @@ const MainContent: React.FC = () => {
         </div>
 
         {/* Fourth Panel: Lesson Section */}
-        <div className="bg-transparent col-span-1 row-span-1 w-[670px] h-[300px] translate-y-24 translate-x-28 border-l border-r border-t border-b-4 border-[#000000] drop-shadow-2xl rounded-lg p-4">
-          <h1 className="font-bold font-zenDots text-xl mb-4">LESSONS:</h1>
+        <div className="bg-transparent col-span-1 row-span-1 w-[670px] h-[300px] translate-y-24 translate-x-28 border-l border-r border-t border-b-4 border-[#000000] drop-shadow-2xl rounded-lg p-6">
+          <h1 className="font-bold font-zenDots text-xl mb-2">LESSONS:</h1>
           <div className="space-y-2 overflow-y-auto max-h-56 text-black font-poppins">
             <button
               className="bg-[#F9F8FD] p-2 w-full text-left"

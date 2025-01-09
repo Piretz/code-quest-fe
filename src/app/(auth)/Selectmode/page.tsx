@@ -40,6 +40,13 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ contributors, maxVisible }) =
 };
 
 const Page: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = () => {
+    setIsLoading(true);
+    console.log(`Navigating to: /selectcourse, Mode: ${selectedMode}`);
+  };
+
   const currentLevel = 1;
   const currentExperience = 11;
   const experienceNeeded = 100;
@@ -307,7 +314,7 @@ const Page: React.FC = () => {
                           <div
                             className={`flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-300 ${
                               activeIndex === index
-                                ? "scale-110 opacity-100 transform translate-x-40 z-10"
+                                ? "scale-110 opacity-100 transform translate-x-40 z-50"
                                 : activeIndex === (index - 1 + Object.keys(modeImages).length) % Object.keys(modeImages).length
                                 ? "scale-90 opacity-50 transform skew-y-12 translate-x-36 blur-sm"
                                 : activeIndex === (index + 1) % Object.keys(modeImages).length
@@ -383,13 +390,15 @@ const Page: React.FC = () => {
                     <div className="flex items-center justify-center mt-5 -translate-y-20 -translate-x-9">
                       <Link href="/selectcourse" passHref>
                         <button
-                          className="text-xl font-poppins hover:scale-110 transition-transform duration-300 bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-full p-3 text-white"
-                          onClick={() => {
-                            console.log(`Navigating to: /selectcourse, Mode: ${selectedMode}`);
-                          }}
+                          className="text-xl font-poppins hover:scale-110 transition-transform duration-300 bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-full p-3 text-white flex items-center"
+                          onClick={handleClick}
                           aria-label={`Selected Mode: ${selectedMode}`}
                         >
-                          {modeTitles[selectedMode]} {/* Displays the mode title */}
+                          {isLoading ? (
+                            <span className="loading loading-spinner loading-sm text-white"></span>
+                          ) : (
+                            modeTitles[selectedMode] /* Displays the mode title */
+                          )}
                         </button>
                       </Link>
                     </div>

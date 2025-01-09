@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation"; // Import useRouter from Next.js
 
 const Sidebar: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   // State for handling modal visibility
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter(); // Instantiate useRouter
@@ -22,9 +23,14 @@ const Sidebar: React.FC = () => {
 
   // Handle the confirm action for sign out
   const handleConfirmSignOut = () => {
-    // Redirect to landing page after confirmation
-    router.push('/landingpage'); // Navigate to the landing page
-    setIsModalVisible(false); // Close modal after redirect
+    setIsLoading(true); // Set loading state to true when button is clicked
+
+    // Simulate a delay before redirecting
+    setTimeout(() => {
+      router.push('/landingpage'); // Navigate to the landing page
+    }, 1000); // Simulate a delay of 1 second for loading (adjust as needed)
+
+    // Optionally close modal (if you have one)
   };
 
   return (
@@ -87,7 +93,7 @@ const Sidebar: React.FC = () => {
       {isModalVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-md cursor-default">
           <div
-            className="p-6 rounded-lg shadow-lg h-48 drop-shadow-2xl border-2 border-[#019AEC] "
+            className="p-10 rounded-lg shadow-lg h-48 drop-shadow-2xl border-2 border-[#019AEC] "
             style={{
               backgroundImage: "url('/assets/bgmodal.png')", // Set background image
               backgroundSize: "cover", // Ensure the image covers the modal area
@@ -95,34 +101,38 @@ const Sidebar: React.FC = () => {
             }}
           >
             <h2 className="flex justify-center text-2xl font-semibold font-zenDots mb-4 text-white">Are you sure you want to log out?</h2>
-            <div className="flex justify-center"> {/* Increased space between buttons */}
+            <div className="flex justify-center gap-10"> {/* Increased space between buttons */}
               <button
-                className="bg-transparent border-none px-4 py-4" // Increased padding for bigger button
+                className="bg-transparent border-none p-4" // Increased padding for bigger button
                 style={{
                   backgroundImage: "url('/assets/btncancel.png')", // Set background image for Cancel button
                   backgroundSize: "contain", // Make sure the image fits the button
                   backgroundRepeat: "no-repeat", // Avoid repeating the background
                   backgroundPosition: "center", // Center the background image
-                  width: "240px", // Set width of the button
+                  width: "150px", // Set width of the button
                   height: "80px", // Set height of the button
                 }}
                 onClick={handleCloseModal}
               >
-                {/* Cancel Text */}
+                <h5 className="font-zenDots">Cancel</h5>
               </button>
               <button
-                className="bg-transparent border-none px-4 py-4" // Increased padding for bigger button
-                style={{
-                  backgroundImage: "url('/assets/btnlogout.png')", // Set background image for Confirm button
-                  backgroundSize: "contain", // Make sure the image fits the button
-                  backgroundRepeat: "no-repeat", // Avoid repeating the background
-                  backgroundPosition: "center", // Center the background image
-                  width: "240px", // Set width of the button
-                  height: "80px", // Set height of the button
-                }}
-                onClick={handleConfirmSignOut} // Redirect to landing page on confirm
-              >
-                {/* Confirm Text */}
+                  className="bg-transparent border-none px-4 py-4 flex items-center justify-center" // Increased padding for bigger button and centered content
+                  style={{
+                    backgroundImage: "url('/assets/btnlogout.png')", // Set background image for Confirm button
+                    backgroundSize: "contain", // Make sure the image fits the button
+                    backgroundRepeat: "no-repeat", // Avoid repeating the background
+                    backgroundPosition: "center", // Center the background image
+                    width: "150px", // Set width of the button
+                    height: "80px", // Set height of the button
+                  }}
+                  onClick={handleConfirmSignOut} // Handle click to start loading and redirection
+                >
+                  {isLoading ? (
+                    <div className="loading loading-spinner loading-lg"></div> // DaisyUI loading spinner
+                  ) : (
+                    <h5 className="font-zenDots">Logout</h5>
+                  )}
               </button>
             </div>
           </div>

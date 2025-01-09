@@ -42,6 +42,8 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ contributors, maxVisible }) =
 };
 
 const Page: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const currentLevel = 1;
   const currentExperience = 11;
   const experienceNeeded = 100;
@@ -140,6 +142,15 @@ const Page: React.FC = () => {
     setIsLobbyPanelVisible(false);
     setIsJoinLobbyVisible(false);
     setIsLobbyFullVisible(false);
+  };
+
+  const handleTakeLesson = (e: React.MouseEvent<HTMLImageElement>) => {
+    if (isLoading) {
+      // Prevent default action when loading
+      e.preventDefault();
+      return;
+    }
+    setIsLoading(true);
   };
 
   const SolohandleClosePopup = () => {
@@ -465,26 +476,37 @@ const Page: React.FC = () => {
               {/* Conditional rendering: Hide COURSE PANEL if PANELDIFF1 is visible */}
               {!isPanelDiffVisible && (
                 <>
-                  {/* Course Panel BG Image */}
-                  <Image
-                    src="/assets/bgpanel.png"
-                    alt="Start Course Panel"
-                    width={600}
-                    height={400}
-                    className="rounded-lg border-2 border-[#019AEC] shadow-2xl"
-                  />
-
-                  {/* Take Lesson Button */}
-                  <Link href="/lesson" passHref>
-                  <Image
-                    src="/assets/btntklesson.png"
-                    alt="HTML Course"
-                    width={200}
-                    height={80}
-                    className="absolute translate-x-24 -translate-y-48 cursor-pointer transition-transform transform hover:scale-110"
-                  />
+                {/* Course Panel BG Image */}
+                <Image
+                  src="/assets/bgpanel.png"
+                  alt="Start Course Panel"
+                  width={600}
+                  height={400}
+                  className="rounded-lg border-2 border-[#019AEC] shadow-2xl"
+                />
+          
+                {/* Take Lesson Button */}
+                <Link href="/lesson" passHref>
+                  <div className="relative flex">
+                    {isLoading && (
+                      <div className="fixed top-48 left-56 flex items-center justify-center">
+                        <span className="loading loading-spinner loading-md text-white"></span>
+                      </div>
+                    )}
+                    <Image
+                      src="/assets/btntklesson.png"
+                      alt="HTML Course"
+                      width={200}
+                      height={80}
+                      className={`absolute translate-x-24 -translate-y-48 cursor-pointer transition-transform transform hover:scale-110 ${
+                        isLoading ? "opacity-50" : "opacity-100"
+                      }`}
+                      onClick={handleTakeLesson}
+                      
+                    />
+                  </div>
                 </Link>
-                </>
+              </>
               )}
             </div>
 

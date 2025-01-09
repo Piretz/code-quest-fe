@@ -1,23 +1,41 @@
-"use client";
-import Image from "next/image";
+// import Image from "next/image";
+// import Sidebar from "../components/sidebar";
+
+// export default function Home() {
+//   return (
+//     <div>    
+//           <Sidebar/>
+
+//       </div>  
+    
+//   )
+// }
+
+// import Dashboard from "../components/Dashboard";
 
 // export default function Home() {
 //   return <Dashboard />;
 // }
 // _app.tsx or root file
-import React from "react";
-import { ThemeProvider } from "../components/ui/ThemeContext"; // Import the ThemeProvider
-import Dashboard from "../components/ui/Dashboard";
+import { useEffect, useState } from "react";
+import LandingPage from "./(auth)/landingpage/page";
 
 export default function Home() {
-  return (
-    <ThemeProvider>
-      <Dashboard />
-    </ThemeProvider>
-  );
-};
+  const [isLoading, setIsLoading] = useState(true);
 
-export default App;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Simulate loading for 2 seconds (adjust as needed)
+
+    return () => clearTimeout(timer); // Cleanup timer
+  }, []);
+
+  return (
+    <LandingPage />
+  );
+}
+
 
 
 
