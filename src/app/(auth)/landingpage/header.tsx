@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; // Import Link from Next.js for navigation
 import '@fortawesome/fontawesome-free/css/all.css';
+import axios from "axios";
 
 const Header = () => {
   const [loading, setLoading] = useState(false); // Add loading state
