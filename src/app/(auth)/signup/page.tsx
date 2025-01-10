@@ -271,13 +271,13 @@ const Signupage = () => {
 
             {/* Social Login & Links */}
             <div className="flex py-1 justify-center items-center">
-  <p className="mt-4 text-sm">
-    Forgot password?{" "}
-    <Link href="#" className="text-red-500 hover:underline">
-      Reset password
-    </Link>
-  </p>
-</div>
+              <p className="mt-4 text-sm">
+                Forgot password?{" "}
+                <Link href="#" className="text-red-500 hover:underline">
+                  Reset password
+                </Link>
+              </p>
+            </div>
 
             {/* Login Button with Image */}
             <Link href="/Selectmode">
