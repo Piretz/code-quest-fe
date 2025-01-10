@@ -17,6 +17,9 @@
 //   return <Dashboard />;
 // }
 // _app.tsx or root file
+
+"use client";
+
 import { useEffect, useState } from "react";
 import LandingPage from "./(auth)/landingpage/page";
 
@@ -31,9 +34,7 @@ export default function Home() {
     return () => clearTimeout(timer); // Cleanup timer
   }, []);
 
-  return (
-    <LandingPage />
-  );
+  return <LandingPage />;
 }
 
 

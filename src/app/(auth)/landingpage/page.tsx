@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Header from "./header";
+import Header from "@/components/ui/Header";
 import Hero from "./home";
 import Heropage from "./about";
 import Stats from "./stats";
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className="w-full min-h-screen flex flex-col">
       {/* Home */}
-      <Header />
+      <Header currentLevel={0} currentExperience={0} experienceNeeded={0} />
 
       {/* Home */}
       <Hero />

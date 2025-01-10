@@ -2,10 +2,80 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; // Import Link from Next.js for navigation
 import '@fortawesome/fontawesome-free/css/all.css';
-import { useForm } from "react-hook-form";
-import useLoginSchema from "../../../../providers/schema/loginschema";
+import Header from "../lesson/header";
+import axios from "axios";
+// Define the props interface
+interface SignUpModalProps {
+  isSignUpVisible: boolean;
+  setIsSignUpVisible: (value: boolean) => void;
+  setIsLoginVisible: (value: boolean) => void;
+}
 
+const SignUpModal: React.FC<SignUpModalProps> = ({ isSignUpVisible, setIsSignUpVisible, setIsLoginVisible }) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    birthdayMonth: "",
+    birthdayDay: "",
+    birthdayYear: "",
+    password: "",
+    confirmPassword: "",
+  });
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    if (!formData.firstName || !formData.email || !formData.password) {
+      alert("Please fill out all required fields!");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/user-student/register", {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        username: formData.username,
+        email: formData.email,
+        birthdate: `${formData.birthdayYear}-${formData.birthdayMonth}-${formData.birthdayDay}`,
+        password: formData.password,
+      });
+
+      if (response.data) {
+        alert("User registered successfully!");
+        setIsSignUpVisible(false); // Close sign-up modal
+        setIsLoginVisible(true); // Show login modal
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("Failed to register. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // If the sign-up modal is not visible, return null (render nothing)
+  if (!isSignUpVisible) return null;
 const Header = () => {
   const [loading, setLoading] = useState(false); // Add loading state
 
@@ -497,9 +567,8 @@ const Header = () => {
       </>
     );
   };
+}
 
-export default Header;
-  function yupResolver(schema: any): import("react-hook-form").Resolver<import("react-hook-form").FieldValues, any> | undefined {
-    throw new Error("Function not implemented.");
-  }
+
+
 

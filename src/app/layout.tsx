@@ -33,9 +33,12 @@
 //     </html>
 //   );
 // }
+import localFont from "next/font/local";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../app/globals.css';
-import { ThemeProvider } from "@/components/ui/ThemeContext";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import '../app/globals.css';
+import { Metadata } from "next";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
