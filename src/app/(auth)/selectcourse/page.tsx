@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../../../components/ui/newheader"; // Correct path to the updated Header component
 import Sidebar from "../../../components/ui/newsidebar"; // Correct path to Sidebar
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from "next/link"; // Import Link component
 
 import Image from "next/image";
@@ -43,6 +43,9 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ contributors, maxVisible }) =
 
 const Page: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode');
 
   const currentLevel = 1;
   const currentExperience = 11;
@@ -60,9 +63,8 @@ const Page: React.FC = () => {
   const settingsUrl = "/assets/setting.png";
 
   const [selectedCourse, setSelectedCourse] = useState<"htmlcourse" | "csscourse" | "jscourse">("htmlcourse");
-  
-  const [activeIndex, setActiveIndex] = useState<number>(0); //FOR CAROUSEL COURSE CARD SLIDER
-  const [isButtonEnabled, setIsButtonEnabled] = useState(true); // FOR NEXT AND PREV BUTTON FOR COURSE CARD
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true);
   const swiperRef = useRef<any>(null);
 
   const [isSoloPanelVisible, setSoloPanelVisible] = useState(false); // State for solopanel visibility for solomode
@@ -91,6 +93,14 @@ const Page: React.FC = () => {
     jscourse: "/javascript-course",
   };
 
+  useEffect(() => {
+    if (mode === 'solomode') {
+      setSoloPanelVisible(true);
+    } else if (mode === 'multimode') {
+      setIsLobbyPanelVisible(true);
+    }
+  }, [mode]);
+  
   const handleSlideChange = (swiper: any) => {
     setActiveIndex(swiper.activeIndex);
     const modeKeys = Object.keys(courseImages) as (keyof typeof courseImages)[];

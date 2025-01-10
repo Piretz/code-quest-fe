@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { useRouter } from 'next/router';
 
 interface AvatarGroupProps {
   contributors: { src: string; alt: string }[];
@@ -44,7 +45,7 @@ const Page: React.FC = () => {
 
   const handleClick = () => {
     setIsLoading(true);
-    console.log(`Navigating to: /selectcourse, Mode: ${selectedMode}`);
+    console.log(`Navigating to: /selectcourse?mode=${selectedMode}`);
   };
 
   const currentLevel = 1;
@@ -387,7 +388,7 @@ const Page: React.FC = () => {
 
       {/* Mode Title as Button with Link */}
       <div className="flex items-center justify-center mt-5 -translate-y-20 -translate-x-9">
-        <Link href="/selectcourse" passHref>
+              <Link href={`/selectcourse?mode=${selectedMode}`} passHref>
           <button
             className="text-xl font-poppins hover:scale-110 transition-transform duration-300 bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-full p-3 text-white flex items-center"
             onClick={handleClick}
