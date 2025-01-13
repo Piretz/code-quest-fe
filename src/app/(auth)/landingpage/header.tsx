@@ -2,80 +2,72 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; // Import Link from Next.js for navigation
 import '@fortawesome/fontawesome-free/css/all.css';
-import Header from "../lesson/header";
-import axios from "axios";
-// Define the props interface
-interface SignUpModalProps {
-  isSignUpVisible: boolean;
-  setIsSignUpVisible: (value: boolean) => void;
-  setIsLoginVisible: (value: boolean) => void;
-}
+import axios from 'axios';
 
-const SignUpModal: React.FC<SignUpModalProps> = ({ isSignUpVisible, setIsSignUpVisible, setIsLoginVisible }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    birthdayMonth: "",
-    birthdayDay: "",
-    birthdayYear: "",
-    password: "",
-    confirmPassword: "",
-  });
-
+const SignUpForm = () => {
+  const [isSignUpVisible, setIsSignUpVisible] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    birthdayMonth: '',
+    birthdayDay: '',
+    birthdayYear: '',
+    password: '',
+    confirmPassword: '',
+    termsAccepted: false,
+  });
 
-  // Handle form input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleCheckboxChange = (e: { target: { checked: any; }; }) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      termsAccepted: e.target.checked,
+    }));
+  };
+
+
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    // Basic validation
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      alert('Passwords do not match');
       return;
     }
 
-    if (!formData.firstName || !formData.email || !formData.password) {
-      alert("Please fill out all required fields!");
-      return;
-    }
-
-    setIsLoading(true);
+    const { firstName, lastName, username, email, birthdayMonth, birthdayDay, birthdayYear, password } = formData;
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/user-student/register", {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        username: formData.username,
-        email: formData.email,
-        birthdate: `${formData.birthdayYear}-${formData.birthdayMonth}-${formData.birthdayDay}`,
-        password: formData.password,
+      const response = await axios.post('http://127.0.0.1:8000/api/user-student/register', {
+        first_name: firstName,
+        last_name: lastName,
+        username: username,
+        email: email,
+        birthday: `${birthdayYear}-${birthdayMonth}-${birthdayDay}`,
+        password: password,
       });
-
-      if (response.data) {
-        alert("User registered successfully!");
-        setIsSignUpVisible(false); // Close sign-up modal
-        setIsLoginVisible(true); // Show login modal
-      }
+      console.log(response.data);
+      // Handle successful registration (e.g., show success message, redirect to login page)
     } catch (error) {
-      console.error("Error during registration:", error);
-      alert("Failed to register. Please try again.");
-    } finally {
-      setIsLoading(false);
+      console.error('Error during sign up:', error);
+      // Handle error (e.g., show error message)
+      
+      
     }
   };
-
-  // If the sign-up modal is not visible, return null (render nothing)
-  if (!isSignUpVisible) return null;
+}
+  //// ENDPOINT ////
 const Header = () => {
   const [loading, setLoading] = useState(false); // Add loading state
 
@@ -116,7 +108,7 @@ const Header = () => {
     setActiveButton("about");
   } else if (currentHash === "#courses") {
     setActiveButton("courses");
-  } else if (currentHash === "#footer") {
+  } else if (currentHash === "#contactUs") {
     setActiveButton("contact us");
   }
 }, [window.location.hash]); // This will trigger every time the hash changes
@@ -125,7 +117,7 @@ const Header = () => {
     setIsSignUpVisible(!isSignUpVisible);
     setIsLoginVisible(false);
   };
-  
+
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);
 
@@ -181,14 +173,13 @@ const Header = () => {
 
   return (
     <>
-      {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-screen bg-opacity-80 bg-transparent text-white px-4 sm:px-8 py-4 flex justify-between items-center shadow-lg">
-        {/* Logo */}
-        <img
-          src="/assets/Steamcircle.png"
-          alt="Cipherion Logo"
-          className="h-12 sm:h-14 animate-spin-slow"
-        />
+      <header className="fixed top-0 left-0 right-0 z-50 w-screen bg-[#00172D] text-white px-4 sm:px-8 py-4 flex justify-between items-center shadow-lg">
+      {/* Logo */}
+      <img
+        src="/assets/Steamcircle.png"
+        alt="Cipherion Logo"
+        className="h-12 sm:h-14 animate-spin-slow"
+      />
 
       {/* Centered Navigation Links */}
       <nav className="flex-grow flex justify-center space-x-4 sm:space-x-14 text-sm sm:text-xl font-zenDots">
@@ -553,6 +544,8 @@ const Header = () => {
               </div>
             </div>
 
+            /////// end of signup/////
+
             {/* Side Logo Image */}
             <div className="absolute -right-72">
               <img
@@ -565,10 +558,8 @@ const Header = () => {
         </div>
       )}
       </>
-    );
-  };
-}
+  )
+};
+  
 
-
-
-
+export default Header;
