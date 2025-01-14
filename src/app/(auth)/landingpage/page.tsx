@@ -7,6 +7,8 @@ import Stats from "./stats";
 import CoursesOffered from "./course";
 import Testimonials from "./testimonial";
 import Footer from "./contactus";
+import Signup from "./signup"; 
+// import Login from "./login";
 
 const App = () => {
   return (
@@ -14,22 +16,28 @@ const App = () => {
       {/* Home */}
       <Header />
 
-      {/* Home */}
+      {/* Hero Section */}
       <Hero />
 
-      {/* About */}
+      {/* About Section */}
       <Heropage />
 
       {/* Stats Section */}
       <Stats />
 
-      {/* Course Section */}
+      {/* Sign Up Section */}
+      <Signup />
+      
+      {/* Login Section */}
+      {/* <Login /> */}
+
+      {/* Courses Offered Section */}
       <CoursesOffered />
 
       {/* Testimonials Section */}
       <Testimonials />
 
-      {/* ContactUs */}
+      {/* Contact Us Section */}
       <Footer />
     </div>
   );

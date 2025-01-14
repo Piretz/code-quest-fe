@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../../../components/ui/newheader"; // Correct path to the updated Header component
 import Sidebar from "../../../components/ui/newsidebar"; // Correct path to Sidebar
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from "next/link"; // Import Link component
 
 import Image from "next/image";
@@ -43,6 +43,9 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ contributors, maxVisible }) =
 
 const Page: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode');
 
   const currentLevel = 1;
   const currentExperience = 11;
@@ -60,9 +63,8 @@ const Page: React.FC = () => {
   const settingsUrl = "/assets/setting.png";
 
   const [selectedCourse, setSelectedCourse] = useState<"htmlcourse" | "csscourse" | "jscourse">("htmlcourse");
-  
-  const [activeIndex, setActiveIndex] = useState<number>(0); //FOR CAROUSEL COURSE CARD SLIDER
-  const [isButtonEnabled, setIsButtonEnabled] = useState(true); // FOR NEXT AND PREV BUTTON FOR COURSE CARD
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true);
   const swiperRef = useRef<any>(null);
 
   const [isSoloPanelVisible, setSoloPanelVisible] = useState(false); // State for solopanel visibility for solomode
@@ -71,7 +73,7 @@ const Page: React.FC = () => {
   const [isPanelCreateVisible, setIsPanelCreatelVisible] = useState(false); // State for lobbypanel for  multiplayer
   const [isLobbyFullVisible, setIsLobbyFullVisible] = useState(false); // State for joinlobbypanel for  multiplayer
   const [isPanelDiffVisible, setPanelDiffVisible] = useState(false); // State for paneldiff visibility both solomode and multiplayer mode
-  
+  const [isCourseSelected, setIsCourseSelected] = useState(false); // State to track if a course is selected
 
   const courseImages: Record<"htmlcourse" | "csscourse" | "jscourse", string> = {
     jscourse: "/assets/jscourse.png",
@@ -91,6 +93,22 @@ const Page: React.FC = () => {
     jscourse: "/javascript-course",
   };
 
+  useEffect(() => {
+    if (isCourseSelected) {
+      if (mode === 'solomode') {
+        setSoloPanelVisible(true);
+      } else if (mode === 'multimode') {
+        setIsLobbyPanelVisible(true);
+      }
+    }
+  }, [mode, isCourseSelected]);
+
+  const handleCourseSelect = (course: "htmlcourse" | "csscourse" | "jscourse") => {
+    setSelectedCourse(course);
+    setIsCourseSelected(true);
+    
+  };
+  
   const handleSlideChange = (swiper: any) => {
     setActiveIndex(swiper.activeIndex);
     const modeKeys = Object.keys(courseImages) as (keyof typeof courseImages)[];
@@ -128,21 +146,22 @@ const Page: React.FC = () => {
   };
   
   const handleJoinClick = () => {
-    // Logic for multiplayer selection
-    console.log("Multiplayer Mode Selected");
+    // Logic for multiplayer mode selection
+    setIsJoinLobbyVisible(true);
+    setIsLobbyPanelVisible(false);
   };
   
   const closeLobbyPanel = () => {
     setIsLobbyPanelVisible(false);
-    setPanelDiffVisible(true);
+    setIsCourseSelected(false); // Reset course selection state
   };
 
-  const handleStartCourseClick = () => {
-    setSoloPanelVisible(true); // Show 
-    setIsLobbyPanelVisible(false);
-    setIsJoinLobbyVisible(false);
-    setIsLobbyFullVisible(false);
-  };
+  // const handleStartCourseClick = () => {
+  //   setSoloPanelVisible(true); // Show 
+  //   setIsLobbyPanelVisible(false);
+  //   setIsJoinLobbyVisible(false);
+  //   setIsLobbyFullVisible(false);
+  // };
 
   const handleTakeLesson = (e: React.MouseEvent<HTMLImageElement>) => {
     if (isLoading) {
@@ -156,7 +175,7 @@ const Page: React.FC = () => {
   const SolohandleClosePopup = () => {
     setSoloPanelVisible(false); // Hide popup
     setPanelDiffVisible(false); // Hide paneldiff image when closing the popup
-    
+    setIsCourseSelected(false); // Reset course selection state
   };
 
   const handleStartGameClick = () => {
@@ -164,40 +183,39 @@ const Page: React.FC = () => {
   };
   
   const SoloPaneldiffBackButton = () => {
-    setSoloPanelVisible(true); 
-    setPanelDiffVisible(false);
-  }
-
-  const MultiplayerPanelVisible = () => {
-    setPanelDiffVisible(true);
-  }
-
-  const MultiplayerDiffBackButton = () => {
-
-  }
-  
-  const MultiplayerhandleClosePopup = () => {
-    
-    
+    setSoloPanelVisible(false);
+    setPanelDiffVisible(false); // Ensure paneldiff is hidden
+    setIsCourseSelected(false); // Reset course selection state
   };
 
-  switch (selectedCourse) {
-    case "htmlcourse":
-      console.log("HTML Course Selected");
-      // Add any specific logic for HTML course
-      break;
-    case "csscourse":
-      console.log("CSS Course Selected");
-      // Add any specific logic for CSS course
-      break;
-    case "jscourse":
-      console.log("JavaScript Course Selected");
-      // Add any specific logic for JavaScript course
-      break;
-    default:
-      console.log("No course selected");
-      break;
+  const CreateLobbyBackButton = () => {
+    setIsPanelCreatelVisible(false);
+    setIsLobbyPanelVisible(true);
+
+  };
+
+  const JoinHandleButton = () => {
+    setIsJoinLobbyVisible(false);
+    setIsPanelCreatelVisible(true);
   }
+
+  // switch (selectedCourse) {
+  //   case "htmlcourse":
+  //     console.log("HTML Course Selected");
+  //     // Add any specific logic for HTML course
+  //     break;
+  //   case "csscourse":
+  //     console.log("CSS Course Selected");
+  //     // Add any specific logic for CSS course
+  //     break;
+  //   case "jscourse":
+  //     console.log("JavaScript Course Selected");
+  //     // Add any specific logic for JavaScript course
+  //     break;
+  //   default:
+  //     console.log("No course selected");
+  //     break;
+  // }
 
   return (
       <div className="flex h-screen bg-[#223F77]">
@@ -361,7 +379,7 @@ const Page: React.FC = () => {
             {/* Start Button */}
             <button
               className="font-zenDots px-5 py-2 -translate-y-20 -translate-x-4 bg-gradient-to-r from-[#035CC2] to-[#073269] rounded-full text-white text-lg hover:bg-[#76D5FE] transition-transform transform hover:scale-110 cursor-pointer"
-              onClick={handleStartCourseClick}
+              onClick={() => handleCourseSelect(selectedCourse)}
             >
               Start Course
             </button>
@@ -593,7 +611,7 @@ const Page: React.FC = () => {
             </div>
           )}
 
-          {/* For Create button function panel section */}
+          {/* For Multiplayer Create button function panel section */}
             {isPanelCreateVisible && (
               <div className="fixed top-72 inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50 shadow-2xl">
 
@@ -609,7 +627,7 @@ const Page: React.FC = () => {
                   
                   {/* Close Button for Panel Diff - Brings back the Course Panel */}
                   <button
-                    onClick={SoloPaneldiffBackButton}  // Close the paneldiff image and return to course panel
+                    onClick={CreateLobbyBackButton}  // Close the paneldiff image and return to course panel
                     className="absolute top-4 right-4 z-50"
                     aria-label="Back to Course Panel"
                     type="button"
@@ -682,7 +700,7 @@ const Page: React.FC = () => {
                           width={200}
                           height={200}
                           className="rounded-lg cursor-pointer transition-transform transform hover:scale-110"
-                          onClick={handleJoinClick} // Function to handle Multiplayer Mode selection
+                          // onClick={handleJoinClick} // Function to handle Multiplayer Mode selection
                         />
                       </div>
                     </div>
@@ -743,9 +761,9 @@ const Page: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Close Button for Panel Diff - Brings back the Course Panel */}
+                    {/* Join button */}
                   <button
-                    onClick={SoloPaneldiffBackButton}  // Close the paneldiff image and return to course panel
+                    onClick={JoinHandleButton}  // Close the paneldiff image and return to course panel
                     className="fixed bottom-1 right-4 z-50"
                     aria-label="Back to Course Panel"
                     type="button"
